@@ -73,7 +73,6 @@ const StoreImageGallery = (props: StoreImageGalleryProps): React.JSX.Element => 
                 <h5 className="pb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white overflow-hidden leading-8 text-center">{props.store.name}</h5>
                 <p className="pb-0  font-normal text-gray-700 dark:text-gray-400 overflow-hidden leading-7 text-center">{props.store.address.city}</p>
                 <p className="pb-0  font-normal text-gray-700 dark:text-gray-400 overflow-hidden leading-7 text-center">{props.store.address.state}</p>
-
             </div>
         </div>
     );

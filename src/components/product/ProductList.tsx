@@ -6,6 +6,7 @@ import { useOutletContext, useParams } from "react-router-dom";
 import { getProductsWithstore } from "../../services/productService";
 import { ContextPathData } from "../BaseTemplate";
 import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
+import { DisplayNotFound } from "../DisplayError";
 
 
 
@@ -46,9 +47,7 @@ export const ProductList = (props: ProductListProps): React.JSX.Element => {
             </div>
         }
         {!products &&
-            <div id="itemNotFound" className='flex flex-col gap-8 justify-center items-center h-screen'>
-                The item was not found or it doesn't exist.
-            </div>
+            <DisplayNotFound/>
         }
     </>
 }

@@ -9,6 +9,7 @@ import { createStoreById, deleteStoreById, getStoreById, updateStoreById } from 
 import { replaceTextNumberPerNumber } from "../../utils/sharedComponents/utilsFunctions";
 import { ContextPathData } from "../BaseTemplate";
 import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
+import { DisplayNotFound } from "../DisplayError";
 
 
 interface StoreFormProps {
@@ -121,9 +122,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
       </div>
     }
     {
-      !store && <div id="itemNotFound" className='flex flex-col gap-8 justify-center items-center h-screen'>
-        The item was not found or it doesn't exist.
-      </div>
+      !store && <DisplayNotFound/>
     }
 
   </>
