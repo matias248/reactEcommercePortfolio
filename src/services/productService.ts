@@ -1,0 +1,139 @@
+import axios from 'axios';
+import { ProductDTO } from '../models/Product';
+import { StoreDTO } from '../models/Store';
+import { currentProducts } from '../LocalData/Products';
+import { currentStores } from '../LocalData/Stores';
+import { getNextId } from '../utils/sharedComponents/utilsFunctions';
+
+
+const url = process.env.REACT_APP_URL_API ?? "";
+
+export const getProducts = async (storeId: number): Promise<ProductDTO[]> => {
+    if (process.env.REACT_APP_ENV === "test") {
+        return currentProducts;
+    }
+    try {
+        const resp = await axios.get(url + "/stores/" + storeId + "/products");
+        return resp.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const getProductsWithstore = async (storeId: number): Promise<{ store: StoreDTO, products: ProductDTO[] }> => {
+    if (process.env.REACT_APP_ENV === "test") {
+        const store: StoreDTO | undefined = currentStores.find((store) => { return store.id === storeId });
+        if (store) {
+            const filterProducts = currentProducts.filter((product) => product.storeId === storeId);
+            return { store: store, products: filterProducts };
+        }
+        else {
+            throw new Error('store not found!');
+        }
+    }
+    try {
+        const resp = await axios.get(url + "/stores/" + storeId + "/products?storedata=true");
+        return resp.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+
+export const getProductById = async (storeId: number, productId: number): Promise<ProductDTO> => {
+    if (process.env.REACT_APP_ENV === "test") {
+        const filterProducts = currentProducts.filter((product) => { return product.storeId === storeId && product.id === productId })
+        if (filterProducts.length > 0)
+            return filterProducts[0];
+        else {
+            throw new Error('product not found!');
+        }
+    }
+    try {
+        const resp = await axios.get(url + "/stores/" + storeId + "/products/" + productId);
+        return resp.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const getProductByIdWithstore = async (storeId: number, productId: number): Promise<{ store: StoreDTO, product: ProductDTO }> => {
+    if (process.env.REACT_APP_ENV === "test") {
+        const store: StoreDTO | undefined = currentStores.find((store) => { return store.id === storeId });
+        if (store) {
+            const filterProducts = currentProducts.filter((product) => { return product.storeId === storeId && product.id === productId })
+            if (filterProducts.length > 0)
+                return { store: store, product: filterProducts[0] };
+            else {
+                throw new Error('product not found!');
+            }
+        }
+        else {
+            throw new Error('store not found!');
+        }
+    }
+    try {
+        const resp = await axios.get(url + "/stores/" + storeId + "/products/" + productId + "?storedata=true");
+        return resp.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const updateProductById = async (storeId: number, productId: number, updateData: ProductDTO): Promise<ProductDTO> => {
+    if (process.env.REACT_APP_ENV === "test") {
+        const id: number = currentProducts.findIndex((product) => { return product.id === productId && product.storeId === storeId });
+        if (id !== -1) {
+            currentProducts[id] = updateData;
+            return Promise.resolve(currentProducts[id]);
+        }
+        else {
+            throw new Error('product not found!');
+        }
+    }
+
+    try {
+        const resp = await axios.patch(url + "/stores/" + storeId + "/products/" + productId, updateData);
+        return resp.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const deleteProductById = async (storeId: number, productId: number): Promise<ProductDTO> => {
+    if (process.env.REACT_APP_ENV === "test") {
+        const id: number = currentProducts.findIndex((product) => { return product.id === productId && product.storeId === storeId });
+        if (id !== -1) {
+            const productDeleted = currentProducts[id];
+            currentProducts.splice(id, 1)
+            return Promise.resolve(productDeleted);
+        }
+        else {
+            throw new Error('product not found!');
+        }
+    }
+
+    try {
+        const resp = await axios.delete(url + "/stores/" + storeId + "/products/" + productId);
+        return resp.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const createProductById = async (storeId: number, data: ProductDTO): Promise<ProductDTO> => {
+    if (process.env.REACT_APP_ENV === "test") {
+        let productToset = data;
+        productToset.id = getNextId(currentProducts)
+        productToset.storeId = storeId;
+        currentProducts.push(data);
+        return Promise.resolve(data);
+    }
+
+    try {
+        const resp = await axios.post(url + "/stores/" + storeId + "/products/", data);
+        return resp.data;
+    } catch (err) {
+        throw err;
+    }
+};
