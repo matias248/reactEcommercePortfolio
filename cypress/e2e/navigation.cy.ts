@@ -30,3 +30,4 @@ describe("Navigation bar test", () => {
         cy.contains('Edit the product');
     })
 })
+

@@ -104,3 +104,10 @@ describe('Store Crud Test', () => {
   })
 
 })
+
+describe('Test Displays if store doesn t exist ', () => {
+  it('Test Display in store form', () => {
+    cy.visit('stores/99');
+    cy.get('#itemNotFound').should('exist');
+  })
+})

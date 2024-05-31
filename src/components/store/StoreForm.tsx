@@ -121,10 +121,11 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
       </div>
     }
     {
-      !store && <div className='flex flex-col gap-8 justify-center items-center h-screen'>
+      !store && <div id="itemNotFound" className='flex flex-col gap-8 justify-center items-center h-screen'>
         The item was not found or it doesn't exist.
       </div>
     }
+
   </>
 
 }

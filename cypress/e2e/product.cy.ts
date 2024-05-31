@@ -83,3 +83,25 @@ describe('Store Crud Test', () => {
   })
   
 })
+
+describe('Test Displays if store doesn t exist ', () => {
+  it('Test Display in list of products', () => {
+    cy.visit('stores/99/products');
+    cy.get('#itemNotFound').should('exist')
+    cy.get('List of products').should('not.exist')
+
+  })
+  it('Test Display in a product', () => {
+    cy.visit('stores/99/products/1');
+    cy.get('#itemNotFound').should('exist')
+  })
+})
+
+describe('Test Displays if product doesn t exist ', () => {
+  it('Test Display in a product', () => {
+    cy.visit('stores/1/products/900');
+    cy.get('#itemNotFound').should('exist');
+    cy.visit('stores/900/products/900');
+    cy.get('#itemNotFound').should('exist');
+  })
+})

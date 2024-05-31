@@ -31,23 +31,26 @@ export const ProductList = (props: ProductListProps): React.JSX.Element => {
         })
     }, [])
 
-
-
-
     return <>
-        <div className="flex items-center flex-col pb-4">
-            <div className="mb-16 text-5xl text-center dark:text-white" >{title}</div>
-
-            <div className="">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-16 gap-8 mx-8 ">
-                    {products && products.map((currentValue) => {
-                        return <ProductImageGallery key={currentValue.id} product={currentValue} onClick={() => { navigationRouter.goToProduct(currentValue.id, currentValue.storeId) }} />
-                    })}
+        {products &&
+            <div className="flex items-center flex-col pb-4">
+                <div className="mb-16 text-5xl text-center dark:text-white" >{title}</div>
+                <div className="">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-16 gap-8 mx-8 ">
+                        {products && products.map((currentValue) => {
+                            return <ProductImageGallery key={currentValue.id} product={currentValue} onClick={() => { navigationRouter.goToProduct(currentValue.id, currentValue.storeId) }} />
+                        })}
+                    </div>
                 </div>
+                <FixedButton functionToDo={() => navigationRouter.createNewProduct((storeId ? +storeId : -1))} title={"Create a product"} />
             </div>
-            <FixedButton functionToDo={() => navigationRouter.createNewProduct((storeId ? +storeId : -1))} title={"Create a product"} />
-        </div>
-    </>;
+        }
+        {!products &&
+            <div id="itemNotFound" className='flex flex-col gap-8 justify-center items-center h-screen'>
+                The item was not found or it doesn't exist.
+            </div>
+        }
+    </>
 }
 
 interface ProductImageGalleryProps {

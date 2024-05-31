@@ -1,4 +1,4 @@
-import {  useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CancelButton, DeleteButton, InputOfNumberForm, InputOfStringForm, InputOfUrlImagesForm, InputSwitchForm, ValidateButton } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { DESCRIPTION_RESTRICTION, NAME_RESTRICTION, REGEX } from "../../utils/constants";
@@ -117,7 +117,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             </div>
         }
         {
-            !product && <div className='flex flex-col gap-8 justify-center items-center h-screen'>
+            !product && <div id="itemNotFound" className='flex flex-col gap-8 justify-center items-center h-screen'>
                 The item was not found or it doesn't exist.
             </div>
         }
