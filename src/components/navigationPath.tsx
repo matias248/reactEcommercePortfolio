@@ -12,14 +12,14 @@ export const NavigationPath = (props: navigationPath): React.JSX.Element => {
     return <>
         <div className="ml-2 text-xs sm:text-base text-gray-900 dark:text-white flex w-full gap-1    ">
             {
-                props.pathData.inStores && props.pathData.storeName && <div id="NavStoresTitle" className="overflow-hidden max-w-[60px]  hover:opacity-75" onClick={navigationRouter.goToTheListOfStores}>
+                props.pathData.inStores && props.pathData.storeName && <div id="NavStoresTitle" className="overflow-hidden max-w-[60px]  hover:opacity-75" onClick={navigationRouter.goToFappListOfStores}>
                     Stores
                 </div>
             }
             {
                 props.pathData.storeName && <>
                     <div>{">"}</div>
-                    <div id="NavStoreName" className="truncate max-w-[80px]  sm:max-w-[200px] overflow-hidden text-ellipsis hover:opacity-75" onClick={() => { if (props.pathData.storeId) navigationRouter.goToStore(props.pathData.storeId) }}>
+                    <div id="NavStoreName" className="truncate max-w-[80px]  sm:max-w-[200px] overflow-hidden text-ellipsis hover:opacity-75" onClick={() => { if (props.pathData.storeId) navigationRouter.goToFappStore(props.pathData.storeId) }}>
                         {props.pathData.storeName}
                     </div>
                 </>
@@ -27,7 +27,7 @@ export const NavigationPath = (props: navigationPath): React.JSX.Element => {
             {
                 props.pathData.inProducts && <>
                     <div>{">"}</div>
-                    <div id="NavProductsTitle" className="overflow-hidden max-w-[80px]  sm:max-w-[200px] text-ellipsis  hover:opacity-75" onClick={() => { if (props.pathData.storeId) navigationRouter.goToTheListOfProducts(props.pathData.storeId) }}>
+                    <div id="NavProductsTitle" className="overflow-hidden max-w-[80px]  sm:max-w-[200px] text-ellipsis  hover:opacity-75" onClick={() => { if (props.pathData.storeId) navigationRouter.goToFappListOfProducts(props.pathData.storeId) }}>
                         {"Products"}
                     </div>
                 </>

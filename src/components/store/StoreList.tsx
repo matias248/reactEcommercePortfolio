@@ -39,14 +39,14 @@ export const StoreList = (props: StoreListProps): React.JSX.Element => {
             <div className="relative">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-16 gap-8 mx-8">
                     {stores && stores.map((currentValue) => {
-                        return <StoreImageGallery key={currentValue.id} store={currentValue} onClick={()=>navigationRouter.goToTheListOfProducts(currentValue.id)} onClickToEdit={()=>navigationRouter.goToStore(currentValue.id)} />
+                        return <StoreImageGallery key={currentValue.id} store={currentValue} onClick={()=>navigationRouter.goToFappListOfProducts(currentValue.id)} onClickToEdit={()=>navigationRouter.goToFappStore(currentValue.id)} />
                     })}
                 </div>
             </div>
             <div className="bg-red-200">
                 <Outlet />
             </div>
-            <FixedButton functionToDo={()=>navigationRouter.createNewStore()} title={"Create a store"} />
+            <FixedButton functionToDo={()=>navigationRouter.goToFappCreationStore()} title={"Create a store"} />
         </div >
     </>;
 }

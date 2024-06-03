@@ -4,7 +4,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { Header } from './components/Header';
 import { AppRoute } from './routes/AppRoute';
 
 export const routes =
@@ -19,9 +18,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <main className="bg-orange-100 dark:bg-gray-900 min-h-screen " >
-      <Header />
       <RouterProvider router={router} />
-
     </main>
   );
 }

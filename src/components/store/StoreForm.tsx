@@ -59,7 +59,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
     if (storeId !== "new" && !isNaN(+(storeId ?? NaN))) {
       updateStoreById(+(storeId ?? 0), data).then((data) => {
 
-        navigationRouter.goToTheListOfStores();
+        navigationRouter.goToFappListOfStores();
 
       }).catch((error) => {
         console.error('Error when update');
@@ -67,7 +67,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
     }
     else {
       createStoreById(data).then((data) => {
-        navigationRouter.goToTheListOfStores();
+        navigationRouter.goToFappListOfStores();
 
       }).catch((error) => {
         console.error('Error when create');
@@ -77,7 +77,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
 
   const deleteStore = () => {
     deleteStoreById(+(storeId ?? 0)).then((data) => {
-      navigationRouter.goToTheListOfStores();
+      navigationRouter.goToFappListOfStores();
     }).catch((error) => {
       console.log("Error when delete")
     })
@@ -116,7 +116,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
           </div>}
           <div className="grid md:grid-cols-2 md:gap-28 gap-4 mt-4 mx-auto md:w-80 min-h-14 ">
             <ValidateButton functionToDo={() => { }} title={"Submit"} />
-            <CancelButton functionToDo={() => { navigationRouter.goToTheListOfStores() }} title={"Cancel"} />
+            <CancelButton functionToDo={() => { navigationRouter.goToFappListOfStores() }} title={"Cancel"} />
           </div>
         </form>
       </div>

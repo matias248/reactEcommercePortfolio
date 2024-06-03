@@ -66,7 +66,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
 
             updateProductById(+(storeId ?? 0), +(productId ?? 0), data).then((data) => {
 
-                navigationRouter.goToTheListOfProducts(storeId ? +storeId : -1);
+                navigationRouter.goToFappListOfProducts(storeId ? +storeId : -1);
 
             }).catch((error) => {
                 console.error('Error when update');
@@ -75,7 +75,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         else {
             createProductById(+(storeId ?? 0), data).then((data) => {
 
-                navigationRouter.goToTheListOfProducts(storeId ? +storeId : -1);
+                navigationRouter.goToFappListOfProducts(storeId ? +storeId : -1);
 
             }).catch((error) => {
                 console.error('Error when create');
@@ -85,7 +85,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
 
     const deleteProduct = () => {
         deleteProductById(+(storeId ?? 0), +(productId ?? 0)).then((data) => {
-            navigationRouter.goToTheListOfProducts(storeId ? +storeId : -1);
+            navigationRouter.goToFappListOfProducts(storeId ? +storeId : -1);
         }).catch((error) => {
             console.log("Error when delete")
         })
@@ -112,7 +112,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                     </div>}
                     <div className="grid md:grid-cols-2 md:gap-28 gap-4 mt-4 mx-auto md:w-80 min-h-14 ">
                         <ValidateButton functionToDo={() => { }} title={"Submit"} />
-                        <CancelButton functionToDo={() => navigationRouter.goToTheListOfProducts(storeId ? +storeId : -1)} title={"Cancel"} />
+                        <CancelButton functionToDo={() => navigationRouter.goToFappListOfProducts(storeId ? +storeId : -1)} title={"Cancel"} />
                     </div>
                 </form>
             </div>

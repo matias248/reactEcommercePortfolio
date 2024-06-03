@@ -31,3 +31,53 @@ describe("Navigation bar test", () => {
     })
 })
 
+describe("Navigation Buttons", () => {
+    it("Home", () => {
+        cy.visit('/');
+
+        cy.get('#NavigationFormsApp').should('exist');
+        cy.get('#NavigationShopApp').should('exist');
+        cy.get('#NavigationFinanceApp').should('exist');
+
+
+    }),
+    it("ToForms", () => {
+        cy.visit('/');
+
+        cy.get('#NavigationFormsApp').click().should('not.exist');
+        cy.get('#NavigationShopApp').should('exist');
+        cy.get('#NavigationFinanceApp').should('exist');
+
+
+        cy.location().should((location:Location) => {
+            expect(location.pathname).to.eq('/stores')
+        })
+    })
+    it("To Shop", () => {
+        cy.visit('/');
+
+        cy.get('#NavigationShopApp').click().should('not.exist');
+        cy.get('#NavigationFinanceApp').should('exist');
+        cy.get('#NavigationFormsApp').should('exist');
+
+        cy.location().should((location:Location) => {
+            expect(location.pathname).to.eq('/shop')
+        })
+    })
+    it("To Finance", () => {
+        cy.visit('/');
+
+        cy.get('#NavigationFinanceApp').click().should('not.exist');
+        cy.get('#NavigationShopApp').should('exist');
+        cy.get('#NavigationFormsApp').should('exist');
+
+        
+
+        cy.location().should((location:Location) => {
+            expect(location.pathname).to.eq('/finance')
+        })
+    })
+})
+
+
+

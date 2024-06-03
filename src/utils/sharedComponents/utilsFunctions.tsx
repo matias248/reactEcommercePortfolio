@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { AppNames } from '../constants';
 
 
 export function useClickOutside(initialIsVisible: boolean) {
@@ -38,19 +39,34 @@ export function useClickOutside(initialIsVisible: boolean) {
 }
 
 export function replaceTextNumberPerNumber(stringToChange: string) {
-    let textModif = (stringToChange+"").split(',').join('.').trim();
-    if(isNaN(+textModif)){
+    let textModif = (stringToChange + "").split(',').join('.').trim();
+    if (isNaN(+textModif)) {
         return textModif;
     }
     return +textModif;
 }
 
 //local methods 
-export function getNextId(array:{id:number}[]) {
+export function getNextId(array: { id: number }[]) {
 
-    let i=1;
-    while(i<=array.length+1 && array.some((element)=>{return element.id === i})){
-      i++;
+    let i = 1;
+    while (i <= array.length + 1 && array.some((element) => { return element.id === i })) {
+        i++;
     }
     return i;
-  }
+}
+
+
+export const getCurrentApp = (pathName:string): AppNames | undefined => {
+    if (pathName.startsWith("/stores")) {
+        return AppNames.FORMS
+    }
+    else if (pathName.startsWith("/finance")) {
+        return AppNames.FINANCE
+    }
+    else if (pathName.startsWith("/shop")) {
+        return AppNames.SHOP
+    }
+}
+
+
