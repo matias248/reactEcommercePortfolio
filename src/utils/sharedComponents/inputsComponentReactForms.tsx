@@ -32,7 +32,7 @@ export const InputOfStringForm = (props: InputTextFormProps): React.JSX.Element 
             {props.title + (props.required ? "*" : "")}
             {props.helpText && <span className="block mb-2 text-sm font-medium text-gray-700 dark:text-white">{props.helpText}</span>}
         </label>
-        <textarea id={"inputString-" + props.title} rows={props.numberOfLines} className={"block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-orange-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
+        <textarea id={"inputString-" + props.title} rows={props.numberOfLines} className={"block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-slate-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
             required={props.required} />
     </div>
 }
@@ -43,7 +43,7 @@ export const InputSwitchForm = (props: InputSwitchFormProps): React.JSX.Element 
             <label className="block mb-2 text-lg font-medium dark:text-white">
                 {props.title}
             </label>
-            <select name="selectedOption" value={props.optionSelected} className={"block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-orange-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}>
+            <select name="selectedOption" value={props.optionSelected} className={"block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-slate-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}>
                 {props.options.map((option, index) => {
                     return <option key={index} id={index + ""} value={option}>{option}</option>
                 })
@@ -63,7 +63,7 @@ export const InputOfNumberForm = (props: InputFormProps): React.JSX.Element => {
             {props.title + (props.required ? "*" : "")}
             {props.helpText && <span className="block mb-2 text-sm font-medium text-gray-700 dark:text-white">{props.helpText}</span>}
         </label>
-        <input type="text" id={"inputNumber" + props.title} className={"bg-gray-50 border border-orange-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
+        <input type="text" id={"inputNumber" + props.title} className={"bg-gray-50 border border-slate-400 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
             required={props.required} />
     </div>
 
@@ -72,7 +72,7 @@ export const InputOfNumberForm = (props: InputFormProps): React.JSX.Element => {
 export const InputOfUrlImagesForm = (props: InputFormProps): React.JSX.Element => {
 
     return <div className="mb-5">
-        <div className="w-24 h-24 mb-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto sm:mx-0">
+        <div className="w-24 h-24 mb-2 bg-white border border-slate-400 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto sm:mx-0">
             {props.currentValue &&
                 <img className="mt-5 h-16 max-w-full rounded-lg object-cover mx-auto text-center dark:text-white" src={props.currentValue} alt="error loading image">
                 </img>}
@@ -85,7 +85,7 @@ export const InputOfUrlImagesForm = (props: InputFormProps): React.JSX.Element =
             {props.title + (props.required ? "*" : "")}
             {props.helpText && <span className="block mb-2 text-sm font-medium text-gray-700 dark:text-white">{props.helpText}</span>}
         </label>
-        <textarea id={"inputNumber" + props.title} rows={1} className={"bg-gray-50 border border-orange-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
+        <textarea id={"inputNumber" + props.title} rows={1} className={"bg-gray-50 border border-slate-400 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
             required={props.required} />
     </div>
 
