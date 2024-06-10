@@ -12,7 +12,6 @@ export const HomePage = (): React.JSX.Element => {
     const presentationAppFinance = "Simulate an app that allows to manage invoices, Past purchases...";
 
     return (
-
         <div className="flex mx-3 items-center flex-col">
             <div className="mb-8 text-xl  dark:text-white" >{IntroPlatform}</div>
             <div className="mb-6 dark:text-white self-start text-xl">
