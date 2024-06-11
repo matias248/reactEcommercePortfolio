@@ -93,20 +93,20 @@ export const InputOfUrlImagesForm = (props: InputFormProps): React.JSX.Element =
 
 
 export const ValidateButton = (props: ButtonProps): React.JSX.Element => {
-    return <button name="submitButton" onClick={props.functionToDo} type="submit" className={"text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
+    return <button name="submitButton" onClick={props.functionToDo} type="submit" className={"text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
 }
 
 
 export const CancelButton = (props: ButtonProps): React.JSX.Element => {
-    return <button name="cancelButton" onClick={(e) => { e.preventDefault(); props.functionToDo() }} className={"text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
+    return <button name="cancelButton" onClick={(e) => { e.preventDefault(); props.functionToDo() }} className={"text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
 }
 
 export const DeleteButton = (props: ButtonProps): React.JSX.Element => {
-    return <button name="deleteButton" onClick={props.functionToDo} className={"text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-800 dark:hover:bg-red-900 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
+    return <button name="deleteButton" onClick={(e) => { e.preventDefault(); props.functionToDo() }} className={"text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-800 dark:hover:bg-red-900 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
 }
 
 export const FixedButton = (props: ButtonProps): React.JSX.Element => {
-    return <button id="fixedButton" onClick={props.functionToDo} className={"fixed bottom-4 right-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-2.5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>
+    return <button id="fixedButton" onClick={props.functionToDo} className={"fixed bottom-4 right-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-2.5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>
         <svg className=" h-[20px] me-2" viewBox="0 0 24 24" fill="white" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>

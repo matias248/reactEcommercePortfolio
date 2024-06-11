@@ -1,8 +1,7 @@
-import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CancelButton, DeleteButton, InputOfStringForm, InputOfUrlImagesForm, ValidateButton } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { DESCRIPTION_RESTRICTION, NAME_RESTRICTION, REGEX } from "../../utils/constants";
-import { getUrlStoreList } from "../../routes/RoutesConfigs";
 import { StoreDTO } from "../../models/Store";
 import { useEffect, useState } from "react";
 import { createStoreById, deleteStoreById, getStoreById, updateStoreById } from "../../services/storeService";
@@ -40,7 +39,6 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
     formState: { errors },
   } = useForm<StoreDTO>({
     values: store
-
   })
   useEffect(() => {
     if (storeId !== "new" && !isNaN(+(storeId ?? NaN))) {

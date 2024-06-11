@@ -118,7 +118,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             </div>
         }
         {
-            !product && <DisplayNotFound/>
+            !product && <DisplayNotFound />
         }
     </>
 

@@ -1,0 +1,40 @@
+{
+  "name": "templatenodejsproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "local":"node localserver.js",
+    "mongoDB":"node mongoDBserver.js",
+    "test": " cross-env NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js  --detectOpenHandles --forceExit "
+  }
+  ,
+  "jest": {
+    "testEnvironment": "node",
+    "globalSetup": "./globalSetup.js",
+
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "transform": {}
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "jest": "^29.7.0",
+    "jsonwebtoken": "9.0.2",
+    "mongoose": "7.6.8",
+    "mongoose-unique-validator": "^4.0.0",
+    "supertest": "^6.3.4",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "standart": "^6.1.0"
+  }
+}

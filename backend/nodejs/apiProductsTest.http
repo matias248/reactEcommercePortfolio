@@ -1,0 +1,62 @@
+@token=a@a.com12
+
+### Get all products
+GET http://localhost:3001/stores/1/products?storedata=true
+Authorization: Bearer {{token}}
+
+
+### Get by id
+GET http://localhost:3001/stores/1/products/2?storedata=true
+Authorization: Bearer {{token}}
+
+
+
+### Create a product
+POST http://localhost:3001/stores/1/products/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+			"code": "f230fh0g3",
+			"name": "Bamboo Watch",
+			"description": "Product Description",
+			"image": "bamboo-watch.jpg",
+			"price": 65,
+			"category": "Accessories",
+			"quantity": 24,
+			"inventoryStatus": "INSTOCK",
+			"rating": 5
+}
+
+### Update a product
+PATCH  http://localhost:3001/stores/1/products/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name":"name changed",
+	"price":89
+}
+
+### Delete a product
+DELETE http://localhost:3001/stores/1/products/1
+Authorization: Bearer {{token}}
+
+
+### Signup
+POST http://localhost:3001/auth/signup
+Content-Type: application/json
+
+{
+    "email":"testalos7",
+    "password":"1777"
+}
+
+### Login
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+    "email":"testalos7",
+    "password":"1777"
+}
