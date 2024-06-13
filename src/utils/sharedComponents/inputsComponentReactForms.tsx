@@ -27,13 +27,17 @@ interface InputSwitchFormProps extends InputFormProps {
 }
 
 export const InputOfStringForm = (props: InputTextFormProps): React.JSX.Element => {
-    return <div className="mb-5 w-full">
-        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-lg font-medium dark:text-white">
+    return <div className={"mb-5 w-full min-w-[100px]"}>
+        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-base sm:text-lg dark:text-white flex items-center">
             {props.title + (props.required ? "*" : "")}
-            {props.helpText && <span className="block mb-2 text-sm font-medium text-gray-700 dark:text-white">{props.helpText}</span>}
         </label>
         <textarea id={"inputString-" + props.title} rows={props.numberOfLines} className={"block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-slate-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
             required={props.required} />
+        {props.helpText && props.errorShouldDisplay && <div className="text-xs dark:text-white italic overflow-hidden ">
+            {props.helpText}
+        </div>
+        }
+
     </div>
 }
 
@@ -58,13 +62,16 @@ export const InputSwitchForm = (props: InputSwitchFormProps): React.JSX.Element 
 
 export const InputOfNumberForm = (props: InputFormProps): React.JSX.Element => {
 
-    return <div className="mb-5">
-        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
+    return <div className={"mb-5 w-full min-w-[100px]"}>
+        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-lg font-medium dark:text-white flex items-center">
             {props.title + (props.required ? "*" : "")}
-            {props.helpText && <span className="block mb-2 text-sm font-medium text-gray-700 dark:text-white">{props.helpText}</span>}
         </label>
         <input type="text" id={"inputNumber" + props.title} className={"bg-gray-50 border border-slate-400 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
             required={props.required} />
+        {props.helpText && props.errorShouldDisplay && <div className="text-xs dark:text-white italic overflow-hidden ">
+            {props.helpText}
+        </div>
+        }
     </div>
 
 }
@@ -81,12 +88,15 @@ export const InputOfUrlImagesForm = (props: InputFormProps): React.JSX.Element =
             }
         </div>
 
-        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
+        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-lg font-medium dark:text-white flex items-center">
             {props.title + (props.required ? "*" : "")}
-            {props.helpText && <span className="block mb-2 text-sm font-medium text-gray-700 dark:text-white">{props.helpText}</span>}
         </label>
         <textarea id={"inputNumber" + props.title} rows={1} className={"bg-gray-50 border border-slate-400 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
             required={props.required} />
+        {props.helpText && props.errorShouldDisplay && <div className="text-xs dark:text-white italic overflow-hidden ">
+            {props.helpText}
+        </div>
+        }
     </div>
 
 }

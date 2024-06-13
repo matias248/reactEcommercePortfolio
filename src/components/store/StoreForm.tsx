@@ -1,7 +1,7 @@
 import { useOutletContext, useParams } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CancelButton, DeleteButton, InputOfStringForm, InputOfUrlImagesForm, ValidateButton } from "../../utils/sharedComponents/inputsComponentReactForms";
-import { DESCRIPTION_RESTRICTION, NAME_RESTRICTION, REGEX } from "../../utils/constants";
+import { DESCRIPTION_RESTRICTION, descriptionRestrictionMessage, NAME_RESTRICTION, nameRestrictionMessage, onlyNumbersRestrictionMessage, REGEX } from "../../utils/constants";
 import { StoreDTO } from "../../models/Store";
 import { useEffect, useState } from "react";
 import { createStoreById, deleteStoreById, getStoreById, updateStoreById } from "../../services/storeService";
@@ -91,20 +91,20 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
         <div className="mb-6 text-5xl text-center mb-16 dark:text-white" >{title}</div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-3/4 ">
-          <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, pattern: REGEX.URL, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} />
+          <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, pattern: REGEX.URL, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")}  />
           <div className="flex gap-4">
-            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("name", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Name"} errorShouldDisplay={errors.name ? true : false} required={true} />
-            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.city", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"City"} errorShouldDisplay={errors.address?.city ? true : false} required={true} />
+            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("name", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Name"} errorShouldDisplay={errors.name ? true : false} required={true} helpText={nameRestrictionMessage} />
+            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.city", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"City"} errorShouldDisplay={errors.address?.city ? true : false} required={true} helpText={nameRestrictionMessage} />
           </div>
           <div className="flex gap-4">
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("currency", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Currency"} errorShouldDisplay={errors.currency ? true : false} required={true} />
-            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.state", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"State"} errorShouldDisplay={errors.address?.state ? true : false} required={true} />
+            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.state", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"State"} errorShouldDisplay={errors.address?.state ? true : false} required={true} helpText={nameRestrictionMessage} />
           </div>
           <div className="flex gap-4">
-            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.zipCode", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Zipcode"} required={true} errorShouldDisplay={errors.address?.zipCode ? true : false} />
-            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.streetNumber", { required: true, pattern: REGEX.ONLYNUMBERS, setValueAs: (value: string) => value.trim() }) }} title={"Street Number"} errorShouldDisplay={errors.address?.streetNumber ? true : false} />
+            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.zipCode", { required: true,maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Zipcode"} required={true} errorShouldDisplay={errors.address?.zipCode ? true : false} helpText={nameRestrictionMessage} />
+            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.streetNumber", { required: true, pattern: REGEX.ONLYNUMBERS, setValueAs: (value: string) => value.trim() }) }} required={true} title={"Street Number"} errorShouldDisplay={errors.address?.streetNumber ? true : false} helpText={onlyNumbersRestrictionMessage} />
           </div>
-          <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.streetName", { required: true, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Street Name"} required={true} errorShouldDisplay={errors.address?.streetName ? true : false} />
+          <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.streetName", { required: true, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Street Name"} required={true} errorShouldDisplay={errors.address?.streetName ? true : false} helpText={descriptionRestrictionMessage} />
           <div className="flex gap-4">
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("location.latitude", { required: true, pattern: REGEX.LATITUDE, setValueAs: (value: string) => replaceTextNumberPerNumber(value) }) }} title={"Latitude"} required={true} errorShouldDisplay={errors.location?.latitude ? true : false} />
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("location.longitude", { required: true, pattern: REGEX.LONGITUDE, setValueAs: (value: string) => replaceTextNumberPerNumber(value) }) }} title={"Longitude"} required={true} errorShouldDisplay={errors.location?.longitude ? true : false} />
@@ -117,10 +117,10 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
             <CancelButton functionToDo={() => { navigationRouter.goToFappListOfStores() }} title={"Cancel"} />
           </div>
         </form>
-      </div>
+      </div> 
     }
     {
-      !store && <DisplayNotFound/>
+      !store && <DisplayNotFound />
     }
 
   </>

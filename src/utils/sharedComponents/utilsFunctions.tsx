@@ -57,7 +57,7 @@ export function getNextId(array: { id: number }[]) {
 }
 
 
-export const getCurrentApp = (pathName:string): AppNames | undefined => {
+export const getCurrentApp = (pathName: string): AppNames | undefined => {
     if (pathName.startsWith("/stores")) {
         return AppNames.FORMS
     }

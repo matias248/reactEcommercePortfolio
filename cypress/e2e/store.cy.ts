@@ -2,7 +2,6 @@ describe('Store Crud Test', () => {
   it('Create a new store', () => {
     cy.visit('stores');
     cy.get('#fixedButton').click();
-    //cy.contains('Create a new store');
 
     cy.get('[name="name"]').type('StoreCypress');
     cy.get('[name="address.city"]').type('City');
