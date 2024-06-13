@@ -9,6 +9,8 @@ import { replaceTextNumberPerNumber } from "../../utils/sharedComponents/utilsFu
 import { ContextPathData } from "../BaseTemplate";
 import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
 import { DisplayNotFound } from "../DisplayError";
+import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
+
 
 
 interface StoreFormProps {
@@ -30,6 +32,8 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
   const title = storeId !== "new" ? "Edit the store" : "Create a new store";
   const pathData: ContextPathData = useOutletContext();
   const navigationRouter: NavigationRouterInterface = NavigationRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
 
 
   const {
@@ -51,6 +55,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
       let newStore: StoreDTO = { id: -1, name: "", currency: "", contactPhone: "0", imageUrl: "", address: { state: "", streetNumber: "", streetName: "", city: "", zipCode: "" }, location: { latitude: 0, longitude: 0 } };
       setStore(newStore);
     }
+    setIsLoading(false)
   }, []);
 
   const onSubmit: SubmitHandler<StoreDTO> = (data) => {
@@ -85,13 +90,13 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
 
 
   return <>
-    {store &&
+    {!isLoading && store &&
       <div className="flex items-center flex-col pb-4">
 
         <div className="mb-6 text-5xl text-center mb-16 dark:text-white" >{title}</div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-3/4 ">
-          <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, pattern: REGEX.URL, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")}  />
+          <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, pattern: REGEX.URL, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} />
           <div className="flex gap-4">
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("name", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Name"} errorShouldDisplay={errors.name ? true : false} required={true} helpText={nameRestrictionMessage} />
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.city", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"City"} errorShouldDisplay={errors.address?.city ? true : false} required={true} helpText={nameRestrictionMessage} />
@@ -101,7 +106,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.state", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"State"} errorShouldDisplay={errors.address?.state ? true : false} required={true} helpText={nameRestrictionMessage} />
           </div>
           <div className="flex gap-4">
-            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.zipCode", { required: true,maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Zipcode"} required={true} errorShouldDisplay={errors.address?.zipCode ? true : false} helpText={nameRestrictionMessage} />
+            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.zipCode", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Zipcode"} required={true} errorShouldDisplay={errors.address?.zipCode ? true : false} helpText={nameRestrictionMessage} />
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.streetNumber", { required: true, pattern: REGEX.ONLYNUMBERS, setValueAs: (value: string) => value.trim() }) }} required={true} title={"Street Number"} errorShouldDisplay={errors.address?.streetNumber ? true : false} helpText={onlyNumbersRestrictionMessage} />
           </div>
           <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.streetName", { required: true, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Street Name"} required={true} errorShouldDisplay={errors.address?.streetName ? true : false} helpText={descriptionRestrictionMessage} />
@@ -117,10 +122,13 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
             <CancelButton functionToDo={() => { navigationRouter.goToFappListOfStores() }} title={"Cancel"} />
           </div>
         </form>
-      </div> 
+      </div>
     }
     {
-      !store && <DisplayNotFound />
+      !isLoading && !store && <DisplayNotFound />
+    }
+    {
+      isLoading && <div className="flex justify-center"><Spinner /></div>
     }
 
   </>

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FixedButton } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { ReactComponent as ImagePlaceholder } from "../../assets/images/iconImagePlaceholder.svg";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { StoreDTO } from "../../models/Store";
 import { EditButton } from "../../utils/sharedComponents/inputsComponentReactForms";
-import { Outlet } from "react-router-dom";
 import { getStores } from "../../services/storeService";
 import { ContextPathData } from "../BaseTemplate";
 import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
+import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
 
 
 interface StoreListProps {
@@ -15,13 +15,11 @@ interface StoreListProps {
 
 export const StoreList = (props: StoreListProps): React.JSX.Element => {
     const title = "List of stores";
-
     const navigationRouter: NavigationRouterInterface = NavigationRouter();
-
-
     const pathData: ContextPathData = useOutletContext();
-
     const [stores, setStores] = useState<StoreDTO[]>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
 
     useEffect(() => {
         getStores().then((response) => {
@@ -31,9 +29,10 @@ export const StoreList = (props: StoreListProps): React.JSX.Element => {
         }).catch((error) => {
             console.error('Error loading products');
         })
+        setIsLoading(false)
     }, [])
 
-    return <>
+    return <>{!isLoading &&
         <div className="flex items-center flex-col pb-4">
             <div className="mx-8 text-5xl text-center mb-8 dark:text-white" >{title}</div>
             <div className="relative">
@@ -45,6 +44,10 @@ export const StoreList = (props: StoreListProps): React.JSX.Element => {
             </div>
             <FixedButton functionToDo={() => navigationRouter.goToFappCreationStore()} title={"Create a store"} />
         </div >
+    }
+        {
+            isLoading && <div className="flex justify-center"><Spinner /></div>
+        }
     </>;
 }
 

@@ -7,6 +7,7 @@ import { getProductsWithstore } from "../../services/productService";
 import { ContextPathData } from "../BaseTemplate";
 import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
 import { DisplayNotFound } from "../DisplayError";
+import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
 
 
 
@@ -20,6 +21,7 @@ export const ProductList = (props: ProductListProps): React.JSX.Element => {
     const [products, setProducts] = useState<ProductDTO[]>();
     const pathData: ContextPathData = useOutletContext();
     const navigationRouter: NavigationRouterInterface = NavigationRouter();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
 
     useEffect(() => {
@@ -30,10 +32,11 @@ export const ProductList = (props: ProductListProps): React.JSX.Element => {
         }).catch((error) => {
             console.error('Error loading products');
         })
+        setIsLoading(false)
     }, [])
 
     return <>
-        {products &&
+        {!isLoading && products &&
             <div className="">
                 <div className="mb-16 text-5xl text-center dark:text-white" >{title}</div>
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 md:gap-4 gap-6 mx-8">
@@ -44,8 +47,11 @@ export const ProductList = (props: ProductListProps): React.JSX.Element => {
                 <FixedButton functionToDo={() => navigationRouter.goToFappCreationProduct((storeId ? +storeId : -1))} title={"Create a product"} />
             </div>
         }
-        {!products &&
+        {!isLoading && !products &&
             <DisplayNotFound />
+        }
+        {
+            isLoading && <div className="flex justify-center"><Spinner /></div>
         }
     </>
 }

@@ -10,6 +10,8 @@ import { ContextPathData } from "../BaseTemplate";
 import { StoreDTO } from "../../models/Store";
 import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
 import { DisplayNotFound } from "../DisplayError";
+import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
+
 
 interface ProductFormProps {
 
@@ -32,6 +34,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
     const [product, setProduct] = useState<ProductDTO>();
     const pathData: ContextPathData = useOutletContext();
     const navigationRouter: NavigationRouterInterface = NavigationRouter();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
 
     useEffect(() => {
@@ -46,6 +49,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             let newProduct: ProductDTO = { name: "", description: "", price: 0, imageUrl: "", category: arrayCategoryType[0], inventoryStatus: arrayInventoryStatusType[0], id: -1, storeId: -1 };
             setProduct(newProduct);
         }
+        setIsLoading(false)
     }, []);
 
     const title = productId !== "new" ? "Edit the product" : "Create a new product";
@@ -94,7 +98,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
 
 
     return <>
-        {product &&
+        {!isLoading && product &&
             <div className="flex items-center flex-col pb-4">
                 <div className="mb-6 text-5xl text-center mb-16 dark:text-white" >{title}</div>
 
@@ -104,7 +108,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
 
                     <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("name", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Name"} errorShouldDisplay={errors.name ? true : false} required={true} helpText={nameRestrictionMessage} />
                     <InputOfStringForm numberOfLines={4} reactFormProps={{ ...register("description", { required: true, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Description"} errorShouldDisplay={errors.description ? true : false} required={true} helpText={descriptionRestrictionMessage} />
-                    <InputOfNumberForm reactFormProps={{ ...register("price", { required: true, pattern: REGEX.NUMBERS_DOTS_COMMAS, setValueAs: (value: string) => replaceTextNumberPerNumber(value) }) }} title={"Price"} errorShouldDisplay={errors.price ? true : false} required={true} helpText={onlyNumbersRestrictionMessage}  />
+                    <InputOfNumberForm reactFormProps={{ ...register("price", { required: true, pattern: REGEX.NUMBERS_DOTS_COMMAS, setValueAs: (value: string) => replaceTextNumberPerNumber(value) }) }} title={"Price"} errorShouldDisplay={errors.price ? true : false} required={true} helpText={onlyNumbersRestrictionMessage} />
                     <InputSwitchForm options={arrayCategoryType} optionSelected={watch("category")} reactFormProps={{ ...register("category", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Category"} />
                     <InputSwitchForm options={arrayInventoryStatusType} optionSelected={watch("inventoryStatus")} reactFormProps={{ ...register("inventoryStatus", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Inventory status"} />
                     {(productId !== "new" && !isNaN(+(productId ?? NaN))) && <div className=" md:gap-28 mt-4  w-40 min-h-8  mb-8 md:mb-4">
@@ -118,8 +122,12 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             </div>
         }
         {
-            !product && <DisplayNotFound />
+            !isLoading && !product && <DisplayNotFound />
+        }
+        {
+            isLoading && <div className="flex justify-center"><Spinner/></div>
         }
     </>
+
 
 }
