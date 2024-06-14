@@ -27,11 +27,11 @@ describe('Store Crud Test', () => {
   it('Read a store', () => {
     cy.visit('stores');
     cy.get('#editButton1').click();
-    cy.get('[name="name"]').should('have.value', 'Toulouse store');
-    cy.get('[name="address.city"]').should('have.value', 'City');
+    cy.get('[name="name"]').should('have.value', 'Simple Store');
+    cy.get('[name="address.city"]').should('have.value', 'Simple City D.C');
     cy.get('[name="currency"]').should('have.value', 'EUR');
 
-    cy.get('[name="address.state"]').should('have.value', 'State');
+    cy.get('[name="address.state"]').should('have.value', 'Simple Country');
     cy.get('[name="address.zipCode"]').should('have.value', '31000');
     cy.get('[name="address.streetNumber"]').should('have.value', '0');
     cy.get('[name="location.latitude"]').should('have.value', '1');
@@ -44,13 +44,13 @@ describe('Store Crud Test', () => {
     cy.visit('stores');
     cy.get('#editButton1').click();
 
-    cy.get('[name="imageUrl"]').should('have.value', 'https://img.freepik.com/vector-premium/fachada-tienda-plana-toldo_23-2147542588.jpg').clear();
+    cy.get('[name="imageUrl"]').should('have.value', '/store1.jpeg').clear();
 
-    cy.get('[name="name"]').should('have.value', 'Toulouse store').type('Updated');
-    cy.get('[name="address.city"]').should('have.value', 'City').type('Updated');
+    cy.get('[name="name"]').should('have.value', 'Simple Store').type('Updated');
+    cy.get('[name="address.city"]').should('have.value', 'Simple City D.C').type('Updated');
     cy.get('[name="currency"]').should('have.value', 'EUR').type('Updated');
 
-    cy.get('[name="address.state"]').should('have.value', 'State').type('Updated');
+    cy.get('[name="address.state"]').should('have.value', 'Simple Country').type('Updated');
     cy.get('[name="address.zipCode"]').should('have.value', '31000').clear().type('31001');
     cy.get('[name="address.streetNumber"]').should('have.value', '0').type('1');
     cy.get('[name="location.latitude"]').should('have.value', '1').type('.2');
@@ -60,18 +60,18 @@ describe('Store Crud Test', () => {
     cy.get('[name="submitButton"]').click();
 
     cy.get('#storeElementGallery1').should('exist')
-      .should('contain', 'Toulouse storeUpdated')
-      .should('contain', 'CityUpdated')
-      .should('contain', 'StateUpdated')
+      .should('contain', 'Simple StoreUpdated')
+      .should('contain', 'Simple City D.CUpdated')
+      .should('contain', 'Simple CountryUpdated')
       .find('#divNoImageSet').should('exist');
 
     cy.get('#editButton1').click();
 
-    cy.get('[name="name"]').should('have.value', 'Toulouse storeUpdated');
-    cy.get('[name="address.city"]').should('have.value', 'CityUpdated');
-    cy.get('[name="currency"]').should('have.value', 'EURUpdated').type('Updated');
+    cy.get('[name="name"]').should('have.value', 'Simple StoreUpdated');
+    cy.get('[name="address.city"]').should('have.value', 'Simple City D.CUpdated');
+    cy.get('[name="currency"]').should('have.value', 'EURUpdated');
 
-    cy.get('[name="address.state"]').should('have.value', 'StateUpdated').type('Updated');
+    cy.get('[name="address.state"]').should('have.value', 'Simple CountryUpdated');
     cy.get('[name="address.zipCode"]').should('have.value', '31001');
     cy.get('[name="address.streetNumber"]').should('have.value', '01');
     cy.get('[name="location.latitude"]').should('have.value', '1.2');

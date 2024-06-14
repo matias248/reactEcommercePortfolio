@@ -24,12 +24,15 @@ describe('Product Form Test', () => {
         cy.visit('stores/1/products/');
         cy.get('#fixedButton').click();
         
+        cy.get('[name="imageUrl"]').type('123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X');
         cy.get('[name="name"]').type('123456789X123456789X123456');
         cy.get('textarea[name="description"]').type('123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X');
         cy.get('[name="price"]').type('A');
 
         cy.get('[name="submitButton"]').click();
 
+        cy.get('[name="imageUrl"]').clear().should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 250');
+        cy.get('[name="imageUrl"]').type('/store1.jpeg').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 250');
         cy.get('[name="name"]').should('have.css', 'background-color', 'rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
         cy.get('[name="price"]').should('have.css', 'background-color', 'rgb(254, 202, 202)').parent().should('contain', 'Only numbers allowed');
         cy.get('textarea[name="description"]').should('have.css', 'background-color', 'rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 250');

@@ -24,9 +24,9 @@ describe('Test ImageGallery product ', () => {
 
     // Long Description and Long Name 
     cy.get('#productElementGallery1').click();
-    cy.get('[name="imageUrl"]').should('have.value', 'bamboo-watch.jpg').clear();
-    cy.get('[name="name"]').should('have.value', 'Bamboo Watch').clear().type('WWWWWWWWWWWWWWWWWW');
-    cy.get('textarea[name="description"]').should('have.value', 'Product Description').clear().type('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
+    cy.get('[name="imageUrl"]').should('have.value', '/watch.jpeg').clear();
+    cy.get('[name="name"]').should('have.value', 'Simple Watch').clear().type('WWWWWWWWWWWWWWWWWW');
+    cy.get('textarea[name="description"]').should('have.value', 'Embrace timeless sophistication with the Simple Watch, a fusion of classic design and modern functionality. Crafted from stainless steel and sapphire crystal.').clear().type('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
 
   
     cy.get('[name="submitButton"]').click();

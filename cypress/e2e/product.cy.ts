@@ -24,9 +24,9 @@ describe('Store Crud Test', () => {
   it('Read a product', () => {
     cy.visit('stores/1/products');
 
-    cy.get('#productElementGallery1').should('contain', 'Bamboo Watch').click();
-    cy.get('[name="name"]').should('have.value', 'Bamboo Watch');
-    cy.get('textarea[name="description"]').should('have.value', 'Product Description');
+    cy.get('#productElementGallery1').should('contain', 'Simple Watch').click();
+    cy.get('[name="name"]').should('have.value', 'Simple Watch');
+    cy.get('textarea[name="description"]').should('have.value', 'Embrace timeless sophistication with the Simple Watch, a fusion of classic design and modern functionality. Crafted from stainless steel and sapphire crystal.');
     cy.get('[name="price"]').should('have.value', '65');
 
     cy.get('[name="category"]').should('have.value', 'Accessories');
@@ -36,9 +36,9 @@ describe('Store Crud Test', () => {
   it('Update a product', () => {
     cy.visit('stores/1/products');
     cy.get('#productElementGallery1').click();
-    cy.get('[name="imageUrl"]').should('have.value', 'bamboo-watch.jpg').clear();
-    cy.get('[name="name"]').should('have.value', 'Bamboo Watch').type('Updated');
-    cy.get('textarea[name="description"]').should('have.value', 'Product Description').type('Updated');
+    cy.get('[name="imageUrl"]').should('have.value', '/watch.jpeg').clear();
+    cy.get('[name="name"]').should('have.value', 'Simple Watch').type('Updated');
+    cy.get('textarea[name="description"]').should('have.value', 'Embrace timeless sophistication with the Simple Watch, a fusion of classic design and modern functionality. Crafted from stainless steel and sapphire crystal.').type('Updated');
 
     cy.get('[name="price"]').should('have.value', '65').type('.1');
     cy.get('[name="category"]').should('have.value', 'Accessories').select(1);
@@ -47,13 +47,13 @@ describe('Store Crud Test', () => {
     cy.get('[name="submitButton"]').click();
 
 
-    cy.get('#productElementGallery1').should('exist').should('contain','Bamboo WatchUpdated')
+    cy.get('#productElementGallery1').should('exist').should('contain','Simple WatchUpdated')
       .find('#divNoImageSet').should('exist').click();
 
     cy.get('[name="imageUrl"]').should('have.value', '')
 
-    cy.get('[name="name"]').should('have.value', 'Bamboo WatchUpdated');
-    cy.get('textarea[name="description"]').should('have.value', 'Product DescriptionUpdated');
+    cy.get('[name="name"]').should('have.value', 'Simple WatchUpdated');
+    cy.get('textarea[name="description"]').should('have.value', 'Embrace timeless sophistication with the Simple Watch, a fusion of classic design and modern functionality. Crafted from stainless steel and sapphire crystal.Updated');
 
     cy.get('[name="price"]').should('have.value', '65.1');
     cy.get('[name="category"]').should('have.value', 'Fitness');
@@ -75,10 +75,10 @@ describe('Store Crud Test', () => {
     cy.visit('stores/1/products');
     cy.get('#productElementGallery1').click();
 
-    cy.get('[name="name"]').should('have.value', 'Bamboo Watch').type('new name');
+    cy.get('[name="name"]').should('have.value', 'Simple Watch').type('new name');
     cy.get('[name="cancelButton"]').click();
     cy.get('#productElementGallery1').click();
-    cy.get('[name="name"]').should('have.value','Bamboo Watch');
+    cy.get('[name="name"]').should('have.value','Simple Watch');
 
   })
   

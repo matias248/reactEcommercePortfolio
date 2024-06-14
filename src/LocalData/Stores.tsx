@@ -4,13 +4,13 @@ import { currentProducts } from "./Products";
 export const currentStores:StoreDTO[] =[
     {
         id: 1,
-        name: "Toulouse store",
+        name: "Simple Store",
         currency: "EUR",
         address: {
             streetNumber:"0",
             streetName:"Street Name",
-            city:"City",
-            state:"State",
+            city:"Simple City D.C",
+            state:"Simple Country",
             zipCode:"31000",
         },
         location: {
@@ -19,17 +19,17 @@ export const currentStores:StoreDTO[] =[
         },
         contactPhone: "+33 123456",
         produtcs: currentProducts,
-        imageUrl:"https://img.freepik.com/vector-premium/fachada-tienda-plana-toldo_23-2147542588.jpg"
+        imageUrl:"/store1.jpeg"
     },
     {
         id: 2,
-        name: "Toulouse store 2",
+        name: "Neo store",
         currency: "EUR",
         address: {
             streetNumber:"0",
             streetName:"Street Name",
-            city:"City",
-            state:"State",
+            city:"Neo City",
+            state:"Neo Country",
             zipCode:"31000",
         },
         location: {
@@ -38,7 +38,7 @@ export const currentStores:StoreDTO[] =[
         },
         contactPhone: "+33 123456",
         produtcs: [],
-        imageUrl:"https://img.freepik.com/vector-premium/fachada-tienda-plana-toldo_23-2147542588.jpg"
+        imageUrl:"/store2.jpeg"
     },
     
 ]

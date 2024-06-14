@@ -103,9 +103,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                 <div className="mb-6 text-5xl text-center mb-16 dark:text-white" >{title}</div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-3/4">
-
-                    <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, pattern: REGEX.URL, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} />
-
+                    <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} helpText={descriptionRestrictionMessage} />
                     <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("name", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Name"} errorShouldDisplay={errors.name ? true : false} required={true} helpText={nameRestrictionMessage} />
                     <InputOfStringForm numberOfLines={4} reactFormProps={{ ...register("description", { required: true, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Description"} errorShouldDisplay={errors.description ? true : false} required={true} helpText={descriptionRestrictionMessage} />
                     <InputOfNumberForm reactFormProps={{ ...register("price", { required: true, pattern: REGEX.NUMBERS_DOTS_COMMAS, setValueAs: (value: string) => replaceTextNumberPerNumber(value) }) }} title={"Price"} errorShouldDisplay={errors.price ? true : false} required={true} helpText={onlyNumbersRestrictionMessage} />
@@ -125,7 +123,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             !isLoading && !product && <DisplayNotFound />
         }
         {
-            isLoading && <div className="flex justify-center"><Spinner/></div>
+            isLoading && <div className="flex justify-center"><Spinner /></div>
         }
     </>
 
