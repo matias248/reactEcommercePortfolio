@@ -26,9 +26,12 @@ export const BaseTemplate = (props: BaseTemplateProps): React.JSX.Element => {
     const handlerPathData = (pathData: PathData) => {
         setPathData(pathData)
     }
+    const resetPathData = () => {
+        setPathData(undefined);
+    }
 
     return <>
-        <Header />
+        <Header resetPathData={resetPathData} />
 
         <div>{pathData &&
             <NavigationPath pathData={pathData} />
