@@ -1,7 +1,7 @@
 @token=a@a.com12
 
 ### Get all products
-GET http://localhost:3001/stores/1/products?storedata=true
+GET http://localhost:3001/stores/1/products
 Authorization: Bearer {{token}}
 
 

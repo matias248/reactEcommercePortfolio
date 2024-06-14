@@ -73,30 +73,30 @@ describe('POST /stores', () => {
 
 describe('PATCH /stores/:id', () => {
   test('Should return 200', async () => {
-    await api.patch('/stores/2').set(commonHeaders).send({
+    await api.patch('/stores/1').set(commonHeaders).send({
       name: "2009",
     })
       .expect(200)
       .then(response => {
         expect(response.body).toEqual(
           {
-            name: "2009",
-            currency: "EUR",
-            id:2,
-            imageUrl: "https://img.freepik.com/vector-premium/fachada-tienda-plana-toldo_23-2147542588.jpg",
-            address: {
-              streetNumber: "0",
-              streetName: "Street Name",
-              city: "City",
-              state: "State",
-              zipCode: "31000"
+            "id": 1,
+            "name": "2009",
+            "currency": "EUR",
+            "address": {
+                "streetNumber":"0",
+                "streetName":"Street Name",
+                "city":"Simple City D.C",
+                "state":"Simple Country",
+                "zipCode":"31000"
             },
-            location: {
-              longitude: 2,
-              latitude: 1
+            "location": {
+                "latitude":1,
+                "longitude":2
             },
-            contactPhone: "+33 123456",
-          },
+            "contactPhone": "+33 123456",
+            "imageUrl":"/store1.jpeg"
+        },
         );
       })
   }

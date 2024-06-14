@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Simple Store2",
+    "name": "Simple Store",
     "currency": "EUR",
     "address": {
         "streetNumber":"0",

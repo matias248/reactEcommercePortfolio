@@ -6,13 +6,15 @@ const commonHeaders = {
 };
 
 const products = readJSON('./localData/products.json')
-
+const filteredProducts = products.filter((product) => {
+  return product.storeId === 1;
+});
 
 describe('GET /products', () => {
   test('Should return 200', async () => {
     const response = await api.get("/stores/1/products")
       .expect(200);
-    expect(response.body).toEqual(products);
+    expect(response.body).toEqual(filteredProducts);
   });
 
   test('Should return 200', async () => {
@@ -21,13 +23,13 @@ describe('GET /products', () => {
     expect(response.body).toEqual({
       "store": {
         "id": 1,
-        "name": "Toulouse store",
+        "name": "Simple Store",
         "currency": "EUR",
         "address": {
           "streetNumber": "0",
           "streetName": "Street Name",
-          "city": "City",
-          "state": "State",
+          "city": "Simple City D.C",
+          "state": "Simple Country",
           "zipCode": "31000"
         },
         "location": {
@@ -35,9 +37,9 @@ describe('GET /products', () => {
           "longitude": 2
         },
         "contactPhone": "+33 123456",
-        "imageUrl": "https://img.freepik.com/vector-premium/fachada-tienda-plana-toldo_23-2147542588.jpg"
+        "imageUrl": "/store1.jpeg"
       },
-      "products": products
+      "products": filteredProducts
     },);
   });
 
@@ -53,9 +55,9 @@ describe('GET /products/:id', () => {
         expect(response.body).toEqual(
           {
             "id": 2,
-            "name": "Black Watch",
-            "description": "Product Description",
-            "imageUrl": "black-watch.jpg",
+            "name": "Simple Shirt",
+            "description": "Discover effortless style with the Simple Shirt, tailored for comfort and versatility. Made from breathable cotton fabric, this shirt is perfect for daily wear and casual outings. Its classic fit and subtle patterns effortlessly complement any wardrobe.",
+            "imageUrl": "/shirt.jpeg",
             "price": 72,
             "category": "Accessories",
             "inventoryStatus": "INSTOCK",
@@ -84,13 +86,13 @@ describe('GET /products/:id', () => {
           {
             "store": {
               "id": 1,
-              "name": "Toulouse store",
+              "name": "Simple Store",
               "currency": "EUR",
               "address": {
                 "streetNumber": "0",
                 "streetName": "Street Name",
-                "city": "City",
-                "state": "State",
+                "city": "Simple City D.C",
+                "state": "Simple Country",
                 "zipCode": "31000"
               },
               "location": {
@@ -98,13 +100,13 @@ describe('GET /products/:id', () => {
                 "longitude": 2
               },
               "contactPhone": "+33 123456",
-              "imageUrl": "https://img.freepik.com/vector-premium/fachada-tienda-plana-toldo_23-2147542588.jpg"
+              "imageUrl": "/store1.jpeg"
             },
             "product": {
               "id": 2,
-              "name": "Black Watch",
-              "description": "Product Description",
-              "imageUrl": "black-watch.jpg",
+              "name": "Simple Shirt",
+              "description": "Discover effortless style with the Simple Shirt, tailored for comfort and versatility. Made from breathable cotton fabric, this shirt is perfect for daily wear and casual outings. Its classic fit and subtle patterns effortlessly complement any wardrobe.",
+              "imageUrl": "/shirt.jpeg",
               "price": 72,
               "category": "Accessories",
               "inventoryStatus": "INSTOCK",
@@ -148,12 +150,12 @@ describe('PATCH /products/:id', () => {
           {
             "id": 2,
             "name": "2009",
-            "description": "Product Description",
-            "imageUrl": "black-watch.jpg",
+            "description": "Discover effortless style with the Simple Shirt, tailored for comfort and versatility. Made from breathable cotton fabric, this shirt is perfect for daily wear and casual outings. Its classic fit and subtle patterns effortlessly complement any wardrobe.",
+            "imageUrl": "/shirt.jpeg",
             "price": 72,
             "category": "Accessories",
             "inventoryStatus": "INSTOCK",
-            "storeId": 1,
+            "storeId": 1
           },
         );
       })
