@@ -1,4 +1,4 @@
-import { validatePartialProduct, validateProduct } from '../../models/ProductModel.js';
+import { inventoryStatusType, validatePartialProduct, validateProduct } from '../../models/ProductModel.js';
 import { readJSON } from '../../utils.js';
 import { getNextId } from '../../models/ProductModel.js';
 
@@ -7,38 +7,86 @@ const stores = readJSON('./localData/stores.json')
 
 
 export class ProductController {
-    getAll = async (req, res) => {
 
-        const storeId = req.storeId;
-        const store = stores.find((element) => element.id === +storeId)
-        if (!store) {
-            return res.status(404).json({ message: 'Store not found' })
+    getAllPublic = async (req, res) => {
+        try {
+            const categories = req.query.categories ? req.query.categories.split(',') : [];
+            const storeId = req.storeId;
+            let response = products;
+            if (categories.length > 0) {
+                response = response.filter((product) => { return categories.includes(product.category) && inventoryStatusType.OUTOFSTOCK != product.inventoryStatus });
+            }
+            if (storeId != undefined) {
+                const store = stores.find((element) => element.id === +storeId)
+                if (!store) {
+                    return res.status(404).json({ message: 'Store not found' })
+                }
+                response = response.filter((product) => { return product.storeId === +storeId && inventoryStatusType.OUTOFSTOCK != product.inventoryStatus });
+                if (req.query.storedata === "true") {
+                    return res.json({ store: store, products: response })
+                }
+                return res.json(response);
+            }
+            res.json(response.filter((product) => { return inventoryStatusType.OUTOFSTOCK != product.inventoryStatus }));
         }
-        let response;
-        response = products.filter((product) => product.storeId === +storeId);
-        if (req.query.storedata === "true") {
-            return res.json({ store: store, products: response })
+        catch (error) {
+            console.log(error)
         }
-        return res.json(response);
     }
 
+    getAll = async (req, res) => {
+        try {
+            const categories = req.query.categories ? req.query.categories.split(',') : [];
+
+            const storeId = req.storeId;
+            let response = products;
+            if (categories.length > 0) {
+                response = response.filter((product) => categories.includes(product.category));
+            }
+            if (storeId != undefined) {
+                const store = stores.find((element) => element.id === +storeId)
+                if (!store) {
+                    return res.status(404).json({ message: 'Store not found' })
+                }
+                response = response.filter((product) => product.storeId === +storeId);
+                if (req.query.storedata === "true") {
+                    return res.json({ store: store, products: response })
+                }
+                return res.json(response);
+            }
+            res.json(response);
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
 
     getById = async (req, res) => {
         const { id } = req.params
         const storeId = req.storeId;
-        const store = stores.find((element) => element.id === +storeId)
-        if (!store) {
-            return res.status(404).json({ message: 'Store not found' })
+
+        if (storeId != undefined) {
+            const store = stores.find((element) => element.id === +storeId)
+            if (!store) {
+                return res.status(404).json({ message: 'Store not found' })
+            }
+            const product = products.filter((product) => { return product.storeId === +storeId && product.id === +id })
+            if (product.length > 0) {
+                if (req.query.storedata === "true") {
+                    return res.json({ store: store, product: product[0] })
+                }
+                return res.json(product[0])
+            }
+            return res.status(404).json({ message: 'Product not found' })
+        }
+        else {
+            const product = products.filter((product) => { return product.id === +id })
+            if (product.length > 0) {
+                return res.json(product[0])
+            }
+            return res.status(404).json({ message: 'Product not found' })
         }
 
-        const product = products.filter((product) => { return product.storeId === +storeId && product.id === +id })
-        if (product.length > 0) {
-            if(req.query.storedata === "true"){
-                return res.json({store:store,product:product[0]})
-            }
-            return res.json(product[0])
-        }
-        res.status(404).json({ message: 'Product not found' })
     }
 
     create = async (req, res) => {

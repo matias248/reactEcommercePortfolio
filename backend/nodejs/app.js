@@ -18,6 +18,8 @@ export const createApp = ({ ProductController, UserController, authMiddleware, S
         req.storeId=req.params.storeId;
         next();
     },createProductRouter({ ProductController, authMiddleware }))
+    app.use('/products', createProductRouter({ ProductController, authMiddleware }))
+
     app.use('/stores', createStoreRouter({ StoreController, authMiddleware }))
 
     app.use('/auth', createUserRouter({ UserController }));

@@ -1,12 +1,38 @@
 @token=a@a.com12
 
 ### Get all products
+GET http://localhost:3001/products?categories=ax,Accessories
+Authorization: Bearer {{token}}
+
+####
+GET http://localhost:3001/products/
+Authorization: Bearer {{token}}
+####
+GET http://localhost:3001/products/public
+Authorization: Bearer {{token}}
+
+### Get products by id
+GET http://localhost:3001/products/1
+Authorization: Bearer {{token}}
+
+### Get all products
+GET http://localhost:3001/products/
+Authorization: Bearer {{token}}
+
+
+### Get products by id
+GET http://localhost:3001/products/1
+Authorization: Bearer {{token}}
+
+### Follow requests filter by store
+
+### Get all products
 GET http://localhost:3001/stores/1/products
 Authorization: Bearer {{token}}
 
 
 ### Get by id
-GET http://localhost:3001/stores/1/products/2?storedata=true
+GET http://localhost:3001/stores/1/products/2
 Authorization: Bearer {{token}}
 
 
@@ -24,7 +50,7 @@ Authorization: Bearer {{token}}
 			"price": 65,
 			"category": "Accessories",
 			"quantity": 24,
-			"inventoryStatus": "INSTOCK",
+			"inventoryStatus": "OUTOFSTOCK",
 			"rating": 5
 }
 

@@ -10,6 +10,8 @@ export const createProductRouter = ({ ProductController,authMiddleware }) => {
 
     productRouter.get('/',productController.getAll)
 
+    productRouter.get('/public',productController.getAllPublic)
+
     productRouter.post('/', productController.create)
     productRouter.get('/:id', productController.getById)
     productRouter.delete('/:id', productController.delete)

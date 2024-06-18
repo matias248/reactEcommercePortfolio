@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { currentProducts } from "../LocalData/Products";
 import { Link, useNavigate } from "react-router-dom";
 import { currentStores } from "../LocalData/Stores";
 import { ReactComponent as ArrowDown } from "../assets/images/arrowDownIcon.svg";
@@ -26,8 +25,9 @@ export const SideBar = (props: sideBarProps): React.JSX.Element => {
             </aside>
         }
         {!isComponentVisible &&
-            <div ref={ref2} className={"fixed m-4 bg-white dark:bg-gray-800 dark:border-2 dark:border-slate-700 rounded-md p-2 " + (props.styleOverride ?? "")}>
-                <svg className="w-6 h-6 fill-black dark:fill-white" viewBox="0 0 20 20"><path d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"></path></svg>
+            <div id="SideBarShop" ref={ref2} className={"bg-white dark:bg-gray-800 dark:border-2 dark:border-slate-700 rounded-md h-full flex items-center justify-center w-full gap-1 " + (props.styleOverride ?? "")}>
+                <svg className="size-6 fill-black dark:fill-white" viewBox="0 0 20 20"><path d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"></path></svg>
+                <div className="hidden md:inline dark:text-white mr-[10px] ">All the categories</div>
             </div>
         }
     </>

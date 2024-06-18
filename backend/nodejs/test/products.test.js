@@ -1,5 +1,5 @@
 import { readJSON } from '../utils.js';
-
+import { inventoryStatusType } from '../models/ProductModel.js'
 
 const commonHeaders = {
   "authorization": "Bearer " + process.env.TOKEN,
@@ -10,7 +10,37 @@ const filteredProducts = products.filter((product) => {
   return product.storeId === 1;
 });
 
+const filteredByCategoryAccessories = products.filter((product) => {
+  return product.category === "Accessories";
+});
+
+
 describe('GET /products', () => {
+
+  test('Should return 200', async () => {
+    const response = await api.get("/products")
+      .expect(200);
+    expect(response.body).toEqual(products);
+  });
+
+  test('Should return 200 /public', async () => {
+    const response = await api.get("/products/public")
+      .expect(200);
+    expect(response.body).toEqual(products.filter((element) => {return inventoryStatusType.OUTOFSTOCK != element.inventoryStatus}));
+  });
+
+  test('Should return 200 /public ?categories', async () => {
+    const response = await api.get("/products/public?categories=Accessories")
+      .expect(200);
+    expect(response.body).toEqual(filteredByCategoryAccessories.filter((element) => inventoryStatusType.OUTOFSTOCK != element.inventoryStatus));
+  });
+
+  test('Should return 200 ?categories', async () => {
+    const response = await api.get("/products?categories=Accessories")
+      .expect(200);
+    expect(response.body).toEqual(filteredByCategoryAccessories);
+  });
+
   test('Should return 200', async () => {
     const response = await api.get("/stores/1/products")
       .expect(200);
@@ -47,6 +77,25 @@ describe('GET /products', () => {
 
 
 describe('GET /products/:id', () => {
+
+  test('Should return 200', async () => {
+    await api.get("/products/2")
+      .expect(200)
+      .then(response => {
+        expect(response.body).toEqual(
+          {
+            "id": 2,
+            "name": "Simple Shirt",
+            "description": "Discover effortless style with the Simple Shirt, tailored for comfort and versatility. Made from breathable cotton fabric, this shirt is perfect for daily wear and casual outings. Its classic fit and subtle patterns effortlessly complement any wardrobe.",
+            "imageUrl": "/shirt.jpeg",
+            "price": 72,
+            "category": "Accessories",
+            "inventoryStatus": "INSTOCK",
+            "storeId": 1
+          },
+        );
+      })
+  });
 
   test('Should return 200', async () => {
     await api.get("/stores/1/products/2")

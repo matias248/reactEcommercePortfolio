@@ -14,7 +14,7 @@ export const Header = (props: HeaderInterface) => {
     const currentRoute: AppNames | undefined = navigationRouter.currentRoute();
 
     return (
-        <header className="h-[64px] mb-8 bg-red-200">
+        <header className="h-[64px] mb-8">
             <nav className="bg-slate-100 border-gray-200 py-[10px] dark:bg-gray-800 h-full">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-full px-2">
                     <div className="flex items-center gap-1  ">

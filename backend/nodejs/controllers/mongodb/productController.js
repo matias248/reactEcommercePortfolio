@@ -1,15 +1,25 @@
-import { ProductModel } from '../../models/ProductModel.js';
+import { ProductModel, inventoryStatusType } from '../../models/ProductModel.js';
 import { getNextSequentialId } from '../../models/ProductModel.js';
 import { StoreModel } from '../../models/StoreModel.js';
 import { takeOutIdAndV } from '../../utils.js';
 
 
 export class ProductController {
-    getAll = async (req, res) => {
+
+    getAllPublic = async (req, res) => {
         try {
             const storeId = req.storeId;
+            const categories = req.query.categories ? req.query.categories.split(',') : [];
             if (!storeId) {
-                return res.status(400).json({ message: "Missing storeId parameter" });
+                let products;
+                if (categories.length > 0) {
+                    products = await ProductModel.find({ category: { $in: categories }, inventoryStatus: { $ne: inventoryStatusType.OUTOFSTOCK } });
+                }
+                else {
+                    products = await ProductModel.find({ inventoryStatus: { $ne: inventoryStatusType.OUTOFSTOCK } })
+                }
+                const productsToSend = products.map((element) => { return takeOutIdAndV(element.toObject()) });
+                return res.json(productsToSend);
             }
 
             const store = await StoreModel.findOne({ id: storeId });
@@ -17,7 +27,13 @@ export class ProductController {
                 return res.status(404).json({ message: "Store not found" });
             }
 
-            const products = await ProductModel.find({ storeId: +store.id })
+            let products;
+            if (categories.length > 0) {
+                products = await ProductModel.find({ storeId: +store.id, category: { $in: categories }, inventoryStatus: { $ne: inventoryStatusType.OUTOFSTOCK } });
+            }
+            else {
+                products = await ProductModel.find({ storeId: +store.id, inventoryStatus: { $ne: inventoryStatusType.OUTOFSTOCK } })
+            }
             const productsToSend = products.map((element) => { return takeOutIdAndV(element.toObject()) });
             if (req.query.storedata === "true") {
                 return res.json({ store: store, products: productsToSend })
@@ -29,6 +45,44 @@ export class ProductController {
         }
     }
 
+    getAll = async (req, res) => {
+        try {
+            const storeId = req.storeId;
+            const categories = req.query.categories ? req.query.categories.split(',') : [];
+            if (!storeId) {
+                let products;
+                if (categories.length > 0) {
+                    products = await ProductModel.find({ category: { $in: categories } });
+                }
+                else {
+                    products = await ProductModel.find({})
+                }
+                const productsToSend = products.map((element) => { return takeOutIdAndV(element.toObject()) });
+                return res.json(productsToSend);
+            }
+
+            const store = await StoreModel.findOne({ id: storeId });
+            if (!store) {
+                return res.status(404).json({ message: "Store not found" });
+            }
+
+            let products;
+            if (categories.length > 0) {
+                products = await ProductModel.find({ storeId: +store.id, category: { $in: categories } });
+            }
+            else {
+                products = await ProductModel.find({ storeId: +store.id })
+            }
+            const productsToSend = products.map((element) => { return takeOutIdAndV(element.toObject()) });
+            if (req.query.storedata === "true") {
+                return res.json({ store: store, products: productsToSend })
+            }
+            res.json(productsToSend);
+
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
 
     getById = async (req, res) => {
         const { id } = req.params
@@ -36,7 +90,8 @@ export class ProductController {
         try {
             const storeId = req.storeId;
             if (!storeId) {
-                return res.status(400).json({ message: "Missing storeId parameter" });
+                const products = await ProductModel.find({ id: id }, { '__v': 0, '_id': 0 });
+                return res.json(products[0]);
             }
 
             const store = await StoreModel.findOne({ id: storeId });
@@ -46,9 +101,12 @@ export class ProductController {
 
             const products = await ProductModel.find({ storeId: store.id, id: id }, { '__v': 0, '_id': 0 });
             if (req.query.storedata === "true") {
-                return res.json({ store: store, product: products[0]})
+                return res.json({ store: store, product: products[0] })
             }
-           return  res.json(products[0]);
+            if (products.length === 0) {
+                return res.status(404).json({ message: "Product not found" });
+            }
+            return res.json(products[0]);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

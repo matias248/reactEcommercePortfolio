@@ -6,6 +6,7 @@ import { BaseTemplate } from "../components/BaseTemplate";
 import { StoreList } from "../components/store/StoreList";
 import { ProductForm } from "../components/product/ProductForm";
 import { HomePage } from "../components/HomePage";
+import { ShopTemplate } from "../components/shop/ShopTemplate";
 
 export const AppRoute = [
   {
@@ -41,7 +42,7 @@ export const AppRoute = [
       },
       {
         path: "shop",
-        element: <h1 className="dark:text-white">Shop App</h1>,
+        element:<ShopTemplate/>,
       },
 
 

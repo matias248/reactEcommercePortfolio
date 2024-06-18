@@ -27,5 +27,14 @@
     "category": "Accessories",
     "inventoryStatus": "INSTOCK",
     "storeId": 2
+  },{
+    "id": 4,
+    "name": "Simple Shirt OUTOFSTOCK",
+    "description": "Discover effortless style with the Simple Shirt, tailored for comfort and versatility. Made from breathable cotton fabric, this shirt is perfect for daily wear and casual outings. Its classic fit and subtle patterns effortlessly complement any wardrobe.",
+    "imageUrl": "/shirt.jpeg",
+    "price": 7,
+    "category": "Accessories",
+    "inventoryStatus": "OUTOFSTOCK",
+    "storeId": 2
   }
 ]

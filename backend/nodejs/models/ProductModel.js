@@ -57,7 +57,11 @@ const ProductSchema = new mongoose.Schema({
   storeId: { type: Number, required: true }
 }, { versionKey: false });
 
-
+export const inventoryStatusType = {
+  INSTOCK: 'INSTOCK',
+  LOWSTOCK: 'LOWSTOCK',
+  OUTOFSTOCK: 'OUTOFSTOCK'
+};
 
 export const ProductModel = mongoose.model("ProductReactApp", ProductSchema)
 
