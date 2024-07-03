@@ -2,43 +2,54 @@ import { ProductModel, inventoryStatusType } from '../../models/ProductModel.js'
 import { getNextSequentialId } from '../../models/ProductModel.js';
 import { StoreModel } from '../../models/StoreModel.js';
 import { takeOutIdAndV } from '../../utils.js';
+import { calculateTotalPages } from '../../utils.js';
 
 
 export class ProductController {
 
     getAllPublic = async (req, res) => {
         try {
-            const storeId = req.storeId;
             const categories = req.query.categories ? req.query.categories.split(',') : [];
-            if (!storeId) {
-                let products;
-                if (categories.length > 0) {
-                    products = await ProductModel.find({ category: { $in: categories }, inventoryStatus: { $ne: inventoryStatusType.OUTOFSTOCK } });
-                }
-                else {
-                    products = await ProductModel.find({ inventoryStatus: { $ne: inventoryStatusType.OUTOFSTOCK } })
-                }
-                const productsToSend = products.map((element) => { return takeOutIdAndV(element.toObject()) });
-                return res.json(productsToSend);
+            const pageIndex = req.query.page ?? 1;
+            const elementsPerPage = req.query.pagelength;
+
+            const textfilter = req.query.textfilter;
+            const storeid = req.query.storeid;
+
+            let query = {};
+
+            if (textfilter != undefined) {
+                const regex = new RegExp(textfilter, 'i');
+                query = {
+                    $or: [
+                        { description: { $regex: regex } },
+                        { name: { $regex: regex } },
+                    ]
+                };
             }
 
-            const store = await StoreModel.findOne({ id: storeId });
-            if (!store) {
-                return res.status(404).json({ message: "Store not found" });
-            }
-
+            let optionsFind = {};
+            let filter = { inventoryStatus: { $ne: inventoryStatusType.OUTOFSTOCK }, ...query };
             let products;
+            let count = undefined;
+
             if (categories.length > 0) {
-                products = await ProductModel.find({ storeId: +store.id, category: { $in: categories }, inventoryStatus: { $ne: inventoryStatusType.OUTOFSTOCK } });
+                filter.category = { $in: categories };
             }
-            else {
-                products = await ProductModel.find({ storeId: +store.id, inventoryStatus: { $ne: inventoryStatusType.OUTOFSTOCK } })
+            if (+storeid > 0) {
+                filter.storeId = +storeid;
+            }
+            if (!isNaN(elementsPerPage) && !isNaN(pageIndex) && +elementsPerPage > 0 && +pageIndex > 0) {
+                const skip = (pageIndex - 1) * elementsPerPage;
+                optionsFind = { skip: skip, limit: +elementsPerPage }
+                count = await ProductModel.countDocuments(filter);
+            }
+            products = await ProductModel.find(filter, null, optionsFind)
+            if (count === undefined) {
+                count = products.length;
             }
             const productsToSend = products.map((element) => { return takeOutIdAndV(element.toObject()) });
-            if (req.query.storedata === "true") {
-                return res.json({ store: store, products: productsToSend })
-            }
-            res.json(productsToSend);
+            return res.json({ products: productsToSend, totalPages: calculateTotalPages(count, !isNaN(elementsPerPage) ? elementsPerPage : count) });
 
         } catch (error) {
             res.status(500).json({ message: error.message });

@@ -1,5 +1,5 @@
 import { inventoryStatusType, validatePartialProduct, validateProduct } from '../../models/ProductModel.js';
-import { readJSON } from '../../utils.js';
+import { calculateTotalPages, readJSON, getPaginatedItems, productAccordingToTheFilter } from '../../utils.js';
 import { getNextId } from '../../models/ProductModel.js';
 
 const products = readJSON('./localData/products.json')
@@ -11,23 +11,23 @@ export class ProductController {
     getAllPublic = async (req, res) => {
         try {
             const categories = req.query.categories ? req.query.categories.split(',') : [];
-            const storeId = req.storeId;
-            let response = products;
-            if (categories.length > 0) {
-                response = response.filter((product) => { return categories.includes(product.category) && inventoryStatusType.OUTOFSTOCK != product.inventoryStatus });
+            const pageIndex = req.query.page ?? 1;
+            const elementsPerPage = req.query.pagelength ?? products.length;
+            const textfilter = req.query.textfilter ?? "";
+            const storeid = req.query.storeid ;
+
+            let productsfiltered = products.filter((product) => {
+                return (categories.length == 0 || categories.includes(product.category)) &&
+                    inventoryStatusType.OUTOFSTOCK != product.inventoryStatus
+                    && productAccordingToTheFilter(product, textfilter, storeid)
+
+            });
+
+            if (+elementsPerPage > 0 && +pageIndex > 0) {
+                let productsfilteredPaged = getPaginatedItems(productsfiltered, +pageIndex - 1, +elementsPerPage)
+                return res.json({ products: productsfilteredPaged, totalPages: calculateTotalPages(productsfiltered.length, elementsPerPage) });
             }
-            if (storeId != undefined) {
-                const store = stores.find((element) => element.id === +storeId)
-                if (!store) {
-                    return res.status(404).json({ message: 'Store not found' })
-                }
-                response = response.filter((product) => { return product.storeId === +storeId && inventoryStatusType.OUTOFSTOCK != product.inventoryStatus });
-                if (req.query.storedata === "true") {
-                    return res.json({ store: store, products: response })
-                }
-                return res.json(response);
-            }
-            res.json(response.filter((product) => { return inventoryStatusType.OUTOFSTOCK != product.inventoryStatus }));
+            res.json({ products: productsfiltered, totalPages: 1 });
         }
         catch (error) {
             console.log(error)

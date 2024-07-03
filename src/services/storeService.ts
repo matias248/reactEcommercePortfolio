@@ -1,7 +1,7 @@
 import { StoreDTO } from '../models/Store';
 import axios, { AxiosResponse } from 'axios';
 import { currentStores } from '../LocalData/Stores';
-import { getNextId } from '../utils/sharedComponents/utilsFunctions';
+import { filterStores, getNextId } from '../utils/sharedComponents/utilsFunctions';
 
 const url = process.env.REACT_APP_URL_API ?? "";
 
@@ -12,6 +12,19 @@ export const getStores = async (): Promise<StoreDTO[]> => {
     }
     try {
         const resp: AxiosResponse<StoreDTO[]> = await axios.get(url + "/stores/");
+        return resp.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const getStoresFilteredByNameCityCodeZip = async (text: string): Promise<StoreDTO[]> => {
+
+    if (process.env.REACT_APP_ENV === "test") {
+        return filterStores(currentStores, text);
+    }
+    try {
+        const resp: AxiosResponse<StoreDTO[]> = await axios.get(url + "/stores?textfilter=" + text);
         return resp.data;
     } catch (err) {
         throw err;

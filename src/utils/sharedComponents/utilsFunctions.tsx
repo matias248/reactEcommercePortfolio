@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AppNames } from '../constants';
+import { StoreDTO } from '../../models/Store';
+import { ProductDTO } from '../../models/Product';
 
 
 export function useClickOutside(initialIsVisible: boolean) {
@@ -70,3 +72,48 @@ export const getCurrentApp = (pathName: string): AppNames | undefined => {
 }
 
 
+export function joinArrayWithComma(arr: string[]): string {
+    return arr.join(',');
+}
+
+export function getTrueKeys(map: Map<string, boolean>): string[] {
+    const result: string[] = [];
+    map.forEach((value, key) => {
+        if (value === true) {
+            result.push(key);
+        }
+    });
+    return result;
+}
+
+export function getPaginatedItems(array: any[], pageIndex: number, itemsPerPage: number) {
+    if (itemsPerPage < 0 || pageIndex < 0) {
+        return [];
+    }
+    const startIndex = pageIndex * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    return array.slice(startIndex, endIndex);
+}
+
+export function calculateTotalPages(totalItems: number, itemsPerPage: number) {
+    if (itemsPerPage <= 0) {
+        return Math.ceil(totalItems / 10);
+    }
+    return Math.ceil(totalItems / itemsPerPage);
+}
+
+export function filterStores(stores: StoreDTO[], text: string): StoreDTO[] {
+    const textLower = text.toLowerCase();
+    return stores.filter(store =>
+        store.name.toLowerCase().includes(textLower) ||
+        store.address.city.toLowerCase().includes(textLower) ||
+        store.address.zipCode.includes(textLower)
+    );
+}
+
+export function productAccordingToTheFilter(product: ProductDTO, text: string, storeId: number | undefined): boolean {
+    const textLower = text.toLowerCase();
+    return (textLower === "" || product.name.toLowerCase().includes(textLower) || product.description.toLowerCase().includes(textLower)) && (product.storeId === storeId || storeId === undefined);
+
+}

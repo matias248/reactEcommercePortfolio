@@ -1,12 +1,19 @@
 import { validatePartialStore, validateStore } from '../../models/StoreModel.js';
-import { readJSON } from '../../utils.js';
+import { readJSON, filterStores } from '../../utils.js';
 
 const stores = readJSON('./localData/stores.json')
 
 export class StoreController {
     getAll = async (req, res) => {
+        const textfilter = req.query.textfilter;
         let response;
-        response = stores;
+        if (textfilter != undefined && textfilter != "") {
+            response = filterStores(stores, textfilter)
+        }
+        else {
+            response = stores;
+        }
+
         return res.json(response);
     }
 
@@ -18,9 +25,9 @@ export class StoreController {
     }
 
     create = async (req, res) => {
-        const newstore={
+        const newstore = {
             ...req.body,
-            id:stores.length+1
+            id: stores.length + 1
         }
         const result = validateStore(newstore)
 

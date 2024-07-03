@@ -26,6 +26,12 @@ interface InputSwitchFormProps extends InputFormProps {
     optionSelected: string;
 }
 
+interface NavigationInputsProps extends Input {
+    currentPage: number;
+    totalPages: number;
+    handlerCurrentPage: (page: number) => void;
+}
+
 export const InputOfStringForm = (props: InputTextFormProps): React.JSX.Element => {
     return <div className={"mb-5 w-full min-w-[100px]"}>
         <label htmlFor={"inputString-" + props.title} className="block mb-2 text-base sm:text-lg dark:text-white flex items-center">
@@ -128,6 +134,35 @@ export const EditButton = (props: ButtonProps): React.JSX.Element => {
     return <button id={props.id ? "editButton" + props.id : "editButton"} className={"w-14 bg-gray-600 rounded-lg dark:fill-white " + (props.styleOverride ?? "")} onClick={(event) => { event.stopPropagation(); props.functionToDo() }}>
         <EditIcon />
     </button>;
+}
+
+export const NavigationInputs = (props: NavigationInputsProps): React.JSX.Element => {
+    const leftArrowFunction = () => { props.handlerCurrentPage(props.currentPage - 1) };
+    const rightArrowFunction = () => { props.handlerCurrentPage(props.currentPage + 1) };
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, functionToDo: (number: number) => void) => {
+        const inputValue = event.target.value;
+        const isPositiveInteger = /^[1-9]\d*$/.test(inputValue);
+
+        if (isPositiveInteger || inputValue == '') {
+            functionToDo(+inputValue);
+        }
+    };
+
+    return (
+        <div className={"flex gap-[6px]  " + (props.styleOverride ?? "")}>
+            <button disabled={props.currentPage <= 1} className={"w-[20px] bg-gray-600 rounded-md dark:text-white p-[4px]"} onClick={(event) => { event.stopPropagation(); leftArrowFunction() }}>
+                {"<"}
+            </button>
+            <div className="flex gap-[2px] max-w-[200px] h-[35px] overflow-auto  items-center px-[2px]">
+                <input className="max-w-[50px] rounded-md text-center dark:text-white dark:bg-gray-400 h-[25px]" value={props.currentPage !== 0 ? props.currentPage : ''} onChange={(event) => { handleInputChange(event, props.handlerCurrentPage) }} />
+                <div className="rounded-md  dark:text-white h-[25px] whitespace-nowrap ">{"of " + (props.totalPages === 0 ? 1 : props.totalPages)}</div>
+            </div>
+            <button disabled={props.currentPage >= props.totalPages} className={"w-[20px] bg-gray-600 rounded-md dark:text-white p-[4px] "} onClick={(event) => { event.stopPropagation(); rightArrowFunction() }}>
+                {">"}
+            </button>
+        </div>
+    );
 }
 
 

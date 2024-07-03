@@ -1,4 +1,4 @@
-import { readJSON } from '../utils.js';
+import { readJSON, productAccordingToTheFilter } from '../utils.js';
 import { inventoryStatusType } from '../models/ProductModel.js'
 
 const commonHeaders = {
@@ -26,13 +26,49 @@ describe('GET /products', () => {
   test('Should return 200 /public', async () => {
     const response = await api.get("/products/public")
       .expect(200);
-    expect(response.body).toEqual(products.filter((element) => {return inventoryStatusType.OUTOFSTOCK != element.inventoryStatus}));
+    expect(response.body).toEqual({ products: products.filter((element) => { return inventoryStatusType.OUTOFSTOCK != element.inventoryStatus }), totalPages: 1 });
+  });
+
+  test('Should return 200 /public?textfilter=Simple', async () => {
+    const response = await api.get("/products/public?textfilter=Simple")
+      .expect(200);
+    expect(response.body).toEqual({
+      totalPages: 1,
+      products: products.filter((element) => { return productAccordingToTheFilter(element, "Simple", undefined) && inventoryStatusType.OUTOFSTOCK != element.inventoryStatus })
+    })
+  });
+
+  test('Should return 200 /public?textfilter=Simple', async () => {
+    const response = await api.get("/products/public?storeid=1")
+      .expect(200);
+    expect(response.body).toEqual({
+      totalPages: 1,
+      products: products.filter((element) => { return productAccordingToTheFilter(element,"", 1) && inventoryStatusType.OUTOFSTOCK != element.inventoryStatus })
+    })
+  });
+
+  test('Should return 200 /public', async () => {
+    const response = await api.get("/products/public?page=1")
+      .expect(200);
+    expect(response.body).toEqual({ products: products.filter((element) => { return inventoryStatusType.OUTOFSTOCK != element.inventoryStatus }), totalPages: 1 });
+  });
+
+  test('Should return 200 /public', async () => {
+    const response = await api.get("/products/public?page=1&pagelength=5")
+      .expect(200);
+    expect(response.body).toEqual({ products: products.filter((element) => { return inventoryStatusType.OUTOFSTOCK != element.inventoryStatus }), totalPages: 1 });
+  });
+
+  test('Should return 200 /public', async () => {
+    const response = await api.get("/products/public?page=1&pagelength=2")
+      .expect(200);
+    expect(response.body).toEqual({ products: products.filter((element) => { return inventoryStatusType.OUTOFSTOCK != element.inventoryStatus }).slice(0, 2), totalPages: 2 });
   });
 
   test('Should return 200 /public ?categories', async () => {
     const response = await api.get("/products/public?categories=Accessories")
       .expect(200);
-    expect(response.body).toEqual(filteredByCategoryAccessories.filter((element) => inventoryStatusType.OUTOFSTOCK != element.inventoryStatus));
+    expect(response.body).toEqual({ products: filteredByCategoryAccessories.filter((element) => { return inventoryStatusType.OUTOFSTOCK != element.inventoryStatus }), totalPages: 1 });
   });
 
   test('Should return 200 ?categories', async () => {

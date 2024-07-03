@@ -1,12 +1,31 @@
 import axios from 'axios';
-import { ProductDTO } from '../models/Product';
+import { inventoryStatusType, ProductDTO } from '../models/Product';
 import { StoreDTO } from '../models/Store';
 import { currentProducts } from '../LocalData/Products';
 import { currentStores } from '../LocalData/Stores';
-import { getNextId } from '../utils/sharedComponents/utilsFunctions';
+import { calculateTotalPages, getNextId, getPaginatedItems, joinArrayWithComma, productAccordingToTheFilter } from '../utils/sharedComponents/utilsFunctions';
 
 
 const url = process.env.REACT_APP_URL_API ?? "";
+
+export const getProductsPublicUrl = async (categories: string[], pageIndex: number, elementsPerPage: number, textFilter: string, storeId?: number): Promise<{ totalPages: number, products: ProductDTO[] }> => {
+    if (process.env.REACT_APP_ENV === "test") {
+        const productsFiltered = currentProducts.filter((product) => {
+            return (categories.includes(product.category) || categories.length === 0) && product.inventoryStatus !== inventoryStatusType.OUTOFSTOCK && productAccordingToTheFilter(product, textFilter, storeId)
+        });
+        return {
+            products: getPaginatedItems(productsFiltered, pageIndex - 1, elementsPerPage), totalPages: calculateTotalPages(productsFiltered.length, elementsPerPage)
+        }
+    }
+    try {
+        const categoriesQuery = joinArrayWithComma(categories);
+        const resp = await axios.get(url + "/products/public?categories=" + categoriesQuery + "&page=" + pageIndex + "&pagelength=" + elementsPerPage + "&textfilter=" + textFilter +
+            (storeId ? "&storeid=" + storeId : ""));
+        return resp.data;
+    } catch (err) {
+        throw err;
+    }
+};
 
 export const getProducts = async (storeId: number): Promise<ProductDTO[]> => {
     if (process.env.REACT_APP_ENV === "test") {

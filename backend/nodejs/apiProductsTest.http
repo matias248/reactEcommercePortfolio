@@ -4,11 +4,21 @@
 GET http://localhost:3001/products?categories=ax,Accessories
 Authorization: Bearer {{token}}
 
+
+### Get all products with filter text
+GET http://localhost:3001/products/public?storeid=1
+Authorization: Bearer {{token}}
+
+### Get all products with store filter
+GET http://localhost:3001/products/public?textfilter=Product
+Authorization: Bearer {{token}}
+
+
 ####
 GET http://localhost:3001/products/
 Authorization: Bearer {{token}}
 ####
-GET http://localhost:3001/products/public
+GET http://localhost:3001/products/public?page=1&pagelength=2
 Authorization: Bearer {{token}}
 
 ### Get products by id

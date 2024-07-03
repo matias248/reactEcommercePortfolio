@@ -5,8 +5,20 @@ import { takeOutIdAndV } from '../../utils.js';
 
 export class StoreController {
     getAll = async (req, res) => {
+        const textfilter = req.query.textfilter;
+        let query = {};
 
-        StoreModel.find()
+        if (textfilter != undefined) {
+            const regex = new RegExp(textfilter, 'i');
+            query = {
+                $or: [
+                    { 'address.city': { $regex: regex } },
+                    { name: { $regex: regex } },
+                    { 'address.zipCode' : { $regex: regex } }
+                ]
+            };
+        }
+        StoreModel.find(query)
             .then(stores => {
                 const storesToSend = stores.map((element) => { return takeOutIdAndV(element.toObject()) });
                 res.status(200).json(storesToSend)

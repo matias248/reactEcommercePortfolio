@@ -16,6 +16,14 @@ describe('GET /stores', () => {
         expect(response.body).toEqual(stores);
       })
   });
+
+  test('Should return 200', async () => {
+    await api.get("/stores?textfilter=Simple")
+      .expect(200)
+      .then(response => {
+        expect(response.body).toEqual([stores[0]]);
+      })
+  });
 });
 
 
@@ -28,20 +36,21 @@ describe('GET /stores/:id', () => {
       .then(response => {
         expect(response.body).toEqual(stores[1]
         )
-      })});
-    test('Should return 404', async () => {
-      await api.get("/stores/95b6c351179df29507b30db7")
-        .set(commonHeaders)
-        .expect(404)
-        .then(response => {
-          expect(response.body).toEqual(
-            {
-              "message": "store not found"
-            },
-          );
-        })
-    });
+      })
   });
+  test('Should return 404', async () => {
+    await api.get("/stores/95b6c351179df29507b30db7")
+      .set(commonHeaders)
+      .expect(404)
+      .then(response => {
+        expect(response.body).toEqual(
+          {
+            "message": "store not found"
+          },
+        );
+      })
+  });
+});
 
 describe('POST /stores', () => {
 
@@ -84,19 +93,19 @@ describe('PATCH /stores/:id', () => {
             "name": "2009",
             "currency": "EUR",
             "address": {
-                "streetNumber":"0",
-                "streetName":"Street Name",
-                "city":"Simple City D.C",
-                "state":"Simple Country",
-                "zipCode":"31000"
+              "streetNumber": "0",
+              "streetName": "Street Name",
+              "city": "Simple City D.C",
+              "state": "Simple Country",
+              "zipCode": "31000"
             },
             "location": {
-                "latitude":1,
-                "longitude":2
+              "latitude": 1,
+              "longitude": 2
             },
             "contactPhone": "+33 123456",
-            "imageUrl":"/store1.jpeg"
-        },
+            "imageUrl": "/store1.jpeg"
+          },
         );
       })
   }

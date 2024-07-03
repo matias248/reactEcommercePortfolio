@@ -4,6 +4,10 @@
 GET http://localhost:3001/stores/
 Authorization: Bearer {{token}}
 
+### Get all stores filtered by  a text
+GET http://localhost:3001/stores?textfilter=31000
+Authorization: Bearer {{token}}
+
 
 ### Get by id
 GET http://localhost:3001/stores/2

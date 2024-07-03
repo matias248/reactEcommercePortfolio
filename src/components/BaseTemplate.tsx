@@ -4,6 +4,8 @@ import { getUrlProductList, getUrlStoreList } from "../routes/RoutesConfigs";
 import { useState } from "react";
 import { NavigationPath } from "./navigationPath";
 import { Header } from "./Header";
+import { NavigationRouterInterface, NavigationRouter } from "../routes/NavigationRouter";
+import { AppNames } from "../utils/constants";
 
 interface BaseTemplateProps {
 }
@@ -22,6 +24,8 @@ export interface ContextPathData {
 export const BaseTemplate = (props: BaseTemplateProps): React.JSX.Element => {
 
     const [pathData, setPathData] = useState<PathData>();
+    const navigationRouter: NavigationRouterInterface = NavigationRouter();
+    const currentRoute: AppNames | undefined = navigationRouter.currentRoute();
 
     const handlerPathData = (pathData: PathData) => {
         setPathData(pathData)
@@ -32,8 +36,7 @@ export const BaseTemplate = (props: BaseTemplateProps): React.JSX.Element => {
 
     return <>
         <Header resetPathData={resetPathData} />
-
-        <div>{pathData &&
+        <div>{pathData && currentRoute === AppNames.FORMS &&
             <NavigationPath pathData={pathData} />
         }
             <Outlet context={{ handlerPathData: handlerPathData } satisfies ContextPathData} />
