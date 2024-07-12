@@ -2,42 +2,33 @@ import { useEffect, useRef, useState } from 'react';
 import { AppNames } from '../constants';
 import { StoreDTO } from '../../models/Store';
 import { ProductDTO } from '../../models/Product';
+import { CartItemDTO } from '../../models/CartItem';
 
 
-export function useClickOutside(initialIsVisible: boolean) {
-    const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
+
+
+export function useClickOutside(functionToDo: () => void) {
     const ref = useRef<HTMLDivElement | null>(null);
-    const ref2 = useRef<HTMLDivElement | null>(null);
 
-
-    const handleClickOutside = (event: MouseEvent) => {
-        if (ref.current) {
-            if (!ref.current.contains(event.target as Node) && (ref2.current == null)) {
-                setIsComponentVisible(false);
-            }
+    const handleClickOutInside = (event: MouseEvent) => {
+        if (ref.current && !ref.current.contains(event.target as Node)) {
+            functionToDo();
         }
-        if (ref2.current) {
-            if (ref2.current.contains(event.target as Node)) {
-                setIsComponentVisible(true);
-            }
-        }
-
-
     };
 
     useEffect(() => {
         const handleDocumentClick = (event: MouseEvent) => {
-            handleClickOutside(event);
+            handleClickOutInside(event);
         };
 
-        document.addEventListener('click', handleDocumentClick);
+        document.addEventListener('mousedown', handleDocumentClick);
 
         return () => {
-            document.removeEventListener('click', handleDocumentClick);
+            document.removeEventListener('mousedown', handleDocumentClick);
         };
     }, []);
 
-    return { ref, ref2, isComponentVisible, setIsComponentVisible };
+    return { ref };
 }
 
 export function replaceTextNumberPerNumber(stringToChange: string) {
@@ -116,4 +107,19 @@ export function productAccordingToTheFilter(product: ProductDTO, text: string, s
     const textLower = text.toLowerCase();
     return (textLower === "" || product.name.toLowerCase().includes(textLower) || product.description.toLowerCase().includes(textLower)) && (product.storeId === storeId || storeId === undefined);
 
+}
+
+export function productDTOtoCartItemDTO(product: ProductDTO, quantityInCart: number): CartItemDTO {
+    let cartItem: CartItemDTO = { quantity: quantityInCart, name: product.name, price: product.price, id: product.id, description: product.description, imageUrl: product.imageUrl }
+    return cartItem;
+}
+
+export function getQuantityOfProductInCartShop(cartShopList: CartItemDTO[], idOfProduct: number): number {
+    let indexOfProduct = cartShopList.findIndex((cartItem) => cartItem.id === idOfProduct)
+    return indexOfProduct !== -1 ? cartShopList[indexOfProduct].quantity : 0;
+}
+
+export function getTotalPriceCart(cartShopList: CartItemDTO[]): number {
+    let totalSum = cartShopList.reduce((accumulator, currentValue) => { return accumulator + currentValue.price * currentValue.quantity }, 0);
+    return totalSum
 }

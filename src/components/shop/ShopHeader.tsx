@@ -4,6 +4,7 @@ import { SearchBar } from "./SearchBar";
 import { ReactComponent as ShoppingCartIcon } from "../../assets/images/shoppingCartIcon.svg";
 import { ReactComponent as ArrowDown } from "../../assets/images/arrowDownIcon.svg";
 import { ShopSelectorDialog } from "./ShopSelectorDialog";
+import { useClickOutside } from "../../utils/sharedComponents/utilsFunctions";
 
 export const ShopHeader = (props: {
     storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined,
@@ -14,6 +15,8 @@ export const ShopHeader = (props: {
     updadeStoresByFilter: () => void,
     handlerProductTextFilter: (text: string) => void,
     updadeProductsByFilter: () => void,
+    handlerCartListVisble: (isVisible: boolean) => void;
+
 }) => {
 
     return (
@@ -30,7 +33,7 @@ export const ShopHeader = (props: {
 
                     <div className="flex items-center lg:order-2 ">
                         {
-                            <button id="shoppingCart" onClick={() => alert("carrito")} className=" bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">
+                            <button id="shoppingCart" onClick={() => props.handlerCartListVisble(true)} className=" bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">
                                 <div className="size-6"><ShoppingCartIcon /></div>
                             </button>
                         }
@@ -46,12 +49,14 @@ export const ShopSelectorInput = (props: {
     handlerShopTextFilter: (text: string) => void, shopTextFilter: string, updadeStoresByFilter: () => void
 }) => {
 
+
     const [displayShopSelectorDialog, setShopSelectorDialog] = useState<boolean>(false);
 
+
     return (<>
-        {displayShopSelectorDialog && <ShopSelectorDialog shopTextFilter={props.shopTextFilter} storesList={props.storesList} selectedStore={props.selectedStore} handlerSelectedInput={props.handlerSelectedInput} handlerShopTextFilter={props.handlerShopTextFilter} updadeStoresByFilter={props.updadeStoresByFilter} />
+        {displayShopSelectorDialog && <ShopSelectorDialog shopTextFilter={props.shopTextFilter} storesList={props.storesList} selectedStore={props.selectedStore} handlerSelectedInput={props.handlerSelectedInput} handlerShopTextFilter={props.handlerShopTextFilter} updadeStoresByFilter={props.updadeStoresByFilter} closeDialog={() => { setShopSelectorDialog(false) }} />
         }
-        <div className="flex h-full border-2 border-gray-200 rounded-lg dark:border-slate-700 " onClick={()=> {setShopSelectorDialog(!displayShopSelectorDialog)}}>
+        <div onClick={() => setShopSelectorDialog(true)} className="flex h-full border-2 border-gray-200 rounded-lg dark:border-slate-700 ">
             <div className=" w-[144px] ml-2" >
                 <p className="text-sm dark:text-white truncate  max-w-full">My store
                 </p>

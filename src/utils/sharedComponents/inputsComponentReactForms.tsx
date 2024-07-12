@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ReactComponent as ImagePlaceholder } from "../../assets/images/iconImagePlaceholder.svg";
 import { ReactComponent as EditIcon } from "../../assets/images/editIcon.svg";
 
@@ -30,6 +30,13 @@ interface NavigationInputsProps extends Input {
     currentPage: number;
     totalPages: number;
     handlerCurrentPage: (page: number) => void;
+}
+
+interface MinusPlusInputInterface extends Input {
+    modifyValue: (quantity: number) => void;
+    id?: string;
+    value: number;
+
 }
 
 export const InputOfStringForm = (props: InputTextFormProps): React.JSX.Element => {
@@ -164,5 +171,38 @@ export const NavigationInputs = (props: NavigationInputsProps): React.JSX.Elemen
         </div>
     );
 }
+export const MinusPlusInput = (props: MinusPlusInputInterface): React.JSX.Element => {
+    const minusFunction = () => { props.modifyValue(props.value - 1); };
+    const plusFunction = () => { props.modifyValue(props.value + 1); };
+    const [emptyValue, setEmptyValue] = useState<boolean>(false);
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, functionToDo: (number: number) => void) => {
+        const inputValue = event.target.value;
+        const isPositiveInteger = /^[0-9]\d*$/.test(inputValue);
+
+        if (isPositiveInteger) {
+            functionToDo(+inputValue);
+        }
+        if (inputValue == '') {
+            setEmptyValue(true);
+        }
+        else if (+inputValue == props.value) {
+            setEmptyValue(false);
+        }
+    };
+
+    useEffect(() => {
+        if (emptyValue == true)
+            setEmptyValue(false)
+    }, [props.modifyValue])
+
+    return <>
+        <button disabled={props.value <= 0} className="bg-red-500 text-white px-4 py-2 rounded-l hover:bg-red-600 " onClick={minusFunction} >-</button>
+        <input className="mx-2 border text-center w-16 h-10" value={emptyValue ? '' : props.value} onChange={(event) => { handleInputChange(event, props.modifyValue) }} />
+        <button className="bg-green-500 text-white px-4 py-2 rounded-r hover:bg-green-600" onClick={(event) => { event.stopPropagation(); plusFunction() }}>+</button>
+    </>
+        ;
+}
+
 
 

@@ -2,9 +2,10 @@ import { useState } from "react";
 import { StoreDTO } from "../../models/Store";
 import { SearchBar } from "./SearchBar";
 import { ReactComponent as LocationIcon } from "../../assets/images/locationIcon.svg";
+import { useClickOutside } from "../../utils/sharedComponents/utilsFunctions";
 
 export const ShopSelectorDialog = (props: {
-    storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined, handlerSelectedInput: (store: StoreDTO) => void, handlerShopTextFilter: (text: string) => void, shopTextFilter: string, updadeStoresByFilter: () => void
+    storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined, handlerSelectedInput: (store: StoreDTO) => void, handlerShopTextFilter: (text: string) => void, shopTextFilter: string, updadeStoresByFilter: () => void, closeDialog: () => void
 }) => {
 
     const [shopSelectedTemporal, setShopSelectedTemporal] = useState<StoreDTO>();
@@ -12,9 +13,10 @@ export const ShopSelectorDialog = (props: {
     const handlerStoreSelected = (store: StoreDTO) => {
         setShopSelectedTemporal(store);
     }
+    const { ref } = useClickOutside(() => props.closeDialog());
 
     return (
-        <div className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 right-0 w-[40%] md:w-[30%] z-10 rounded-l-lg flex flex-col gap-1 px-1">
+        <div ref={ref} className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 left-0 w-[40%] md:w-[30%] z-10 rounded-r-lg flex flex-col gap-1 px-1" >
             <div className="dark:text-white font-bold self-center ">Select your store</div>
 
             <div className="dark:text-slate-100 text-sm mb-1">Enter your zip code or city to see the nearest stores. This will allow you to filter products by store.</div>
@@ -41,7 +43,7 @@ const ShopSelectorDialogStoreInputList = (props: { storesList: StoreDTO[] | unde
     return (
         <div className="flex flex-col gap-1  overflow-auto  ">
             {props.storesList && props.storesList.map((currentValue) => {
-                return <ShopSelectorDialogStoreInput store={currentValue} onClick={() => props.handlerTemporalStore(currentValue)} idStoreSelected={props.selectedStore?.id} key={currentValue.id}/>
+                return <ShopSelectorDialogStoreInput store={currentValue} onClick={() => props.handlerTemporalStore(currentValue)} idStoreSelected={props.selectedStore?.id} key={currentValue.id} />
             })}
 
         </div>

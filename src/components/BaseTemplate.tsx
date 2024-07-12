@@ -1,6 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { StoreDTO } from "../models/Store";
-import { getUrlProductList, getUrlStoreList } from "../routes/RoutesConfigs";
+import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import { NavigationPath } from "./navigationPath";
 import { Header } from "./Header";
