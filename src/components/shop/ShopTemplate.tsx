@@ -9,6 +9,7 @@ import { getStores, getStoresFilteredByNameCityCodeZip } from "../../services/st
 import { ShopHeader, ShopSelectorInput } from "./ShopHeader";
 import { ShopCart } from "./ShopCart";
 import { CartItemDTO } from "../../models/CartItem";
+import { OrderConfirmModal } from "./OrderConfirm";
 
 
 export const ShopTemplate = (): React.JSX.Element => {
@@ -16,6 +17,7 @@ export const ShopTemplate = (): React.JSX.Element => {
     const [products, setProducts] = useState<ProductDTO[]>();
     const [cartShopList, setcartShopList] = useState<CartItemDTO[]>();
     const [cartListVisble, setCartListVisble] = useState<boolean>(false);
+    const [orderConfirmModal, setOrderConfirmModal] = useState<boolean>(false);
 
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -30,14 +32,16 @@ export const ShopTemplate = (): React.JSX.Element => {
 
     const [filterCategoryMap, setMap] = useState<Map<string, boolean>>(() => {
         const initialMap = new Map<string, boolean>();
-        arrayCategoryType.forEach(item => initialMap.set(item, false));
+        arrayCategoryType.forEach(item => initialMap.set(item, true));
         return initialMap;
     });
 
     const handlerCurrentPage = (page: number) => {
         setCurrentPage(page)
     }
-
+    const handlerOrderConfirmModal = (value: boolean) => {
+        setOrderConfirmModal(value)
+    }
 
     const handlerShopTextFilter = (text: string) => {
         setShopTextFilter(text)
@@ -129,8 +133,11 @@ export const ShopTemplate = (): React.JSX.Element => {
 
     return (
         <>
+            {orderConfirmModal &&
+                <OrderConfirmModal functionToDo={() => { handlerOrderConfirmModal(false); setcartShopList([]); setCartListVisble(false) }} />
+            }
             {cartListVisble &&
-                <ShopCart handlerCartListVisble={(value: boolean) => setCartListVisble(value)} cart={cartShopList} changeQuantityInCartShop={changeQuantityInCartShop} />
+                <ShopCart handlerCartListVisble={(value: boolean) => setCartListVisble(value)} cart={cartShopList} changeQuantityInCartShop={changeQuantityInCartShop} handlerOrderConfirmModal={() => handlerOrderConfirmModal(true)} />
             }
             <ShopHeader storesList={listOfStores} selectedStore={shopSelected} handlerSelectedInput={handlerStoreSelected} handlerShopTextFilter={handlerShopTextFilter} updadeStoresByFilter={() => getFilteredStores(shopTextFilter)} updadeProductsByFilter={() => getFilteredProducts(productTextFilter)}
                 textFilterShop={shopTextFilter} textFilterProduct={productTextFilter} handlerProductTextFilter={handlerProductTextFilter} handlerCartListVisble={(value: boolean) => setCartListVisble(value)} />

@@ -39,8 +39,8 @@ export const ShopProductList = (props: ShopProductListInterface): React.JSX.Elem
                 <div id="shopProductList" className="grid max-[1040px]:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:gap-4 gap-6 rounded-lg  min-h-[300px] dark:bg-gray-600 bg-gray-300 p-2">
                     {
                         props.products.map((product) => {
-                            return <div key={product.id} className="w-full min-[1040px]:w-[258px]">
-                                <ShopProductImageGallery cartItem={productDTOtoCartItemDTO(product, getQuantityOfProductInCartShop(props.cartShopList, product.id))}  changeQuantityInCartShop={props.changeQuantityInCartShop} /></div>
+                            return <div key={product.id} className="w-full min-[1040px]:w-[258px]" id={"ShopProductElementGalleryContainer" + product.id}>
+                                <ShopProductImageGallery cartItem={productDTOtoCartItemDTO(product, getQuantityOfProductInCartShop(props.cartShopList, product.id))} changeQuantityInCartShop={props.changeQuantityInCartShop} /></div>
                         })
                     }
                 </div>
@@ -86,21 +86,21 @@ export const ShopProductImageGallery = (props: ProductImageGalleryProps): React.
                         </p>
                     </div>
                     <div className="flex flex-row-reverse items-center  max-[1040px]:justify-center" onClick={() => { setshowDescription(!showDescription) }}>
-                        <button id={"learnMore" + props.cartItem.id} className=" text-white  hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Learn more</button>
+                        <button id={"learnMore" + props.cartItem.id} className=" text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Learn more</button>
                     </div>
                 </div>
                 <div>
                     <div className=" h-[4rem] flex justify-center items-center rounded-lg">
-                        <MinusPlusInput modifyValue={wrapperchangeQuantityInCartShop} value={props.cartItem.quantity} title={""} />
+                        <MinusPlusInput modifyValue={wrapperchangeQuantityInCartShop} value={props.cartItem.quantity} title={""} id={"minusPlusProductItem"+props.cartItem.id} />
                     </div>
                 </div>
 
             </>}
             {showDescription && <>
-                <div className="size-[3rem] " onClick={() => { setshowDescription(!showDescription) }}>
+                <div id={"descriptionProductCrossIcon" + props.cartItem.id} className="size-[3rem] " onClick={() => { setshowDescription(!showDescription) }}>
                     <CrossIcon className="dark:fill-white" />
                 </div>
-                <div className="dark:text-white overflow-y-auto  h-[15.25rem] mx-1">{props.cartItem.description} </div>
+                <div id={"descriptionProductText" + props.cartItem.id} className="dark:text-white overflow-y-auto  h-[15.25rem] mx-1">{props.cartItem.description} </div>
             </>
             }
         </div>

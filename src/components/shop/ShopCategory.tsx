@@ -16,7 +16,7 @@ export const ShopCategoryList = (props: ShopCategoryListInterface): React.JSX.El
             <div id="categoryList" className="flex gap-1 flex-wrap">
                 {
                     Array.from(props.filterCategoryMap.entries()).map(([key, value], index) => {
-                        return <ShopCategoryItem category={key} filterOn={value} onChange={() => props.updateFilterCategoryMap(key, !value)} key={key} />
+                        return <ShopCategoryItem id={index} category={key} filterOn={value} onChange={() => props.updateFilterCategoryMap(key, !value)} key={key} />
                     })
                 }
             </div>
@@ -28,11 +28,12 @@ interface ShopCategoryItemInterface {
     category: string;
     filterOn: boolean;
     onChange: () => void;
+    id: number;
 }
 
 export const ShopCategoryItem = (props: ShopCategoryItemInterface): React.JSX.Element => {
 
-    return <div onClick={() => { props.onChange() }} className={"dark:text-white rounded-lg px-2 flex  " + (props.filterOn ? "bg-blue-500" : "bg-gray-500")}>
+    return <div id={`ShopCategoryItem${props.id}`} onClick={() => { props.onChange() }} className={"dark:text-white rounded-lg px-2 flex  " + (props.filterOn ? "bg-blue-500" : "bg-gray-500")}>
         {
             !props.filterOn && <div className="dark:fill-white size-[20px] self-center "><CrossIcon /> </div>
 

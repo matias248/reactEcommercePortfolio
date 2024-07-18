@@ -16,13 +16,13 @@ export const ShopSelectorDialog = (props: {
     const { ref } = useClickOutside(() => props.closeDialog());
 
     return (
-        <div ref={ref} className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 left-0 w-[40%] md:w-[30%] z-10 rounded-r-lg flex flex-col gap-1 px-1" >
+        <div ref={ref} className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 left-0 max-[460px]:w-[50%] w-[40%] md:w-[30%] z-10 rounded-r-lg flex flex-col gap-1 px-1" >
             <div className="dark:text-white font-bold self-center ">Select your store</div>
 
             <div className="dark:text-slate-100 text-sm mb-1">Enter your zip code or city to see the nearest stores. This will allow you to filter products by store.</div>
 
             <div className=" ">
-                <SearchBar textFilter={props.shopTextFilter} handlerValueChange={props.handlerShopTextFilter} functionOnSubmit={props.updadeStoresByFilter} />
+                <SearchBar textFilter={props.shopTextFilter} handlerValueChange={props.handlerShopTextFilter} functionOnSubmit={props.updadeStoresByFilter} id="filtershops" />
             </div>
 
             <div className="flex-1 overflow-auto mb-2">
