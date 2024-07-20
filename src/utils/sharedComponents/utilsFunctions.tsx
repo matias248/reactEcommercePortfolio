@@ -31,6 +31,37 @@ export function useClickOutside(functionToDo: () => void) {
     return { ref };
 }
 
+export function useSideBarLogic(initialIsVisible: boolean) {
+    const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
+    const button = useRef<HTMLDivElement | null>(null);
+    const dialog = useRef<HTMLDivElement | null>(null);
+
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (dialog.current && !dialog.current.contains(event.target as Node)) {
+            return setIsComponentVisible(false);
+        }
+
+        if (button.current && button.current.contains(event.target as Node)) {
+            setIsComponentVisible(true);
+        }
+    };
+
+    useEffect(() => {
+        const handleDocumentClick = (event: MouseEvent) => {
+            handleClickOutside(event);
+        };
+
+        document.addEventListener('click', handleDocumentClick);
+
+        return () => {
+            document.removeEventListener('click', handleDocumentClick);
+        };
+    }, []);
+
+    return { button, dialog, isComponentVisible };
+}
+
 export function replaceTextNumberPerNumber(stringToChange: string) {
     let textModif = (stringToChange + "").split(',').join('.').trim();
     if (isNaN(+textModif)) {

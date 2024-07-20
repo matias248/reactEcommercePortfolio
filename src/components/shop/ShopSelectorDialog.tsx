@@ -1,41 +1,42 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { StoreDTO } from "../../models/Store";
 import { SearchBar } from "./SearchBar";
 import { ReactComponent as LocationIcon } from "../../assets/images/locationIcon.svg";
 import { useClickOutside } from "../../utils/sharedComponents/utilsFunctions";
 
-export const ShopSelectorDialog = (props: {
-    storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined, handlerSelectedInput: (store: StoreDTO) => void, handlerShopTextFilter: (text: string) => void, shopTextFilter: string, updadeStoresByFilter: () => void, closeDialog: () => void
-}) => {
+interface shopSelectorDialog {
+    storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined, handlerSelectedInput: (store: StoreDTO) => void, handlerShopTextFilter: (text: string) => void, shopTextFilter: string, updadeStoresByFilter: () => void,
+}
 
+export type Ref = HTMLDivElement;
+
+export const ShopSelectorDialog = forwardRef<Ref, shopSelectorDialog>((props: shopSelectorDialog, ref) => {
     const [shopSelectedTemporal, setShopSelectedTemporal] = useState<StoreDTO>();
 
     const handlerStoreSelected = (store: StoreDTO) => {
         setShopSelectedTemporal(store);
     }
-    const { ref } = useClickOutside(() => props.closeDialog());
 
-    return (
-        <div ref={ref} className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 left-0 max-[460px]:w-[50%] w-[40%] md:w-[30%] z-10 rounded-r-lg flex flex-col gap-1 px-1" >
-            <div className="dark:text-white font-bold self-center ">Select your store</div>
+    return (<div ref={ref} className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 left-0 max-[460px]:w-[50%] w-[40%] md:w-[30%] z-10 rounded-r-lg flex flex-col gap-1 px-1" >
+        <div className="dark:text-white font-bold self-center ">Select your store</div>
 
-            <div className="dark:text-slate-100 text-sm mb-1">Enter your zip code or city to see the nearest stores. This will allow you to filter products by store.</div>
+        <div className="dark:text-slate-100 text-sm mb-1">Enter your zip code or city to see the nearest stores. This will allow you to filter products by store.</div>
 
-            <div className=" ">
-                <SearchBar textFilter={props.shopTextFilter} handlerValueChange={props.handlerShopTextFilter} functionOnSubmit={props.updadeStoresByFilter} id="filtershops" />
-            </div>
-
-            <div className="flex-1 overflow-auto mb-2">
-                <ShopSelectorDialogStoreInputList storesList={props.storesList ?? []} selectedStore={shopSelectedTemporal} handlerTemporalStore={handlerStoreSelected} />
-
-            </div>
-
-            <div className="mb-2">
-                <ShopSelectorDialogButtonCorfim styleOverride="" functionToDo={() => { if (shopSelectedTemporal) props.handlerSelectedInput(shopSelectedTemporal) }} title={"Select store"} />
-            </div>
+        <div className=" ">
+            <SearchBar textFilter={props.shopTextFilter} handlerValueChange={props.handlerShopTextFilter} functionOnSubmit={props.updadeStoresByFilter} id="filtershops" />
         </div>
-    )
+
+        <div className="flex-1 overflow-auto mb-2">
+            <ShopSelectorDialogStoreInputList storesList={props.storesList ?? []} selectedStore={shopSelectedTemporal} handlerTemporalStore={handlerStoreSelected} />
+
+        </div>
+
+        <div className="mb-2">
+            <ShopSelectorDialogButtonCorfim styleOverride="" functionToDo={() => { if (shopSelectedTemporal) props.handlerSelectedInput(shopSelectedTemporal) }} title={"Select store"} />
+        </div>
+    </div>)
 }
+);
 
 const ShopSelectorDialogStoreInputList = (props: { storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined, handlerTemporalStore: (store: StoreDTO) => void }) => {
 
