@@ -32,7 +32,7 @@ export const ShopTemplate = (): React.JSX.Element => {
 
     const [filterCategoryMap, setMap] = useState<Map<string, boolean>>(() => {
         const initialMap = new Map<string, boolean>();
-        arrayCategoryType.forEach(item => initialMap.set(item, true));
+        arrayCategoryType.forEach(item => initialMap.set(item, false));
         return initialMap;
     });
 

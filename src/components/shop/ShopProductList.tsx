@@ -91,7 +91,7 @@ export const ShopProductImageGallery = (props: ProductImageGalleryProps): React.
                 </div>
                 <div>
                     <div className=" h-[4rem] flex justify-center items-center rounded-lg">
-                        <MinusPlusInput modifyValue={wrapperchangeQuantityInCartShop} value={props.cartItem.quantity} title={""} id={"minusPlusProductItem"+props.cartItem.id} />
+                        <MinusPlusInput modifyValue={wrapperchangeQuantityInCartShop} value={props.cartItem.quantity} title={""} id={"minusPlusProductItem" + props.cartItem.id} />
                     </div>
                 </div>
 
