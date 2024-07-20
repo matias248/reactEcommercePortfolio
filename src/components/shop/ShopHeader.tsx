@@ -5,6 +5,7 @@ import { ReactComponent as ShoppingCartIcon } from "../../assets/images/shopping
 import { ReactComponent as ArrowDown } from "../../assets/images/arrowDownIcon.svg";
 import { ShopSelectorDialog } from "./ShopSelectorDialog";
 import { useSideBarLogic } from "../../utils/sharedComponents/utilsFunctions";
+import { AnimatePresence } from 'framer-motion'
 
 export const ShopHeader = (props: {
     storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined,
@@ -52,10 +53,12 @@ export const ShopSelectorInput = (props: {
     const { button, isComponentVisible, dialog } = useSideBarLogic(false)
 
     return (<>
-        {
-            isComponentVisible && <ShopSelectorDialog ref={dialog} storesList={props.storesList} selectedStore={props.selectedStore} handlerSelectedInput={props.handlerSelectedInput}
-                handlerShopTextFilter={props.handlerShopTextFilter} shopTextFilter={props.shopTextFilter} updadeStoresByFilter={props.updadeStoresByFilter} />
-        }
+        <AnimatePresence>
+            {
+                isComponentVisible && <ShopSelectorDialog ref={dialog} storesList={props.storesList} selectedStore={props.selectedStore} handlerSelectedInput={props.handlerSelectedInput}
+                    handlerShopTextFilter={props.handlerShopTextFilter} shopTextFilter={props.shopTextFilter} updadeStoresByFilter={props.updadeStoresByFilter} />
+            }
+        </AnimatePresence>
         <div ref={button} id={'ShopSelectorInput'} className="flex h-full border-2 border-gray-200 rounded-lg dark:border-slate-700 ">
             <div className=" w-[144px] ml-2" >
                 <p className="text-sm dark:text-white truncate  max-w-full">My store

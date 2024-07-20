@@ -2,7 +2,7 @@ import { forwardRef, useState } from "react";
 import { StoreDTO } from "../../models/Store";
 import { SearchBar } from "./SearchBar";
 import { ReactComponent as LocationIcon } from "../../assets/images/locationIcon.svg";
-import { useClickOutside } from "../../utils/sharedComponents/utilsFunctions";
+import { motion } from "framer-motion"
 
 interface shopSelectorDialog {
     storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined, handlerSelectedInput: (store: StoreDTO) => void, handlerShopTextFilter: (text: string) => void, shopTextFilter: string, updadeStoresByFilter: () => void,
@@ -17,7 +17,10 @@ export const ShopSelectorDialog = forwardRef<Ref, shopSelectorDialog>((props: sh
         setShopSelectedTemporal(store);
     }
 
-    return (<div ref={ref} className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 left-0 max-[460px]:w-[50%] w-[40%] md:w-[30%] z-10 rounded-r-lg flex flex-col gap-1 px-1" >
+    return (<motion.div initial={{ x: '-100%' }}
+        animate={{ x: 0 }}
+        exit={{x:'-100%'}}
+        transition={{ duration: 0.6 }} ref={ref} className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 left-0 max-[460px]:w-[50%] w-[40%] md:w-[30%] z-10 rounded-r-lg flex flex-col gap-1 px-1" >
         <div className="dark:text-white font-bold self-center ">Select your store</div>
 
         <div className="dark:text-slate-100 text-sm mb-1">Enter your zip code or city to see the nearest stores. This will allow you to filter products by store.</div>
@@ -34,7 +37,7 @@ export const ShopSelectorDialog = forwardRef<Ref, shopSelectorDialog>((props: sh
         <div className="mb-2">
             <ShopSelectorDialogButtonCorfim styleOverride="" functionToDo={() => { if (shopSelectedTemporal) props.handlerSelectedInput(shopSelectedTemporal) }} title={"Select store"} />
         </div>
-    </div>)
+    </motion.div>)
 }
 );
 

@@ -3,7 +3,7 @@ import { ReactComponent as ImagePlaceholder } from "../../assets/images/iconImag
 import { MinusPlusInput } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { ReactComponent as CrossIcon } from "../../assets/images/crossIcon.svg";
 import { getTotalPriceCart } from "../../utils/sharedComponents/utilsFunctions";
-
+import { motion } from "framer-motion";
 
 interface ShopCartInterface {
     cart: CartItemDTO[] | undefined;
@@ -18,7 +18,10 @@ export const ShopCart = (props: ShopCartInterface) => {
 
 
     return (<>
-        <div className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 right-0 max-[460px]:w-[60%] w-[40%] md:w-[30%] z-10 rounded-l-lg flex flex-col gap-1 px-2 ">
+        <motion.div initial={{ x: '+100%' }}
+        animate={{ x: 0 }}
+        exit={{x:'+100%'}}
+        transition={{ duration: 0.6 }} className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 right-0 max-[460px]:w-[60%] w-[40%] md:w-[30%] z-10 rounded-l-lg flex flex-col gap-1 px-2 ">
             <div id="crossShopCart" className="size-[2.5rem] relative -left-1" onClick={() => { props.handlerCartListVisble(false) }}>
                 <CrossIcon className="dark:fill-white" />
             </div>
@@ -32,7 +35,7 @@ export const ShopCart = (props: ShopCartInterface) => {
             <div className="mb-2">
                 <ShopButtonConfirm styleOverride="" functionToDo={() => { if (props.cart && props.cart.length > 0) props.handlerOrderConfirmModal() }} title={"Submit Order"} />
             </div>
-        </div>
+        </motion.div>
     </>
     )
 }

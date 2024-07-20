@@ -10,6 +10,7 @@ import { ShopHeader, ShopSelectorInput } from "./ShopHeader";
 import { ShopCart } from "./ShopCart";
 import { CartItemDTO } from "../../models/CartItem";
 import { OrderConfirmModal } from "./OrderConfirm";
+import { AnimatePresence } from "framer-motion";
 
 
 export const ShopTemplate = (): React.JSX.Element => {
@@ -136,9 +137,12 @@ export const ShopTemplate = (): React.JSX.Element => {
             {orderConfirmModal &&
                 <OrderConfirmModal functionToDo={() => { handlerOrderConfirmModal(false); setcartShopList([]); setCartListVisble(false) }} />
             }
-            {cartListVisble &&
-                <ShopCart handlerCartListVisble={(value: boolean) => setCartListVisble(value)} cart={cartShopList} changeQuantityInCartShop={changeQuantityInCartShop} handlerOrderConfirmModal={() => handlerOrderConfirmModal(true)} />
-            }
+            <AnimatePresence>
+                {cartListVisble &&
+                    <ShopCart handlerCartListVisble={(value: boolean) => setCartListVisble(value)} cart={cartShopList} changeQuantityInCartShop={changeQuantityInCartShop} handlerOrderConfirmModal={() => handlerOrderConfirmModal(true)} />
+                }
+            </AnimatePresence>
+
             <ShopHeader storesList={listOfStores} selectedStore={shopSelected} handlerSelectedInput={handlerStoreSelected} handlerShopTextFilter={handlerShopTextFilter} updadeStoresByFilter={() => getFilteredStores(shopTextFilter)} updadeProductsByFilter={() => getFilteredProducts(productTextFilter)}
                 textFilterShop={shopTextFilter} textFilterProduct={productTextFilter} handlerProductTextFilter={handlerProductTextFilter} handlerCartListVisble={(value: boolean) => setCartListVisble(value)} />
             <div className=" block sm:hidden  ml-[5%] w-[188px] mb-4">
