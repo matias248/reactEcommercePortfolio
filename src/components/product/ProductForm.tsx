@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { CancelButton, DeleteButton, InputOfNumberForm, InputOfStringForm, InputOfUrlImagesForm, InputSwitchForm, ValidateButton } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { DESCRIPTION_RESTRICTION, descriptionRestrictionMessage, NAME_RESTRICTION, nameRestrictionMessage, onlyNumbersRestrictionMessage, REGEX } from "../../utils/constants";
 import { useEffect, useState } from "react";
-import { arrayCategoryType, arrayInventoryStatusType, ProductDTO } from "../../models/Product";
+import { arrayCategoryType, arrayCurrencyType, arrayInventoryStatusType, ProductDTO } from "../../models/Product";
 import { createProductById, deleteProductById, getProductByIdWithstore, updateProductById } from "../../services/productService";
 import { replaceTextNumberPerNumber } from "../../utils/sharedComponents/utilsFunctions";
 import { ContextPathData } from "../BaseTemplate";
@@ -42,11 +42,10 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             setValuesOfTheInputs(+(storeId ?? 0), +(productId ?? 0), (data) => {
                 setProduct(data.product);
                 pathData.handlerPathData({ inProducts: true, inStores: true, storeName: data.store.name, productName: data.product.name, storeId: data.store.id, productId: data.product.id })
-
             });
         }
         else {
-            let newProduct: ProductDTO = { name: "", description: "", price: 0, imageUrl: "", category: arrayCategoryType[0], inventoryStatus: arrayInventoryStatusType[0], id: -1, storeId: -1 };
+            let newProduct: ProductDTO = { name: "", description: "", price: 0, currency: arrayCurrencyType[0], imageUrl: "", category: arrayCategoryType[0], inventoryStatus: arrayInventoryStatusType[0], id: -1, storeId: -1 };
             setProduct(newProduct);
         }
         setIsLoading(false)
@@ -85,6 +84,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                 console.error('Error when create');
             })
         }
+
     }
 
     const deleteProduct = () => {
@@ -106,14 +106,17 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                     <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} helpText={descriptionRestrictionMessage} />
                     <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("name", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Name"} errorShouldDisplay={errors.name ? true : false} required={true} helpText={nameRestrictionMessage} />
                     <InputOfStringForm numberOfLines={4} reactFormProps={{ ...register("description", { required: true, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Description"} errorShouldDisplay={errors.description ? true : false} required={true} helpText={descriptionRestrictionMessage} />
-                    <InputOfNumberForm reactFormProps={{ ...register("price", { required: true, pattern: REGEX.NUMBERS_DOTS_COMMAS, setValueAs: (value: string) => replaceTextNumberPerNumber(value) }) }} title={"Price"} errorShouldDisplay={errors.price ? true : false} required={true} helpText={onlyNumbersRestrictionMessage} />
+                    <div className="flex gap-4 ">
+                        <InputOfNumberForm reactFormProps={{ ...register("price", { required: true, pattern: REGEX.NUMBERS_DOTS_COMMAS, setValueAs: (value: string) => replaceTextNumberPerNumber(value) }) }} title={"Price"} errorShouldDisplay={errors.price ? true : false} required={true} helpText={onlyNumbersRestrictionMessage} />
+                        <InputSwitchForm options={arrayCurrencyType} optionSelected={watch("currency")} reactFormProps={{ ...register("currency", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Currency"} styleOverride="text-center h-[2.875rem] " />
+                    </div>
                     <InputSwitchForm options={arrayCategoryType} optionSelected={watch("category")} reactFormProps={{ ...register("category", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Category"} />
                     <InputSwitchForm options={arrayInventoryStatusType} optionSelected={watch("inventoryStatus")} reactFormProps={{ ...register("inventoryStatus", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Inventory status"} />
                     {(productId !== "new" && !isNaN(+(productId ?? NaN))) && <div className=" md:gap-28 mt-4  w-40 min-h-8  mb-8 md:mb-4">
                         <DeleteButton functionToDo={() => deleteProduct()} title={"Delete Product"}></DeleteButton>
                     </div>}
                     <div className="grid md:grid-cols-2 md:gap-28 gap-4 mt-4 mx-auto md:w-80 min-h-14 ">
-                        <ValidateButton functionToDo={() => { }} title={"Submit"} />
+                        <ValidateButton functionToDo={() => { console.log(handleSubmit) }} title={"Submit"} />
                         <CancelButton functionToDo={() => navigationRouter.goToFappListOfProducts(storeId ? +storeId : -1)} title={"Cancel"} />
                     </div>
                 </form>

@@ -5,4 +5,5 @@ export interface CartItemDTO {
     quantity: number;
     imageUrl?: string;
     description:string;
+    currency: string;
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ShopCategoryList } from "./ShopCategory";
 import { arrayCategoryType, ProductDTO } from "../../models/Product";
 import { getProductsPublicUrl } from "../../services/productService";
-import { getTrueKeys, productDTOtoCartItemDTO } from '../../utils/sharedComponents/utilsFunctions'
+import { getTrueKeys } from '../../utils/sharedComponents/utilsFunctions'
 import { ShopProductList } from "./ShopProductList";
 import { StoreDTO } from "../../models/Store";
 import { getStores, getStoresFilteredByNameCityCodeZip } from "../../services/storeService";
@@ -133,7 +133,7 @@ export const ShopTemplate = (): React.JSX.Element => {
     }
 
     return (
-        <>
+        <div className="pb-4">
             {orderConfirmModal &&
                 <OrderConfirmModal functionToDo={() => { handlerOrderConfirmModal(false); setcartShopList([]); setCartListVisble(false) }} />
             }
@@ -152,7 +152,7 @@ export const ShopTemplate = (): React.JSX.Element => {
                 <ShopCategoryList updateFilterCategoryMap={updateFilterCategoryMap} filterCategoryMap={filterCategoryMap} />
             </div>
             <ShopProductList products={products} isLoading={isLoading} currentPage={currentPage} totalPages={totalPages ?? 1} handlerCurrentPage={handlerCurrentPage} cartShopList={cartShopList ?? []} changeQuantityInCartShop={changeQuantityInCartShop} />
-        </>
+        </div>
     );
 }
 

@@ -1,6 +1,6 @@
 import { ProductDTO } from "../models/Product";
 
-export const currentProducts:ProductDTO[] =[
+export const currentProducts: ProductDTO[] = [
   {
     "id": 1,
     "name": "Simple Watch",
@@ -9,7 +9,8 @@ export const currentProducts:ProductDTO[] =[
     "price": 65,
     "category": "Accessories",
     "inventoryStatus": "INSTOCK",
-    "storeId": 1
+    "storeId": 1,
+    "currency": "€"
   },
   {
     "id": 2,
@@ -17,17 +18,19 @@ export const currentProducts:ProductDTO[] =[
     "description": "Discover effortless style with the Simple Shirt, tailored for comfort and versatility. Made from breathable cotton fabric, this shirt is perfect for daily wear and casual outings. Its classic fit and subtle patterns effortlessly complement any wardrobe.",
     "imageUrl": "/shirt.jpeg",
     "price": 72,
-    "category": "Accessories",
+    "category": "Clothing",
     "inventoryStatus": "INSTOCK",
-    "storeId": 1
-  },{
+    "storeId": 1,
+    "currency": "€"
+  }, {
     "id": 3,
-    "name": "Simple Shirt",
-    "description": "Discover effortless style with the Simple Shirt, tailored for comfort and versatility. Made from breathable cotton fabric, this shirt is perfect for daily wear and casual outings. Its classic fit and subtle patterns effortlessly complement any wardrobe.",
+    "name": "Neo Shirt",
+    "description": "Discover effortless style with the Neo Shirt, tailored for comfort and versatility. Made from breathable cotton fabric, this shirt is perfect for daily wear and casual outings. Its classic fit and subtle patterns effortlessly complement any wardrobe.",
     "imageUrl": "/shirt.jpeg",
     "price": 72,
-    "category": "Accessories",
+    "category": "Clothing",
     "inventoryStatus": "INSTOCK",
-    "storeId": 2
+    "storeId": 2,
+    "currency": "€"
   },
 ]

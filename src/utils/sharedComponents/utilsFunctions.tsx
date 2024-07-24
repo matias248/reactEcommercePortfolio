@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AppNames } from '../constants';
 import { StoreDTO } from '../../models/Store';
-import { ProductDTO } from '../../models/Product';
+import { currencyType, ProductDTO } from '../../models/Product';
 import { CartItemDTO } from '../../models/CartItem';
 
 
@@ -141,7 +141,7 @@ export function productAccordingToTheFilter(product: ProductDTO, text: string, s
 }
 
 export function productDTOtoCartItemDTO(product: ProductDTO, quantityInCart: number): CartItemDTO {
-    let cartItem: CartItemDTO = { quantity: quantityInCart, name: product.name, price: product.price, id: product.id, description: product.description, imageUrl: product.imageUrl }
+    let cartItem: CartItemDTO = { quantity: quantityInCart, name: product.name, price: product.price, id: product.id, description: product.description, imageUrl: product.imageUrl, currency: product.currency }
     return cartItem;
 }
 
@@ -151,6 +151,16 @@ export function getQuantityOfProductInCartShop(cartShopList: CartItemDTO[], idOf
 }
 
 export function getTotalPriceCart(cartShopList: CartItemDTO[]): number {
-    let totalSum = cartShopList.reduce((accumulator, currentValue) => { return accumulator + currentValue.price * currentValue.quantity }, 0);
+    let totalSum = cartShopList.reduce((accumulator, currentValue) => {
+        let currencyIndex = 1;
+        if (currentValue.currency === currencyType.STERLING) {
+            currencyIndex = 1.19;
+        }
+        else if (currentValue.currency === currencyType.DOLLAR) {
+            currencyIndex = 0.92;
+
+        }
+        return accumulator + currentValue.price * currencyIndex * currentValue.quantity
+    }, 0);
     return totalSum
 }

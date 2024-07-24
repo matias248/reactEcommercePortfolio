@@ -53,7 +53,7 @@ describe('filters on the shop', () => {
         cy.get('#ShopProductElementGallery2').should('exist');
         cy.get('#ShopProductElementGallery3').should('exist');
 
-        cy.get('#ShopCategoryItem0').click();
+        cy.get('#ShopCategoryItem1').click();
 
         cy.get('#shopProductList').should('not.exist');
         cy.get('#shopProductListContainer').contains('No items founded').should('exist');

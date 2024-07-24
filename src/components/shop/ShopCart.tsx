@@ -30,7 +30,7 @@ export const ShopCart = (props: ShopCartInterface) => {
                 <ShopCartInputList cartItems={props.cart} changeQuantityInCartShop={props.changeQuantityInCartShop} />
             </div>
             <div className="mb-2">
-                <div className="dark:text-white text-xl">Total: {totalPriceCart}</div>
+                <div className="dark:text-white text-xl overflow-x-auto whitespace-nowrap">Total: {totalPriceCart} €</div>
             </div>
             <div className="mb-2">
                 <ShopButtonConfirm styleOverride="" functionToDo={() => { if (props.cart && props.cart.length > 0) props.handlerOrderConfirmModal() }} title={"Submit Order"} />

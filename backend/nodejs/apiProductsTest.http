@@ -61,7 +61,8 @@ Authorization: Bearer {{token}}
 			"category": "Accessories",
 			"quantity": 24,
 			"inventoryStatus": "OUTOFSTOCK",
-			"rating": 5
+			"rating": 5,
+			"currency":"€"
 }
 
 ### Update a product

@@ -13,6 +13,8 @@ describe('Store Crud Test', () => {
     cy.get('[name="inventoryStatus"]').type('31000');
 
     cy.get('[name="submitButton"]').click();
+    cy.contains('List of products');
+
     //Verify data. Normally it is the product with id number 4.
     cy.get('#productElementGallery4').should('exist')
       .should('contain', 'ProductCypress')
@@ -21,7 +23,7 @@ describe('Store Crud Test', () => {
 
 
   })
-  it('Read a product', () => {
+ it('Read a product', () => {
     cy.visit('stores/1/products');
 
     cy.get('#productElementGallery1').should('contain', 'Simple Watch').click();
@@ -81,7 +83,6 @@ describe('Store Crud Test', () => {
     cy.get('[name="name"]').should('have.value','Simple Watch');
 
   })
-  
 })
 
 describe('Test Displays if store doesn t exist ', () => {

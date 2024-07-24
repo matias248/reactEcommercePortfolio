@@ -81,8 +81,8 @@ export const ShopProductImageGallery = (props: ProductImageGalleryProps): React.
                         <div className=" text-2xl font-bold text-gray-900 dark:text-white  leading-8 whitespace-nowrap">{props.cartItem.name}</div>
                     </div>
                     <div className="w-full">
-                        <p id={`2textShopProductGallery${props.cartItem.id}`} className=" text-2xl font-bold text-gray-900 dark:text-white whitespace-nowrap  leading-8">
-                            {props.cartItem.price + "€"}
+                        <p id={`2textShopProductGallery${props.cartItem.id}`} className=" text-2xl font-bold text-gray-900 dark:text-white whitespace-nowrap leading-8">
+                            {props.cartItem.price + props.cartItem.currency}
                         </p>
                     </div>
                     <div className="flex flex-row-reverse items-center  max-[1040px]:justify-center" onClick={() => { setshowDescription(!showDescription) }}>

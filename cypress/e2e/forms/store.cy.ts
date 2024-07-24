@@ -5,7 +5,6 @@ describe('Store Crud Test', () => {
 
     cy.get('[name="name"]').type('StoreCypress');
     cy.get('[name="address.city"]').type('City');
-    cy.get('[name="currency"]').type('currency');
 
     cy.get('[name="address.state"]').type('state');
     cy.get('[name="address.zipCode"]').type('31000');
@@ -29,7 +28,6 @@ describe('Store Crud Test', () => {
     cy.get('#editButton1').click();
     cy.get('[name="name"]').should('have.value', 'Simple Store');
     cy.get('[name="address.city"]').should('have.value', 'Simple City D.C');
-    cy.get('[name="currency"]').should('have.value', 'EUR');
 
     cy.get('[name="address.state"]').should('have.value', 'Simple Country');
     cy.get('[name="address.zipCode"]').should('have.value', '31000');
@@ -48,7 +46,6 @@ describe('Store Crud Test', () => {
 
     cy.get('[name="name"]').should('have.value', 'Simple Store').type('Updated');
     cy.get('[name="address.city"]').should('have.value', 'Simple City D.C').type('Updated');
-    cy.get('[name="currency"]').should('have.value', 'EUR').type('Updated');
 
     cy.get('[name="address.state"]').should('have.value', 'Simple Country').type('Updated');
     cy.get('[name="address.zipCode"]').should('have.value', '31000').clear().type('31001');
@@ -69,7 +66,6 @@ describe('Store Crud Test', () => {
 
     cy.get('[name="name"]').should('have.value', 'Simple StoreUpdated');
     cy.get('[name="address.city"]').should('have.value', 'Simple City D.CUpdated');
-    cy.get('[name="currency"]').should('have.value', 'EURUpdated');
 
     cy.get('[name="address.state"]').should('have.value', 'Simple CountryUpdated');
     cy.get('[name="address.zipCode"]').should('have.value', '31001');

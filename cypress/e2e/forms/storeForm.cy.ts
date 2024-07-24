@@ -17,7 +17,6 @@ describe('Store Form Test', () => {
         cy.contains('Create a new store');
 
         //stays in creation page after putting also currency
-        cy.get('[name="currency"]').type('EUR');
         cy.get('[name="submitButton"]').click();
         cy.contains('Create a new store');
 
@@ -55,8 +54,6 @@ describe('Store Form Test', () => {
         cy.get('[name="name"]').type('123456789X123456789X123456');       
 
         cy.get('[name="address.city"]').type('123456789X123456789X123456');
-
-        cy.get('[name="currency"]').type('EUR');
 
         cy.get('[name="address.state"]').type('123456789X123456789X123456');
 

@@ -43,7 +43,7 @@ describe('GET /products', () => {
       .expect(200);
     expect(response.body).toEqual({
       totalPages: 1,
-      products: products.filter((element) => { return productAccordingToTheFilter(element,"", 1) && inventoryStatusType.OUTOFSTOCK != element.inventoryStatus })
+      products: products.filter((element) => { return productAccordingToTheFilter(element, "", 1) && inventoryStatusType.OUTOFSTOCK != element.inventoryStatus })
     })
   });
 
@@ -90,7 +90,6 @@ describe('GET /products', () => {
       "store": {
         "id": 1,
         "name": "Simple Store",
-        "currency": "EUR",
         "address": {
           "streetNumber": "0",
           "streetName": "Street Name",
@@ -127,7 +126,8 @@ describe('GET /products/:id', () => {
             "price": 72,
             "category": "Accessories",
             "inventoryStatus": "INSTOCK",
-            "storeId": 1
+            "storeId": 1,
+            "currency": "€",
           },
         );
       })
@@ -146,7 +146,8 @@ describe('GET /products/:id', () => {
             "price": 72,
             "category": "Accessories",
             "inventoryStatus": "INSTOCK",
-            "storeId": 1
+            "storeId": 1,
+            "currency": "€",
           },
         );
       })
@@ -172,7 +173,6 @@ describe('GET /products/:id', () => {
             "store": {
               "id": 1,
               "name": "Simple Store",
-              "currency": "EUR",
               "address": {
                 "streetNumber": "0",
                 "streetName": "Street Name",
@@ -195,7 +195,8 @@ describe('GET /products/:id', () => {
               "price": 72,
               "category": "Accessories",
               "inventoryStatus": "INSTOCK",
-              "storeId": 1
+              "storeId": 1,
+              "currency": "€",
             }
           },
         );
@@ -206,7 +207,7 @@ describe('GET /products/:id', () => {
 
 describe('POST /products', () => {
 
-  test('Should return 200', async () => {
+  test('Should return 201', async () => {
     await api.post('/stores/1/products/').send({
       name: "Black Watch",
       description: "Product Description",
@@ -214,6 +215,8 @@ describe('POST /products', () => {
       price: 72,
       category: "Accessories",
       inventoryStatus: "INSTOCK",
+      currency: "€",
+
     }).set(commonHeaders)
       .expect(201)
       .then(response => {
@@ -240,7 +243,8 @@ describe('PATCH /products/:id', () => {
             "price": 72,
             "category": "Accessories",
             "inventoryStatus": "INSTOCK",
-            "storeId": 1
+            "storeId": 1,
+            "currency": "€"
           },
         );
       })

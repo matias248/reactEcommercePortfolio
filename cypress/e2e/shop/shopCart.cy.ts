@@ -28,7 +28,7 @@ describe('Shop cart test', () => {
         cy.get('#ShopCartItem1').should('not.exist');
         cy.get('#emptyCartShop').should('exist')
     })
-    it('Add a product. Use filters to don t show that product. See if cartshop and product list still equal', function () {
+    it('Add a product. Use product text filter to don t show that product. See if cartshop and product list still equal', function () {
         cy.get('#ShopProductElementGalleryContainer1').contains('+').click();
         cy.get('#default-searchfilterproducts').type('shirt')
         cy.get('#buttonSearchfilterproducts').click();
@@ -37,7 +37,6 @@ describe('Shop cart test', () => {
         cy.get('#minusPlusCartItem1input').should('have.value', 1)
         cy.get('#default-searchfilterproducts').clear().type('{enter}');
         cy.get('#minusPlusProductItem1input').should('have.value', 1)
-
     })
 })
 

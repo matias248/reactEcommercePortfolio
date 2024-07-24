@@ -1,6 +1,6 @@
 import { useOutletContext, useParams } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { CancelButton, DeleteButton, InputOfStringForm, InputOfUrlImagesForm, ValidateButton } from "../../utils/sharedComponents/inputsComponentReactForms";
+import { CancelButton, DeleteButton, InputOfStringForm, InputOfUrlImagesForm, InputSwitchForm, ValidateButton } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { DESCRIPTION_RESTRICTION, descriptionRestrictionMessage, NAME_RESTRICTION, nameRestrictionMessage, onlyNumbersRestrictionMessage, REGEX } from "../../utils/constants";
 import { StoreDTO } from "../../models/Store";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import { ContextPathData } from "../BaseTemplate";
 import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
 import { DisplayNotFound } from "../DisplayError";
 import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
+import { arrayCurrencyType } from "../../models/Product";
 
 
 
@@ -52,7 +53,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
       });
     }
     else {
-      let newStore: StoreDTO = { id: -1, name: "", currency: "", contactPhone: "0", imageUrl: "", address: { state: "", streetNumber: "", streetName: "", city: "", zipCode: "" }, location: { latitude: 0, longitude: 0 } };
+      let newStore: StoreDTO = { id: -1, name: "", contactPhone: "0", imageUrl: "", address: { state: "", streetNumber: "", streetName: "", city: "", zipCode: "" }, location: { latitude: 0, longitude: 0 } };
       setStore(newStore);
     }
     setIsLoading(false)
@@ -102,7 +103,6 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.city", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"City"} errorShouldDisplay={errors.address?.city ? true : false} required={true} helpText={nameRestrictionMessage} />
           </div>
           <div className="flex gap-4">
-            <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("currency", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Currency"} errorShouldDisplay={errors.currency ? true : false} required={true} />
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.state", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"State"} errorShouldDisplay={errors.address?.state ? true : false} required={true} helpText={nameRestrictionMessage} />
           </div>
           <div className="flex gap-4">

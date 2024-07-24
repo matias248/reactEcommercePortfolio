@@ -7,7 +7,9 @@
     "price": 65,
     "category": "Accessories",
     "inventoryStatus": "INSTOCK",
-    "storeId": 1
+    "storeId": 1,
+    "currency": "€"
+
   },
   {
     "id": 2,
@@ -17,7 +19,9 @@
     "price": 72,
     "category": "Accessories",
     "inventoryStatus": "INSTOCK",
-    "storeId": 1
+    "storeId": 1,
+    "currency": "€"
+
   },{
     "id": 3,
     "name": "Simple Shirt",
@@ -26,7 +30,9 @@
     "price": 72,
     "category": "Accessories",
     "inventoryStatus": "INSTOCK",
-    "storeId": 2
+    "storeId": 2,
+    "currency": "€"
+
   },{
     "id": 4,
     "name": "Simple Shirt OUTOFSTOCK",
@@ -35,6 +41,8 @@
     "price": 7,
     "category": "Accessories",
     "inventoryStatus": "OUTOFSTOCK",
-    "storeId": 2
+    "storeId": 2,
+    "currency": "€"
+
   }
 ]

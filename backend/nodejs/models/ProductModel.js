@@ -10,6 +10,7 @@ export const ProductSchemaZod = z.object({
   category: z.string(),
   imageUrl: z.string().optional(),
   storeId: z.number(),
+  currency: z.string(),
 });
 
 export function validateProduct(input) {
@@ -50,7 +51,11 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     default: undefined,
   },
-  storeName:{
+  storeName: {
+    type: String,
+    required: true
+  },
+  currency: {
     type: String,
     required: true
   },
@@ -74,8 +79,8 @@ export async function getNextSequentialId() {
 
 export function getNextId(array) {
 
-  let i=1;
-  while(i<=array.length+1 && array.some((element)=>{return element.id === i})){
+  let i = 1;
+  while (i <= array.length + 1 && array.some((element) => { return element.id === i })) {
     i++;
   }
   return i;

@@ -5,7 +5,6 @@ export const currentStores:StoreDTO[] =[
     {
         id: 1,
         name: "Simple Store",
-        currency: "EUR",
         address: {
             streetNumber:"0",
             streetName:"Street Name",
@@ -24,7 +23,6 @@ export const currentStores:StoreDTO[] =[
     {
         id: 2,
         name: "Neo store",
-        currency: "EUR",
         address: {
             streetNumber:"0",
             streetName:"Street Name",

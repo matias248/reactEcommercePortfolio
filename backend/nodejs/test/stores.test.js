@@ -57,7 +57,6 @@ describe('POST /stores', () => {
   test('Should return 200', async () => {
     await api.post('/stores').send({
       name: "Black Watch",
-      currency: "E",
       imageUrl: "black-watch.jpg",
       address: {
         streetNumber: "1",
@@ -91,7 +90,6 @@ describe('PATCH /stores/:id', () => {
           {
             "id": 1,
             "name": "2009",
-            "currency": "EUR",
             "address": {
               "streetNumber": "0",
               "streetName": "Street Name",

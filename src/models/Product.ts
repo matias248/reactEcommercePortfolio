@@ -6,7 +6,8 @@ export interface ProductDTO {
     imageUrl?: string;
     inventoryStatus: string;
     category: string;
-    storeId:number
+    storeId:number;
+    currency: string;
 }
 
 export const CategoryType = {
@@ -22,6 +23,14 @@ export const inventoryStatusType = {
     OUTOFSTOCK: 'OUTOFSTOCK'
 };
 
+export const currencyType = {
+    EUR: '€',
+    DOLLAR: '$',
+    STERLING: '£'
+};
+
 export const arrayCategoryType = Object.values(CategoryType)
 
 export const arrayInventoryStatusType = Object.values(inventoryStatusType)
+
+export const arrayCurrencyType = Object.values(currencyType)

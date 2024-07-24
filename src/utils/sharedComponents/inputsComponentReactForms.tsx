@@ -41,10 +41,10 @@ interface MinusPlusInputInterface extends Input {
 
 export const InputOfStringForm = (props: InputTextFormProps): React.JSX.Element => {
     return <div className={"mb-5 w-full min-w-[100px]"}>
-        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-base sm:text-lg dark:text-white flex items-center">
+        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-base sm:text-lg dark:text-white flex items-center font-medium">
             {props.title + (props.required ? "*" : "")}
         </label>
-        <textarea id={"inputString-" + props.title} rows={props.numberOfLines} className={"block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-slate-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
+        <textarea id={"inputString-" + props.title} rows={props.numberOfLines} className={"block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-slate-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + (props.numberOfLines === 1 ? "h-[2.875rem]" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
             required={props.required} />
         {props.helpText && props.errorShouldDisplay && <div className="text-xs dark:text-white italic overflow-hidden ">
             {props.helpText}
@@ -56,16 +56,15 @@ export const InputOfStringForm = (props: InputTextFormProps): React.JSX.Element 
 
 export const InputSwitchForm = (props: InputSwitchFormProps): React.JSX.Element => {
     return (
-        <div>
-            <label className="block mb-2 text-lg font-medium dark:text-white">
+        <div className="mb-5">
+            <label className="block mb-2 text-base sm:text-lg font-medium dark:text-white">
                 {props.title}
             </label>
-            <select name="selectedOption" value={props.optionSelected} className={"block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-slate-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}>
+            <select name="selectedOption" value={props.optionSelected} className={" block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-slate-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}>
                 {props.options.map((option, index) => {
-                    return <option key={index} id={index + ""} value={option}>{option}</option>
+                    return <option className="" key={index} id={index + ""} value={option}>{option}</option>
                 })
                 }
-
             </select>
 
         </div>
@@ -76,10 +75,10 @@ export const InputSwitchForm = (props: InputSwitchFormProps): React.JSX.Element 
 export const InputOfNumberForm = (props: InputFormProps): React.JSX.Element => {
 
     return <div className={"mb-5 w-full min-w-[100px]"}>
-        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-lg font-medium dark:text-white flex items-center">
+        <label htmlFor={"inputString-" + props.title} className="block mb-2 text-base sm:text-lg font-medium dark:text-white flex items-center">
             {props.title + (props.required ? "*" : "")}
         </label>
-        <input type="text" id={"inputNumber" + props.title} className={"bg-gray-50 border border-slate-400 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
+        <input type="text" id={"inputNumber" + props.title} className={"bg-gray-50  border border-slate-400 text-gray-900 text-base rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " + (props.errorShouldDisplay ? "bg-red-200 dark:bg-red-800" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
             required={props.required} />
         {props.helpText && props.errorShouldDisplay && <div className="text-xs dark:text-white italic overflow-hidden ">
             {props.helpText}
@@ -104,7 +103,7 @@ export const InputOfUrlImagesForm = (props: InputFormProps): React.JSX.Element =
         <label htmlFor={"inputString-" + props.title} className="block mb-2 text-lg font-medium dark:text-white flex items-center">
             {props.title + (props.required ? "*" : "")}
         </label>
-        <textarea id={"inputNumber" + props.title} rows={1} className={"bg-gray-50 border border-slate-400 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + (props.errorShouldDisplay ? "bg-red-200" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
+        <textarea id={"inputNumber" + props.title} rows={1} className={"bg-gray-50 border border-slate-400 text-gray-900 text-base rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " + (props.errorShouldDisplay ? "bg-red-200" : "") + " " + (props.styleOverride ?? "")} {...props.reactFormProps}
             required={props.required} />
         {props.helpText && props.errorShouldDisplay && <div className="text-xs dark:text-white italic overflow-hidden ">
             {props.helpText}
@@ -121,11 +120,11 @@ export const ValidateButton = (props: ButtonProps): React.JSX.Element => {
 
 
 export const CancelButton = (props: ButtonProps): React.JSX.Element => {
-    return <button name="cancelButton" onClick={(e) => { e.preventDefault(); props.functionToDo() }} className={"text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
+    return <button type="button" name="cancelButton" onClick={(e) => { e.preventDefault(); props.functionToDo() }} className={"text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
 }
 
 export const DeleteButton = (props: ButtonProps): React.JSX.Element => {
-    return <button name="deleteButton" onClick={(e) => { e.preventDefault(); props.functionToDo() }} className={"text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-800 dark:hover:bg-red-900 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
+    return <button type="button" name="deleteButton" onClick={(e) => { e.preventDefault(); props.functionToDo() }} className={"text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-800 dark:hover:bg-red-900 dark:focus:ring-blue-800 " + (props.styleOverride ?? "")}>{props.title}</button>
 }
 
 export const FixedButton = (props: ButtonProps): React.JSX.Element => {
@@ -197,9 +196,9 @@ export const MinusPlusInput = (props: MinusPlusInputInterface): React.JSX.Elemen
     }, [props.modifyValue])
 
     return <>
-        <button id={props.id+"+"} disabled={props.value <= 0} className="bg-red-500 text-white px-4 py-2 rounded-l hover:bg-red-600 " onClick={minusFunction} >-</button>
-        <input id={props.id+"input"} className="mx-2 border text-center w-16 h-10" value={emptyValue ? '' : props.value} onChange={(event) => { handleInputChange(event, props.modifyValue) }} />
-        <button id={props.id+"-"} className="bg-green-500 text-white px-4 py-2 rounded-r hover:bg-green-600" onClick={(event) => { event.stopPropagation(); plusFunction() }}>+</button>
+        <button id={props.id + "+"} disabled={props.value <= 0} className="bg-red-500 text-white px-4 py-2 rounded-l hover:bg-red-600 " onClick={minusFunction} >-</button>
+        <input id={props.id + "input"} className="mx-2 border text-center w-16 h-10" value={emptyValue ? '' : props.value} onChange={(event) => { handleInputChange(event, props.modifyValue) }} />
+        <button id={props.id + "-"} className="bg-green-500 text-white px-4 py-2 rounded-r hover:bg-green-600" onClick={(event) => { event.stopPropagation(); plusFunction() }}>+</button>
     </>
         ;
 }

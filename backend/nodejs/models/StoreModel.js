@@ -15,7 +15,6 @@ const AddressSchemaZod = z.object(
 const StoreSchemaZod = z.object({
   id: z.number(),
   name: z.string(),
-  currency: z.string(),
   location: LocationSchemaZod,
   address: AddressSchemaZod,
   contactPhone: z.string(),
@@ -42,10 +41,6 @@ const StoreSchema = new mongoose.Schema({
     unique: true
   },
   name: {
-    type: String,
-    required: true
-  },
-  currency: {
     type: String,
     required: true
   },
