@@ -178,9 +178,10 @@ export const MinusPlusInput = (props: MinusPlusInputInterface): React.JSX.Elemen
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, functionToDo: (number: number) => void) => {
         const inputValue = event.target.value;
         const isPositiveInteger = /^[0-9]\d*$/.test(inputValue);
-
         if (isPositiveInteger) {
-            functionToDo(+inputValue);
+            if (+inputValue <= 99) {
+                functionToDo(+inputValue);
+            }
         }
         if (inputValue == '') {
             setEmptyValue(true);
@@ -198,7 +199,7 @@ export const MinusPlusInput = (props: MinusPlusInputInterface): React.JSX.Elemen
     return <>
         <button id={props.id + "+"} disabled={props.value <= 0} className="bg-red-500 text-white px-4 py-2 rounded-l hover:bg-red-600 " onClick={minusFunction} >-</button>
         <input id={props.id + "input"} className="mx-2 border text-center w-16 h-10" value={emptyValue ? '' : props.value} onChange={(event) => { handleInputChange(event, props.modifyValue) }} />
-        <button id={props.id + "-"} className="bg-green-500 text-white px-4 py-2 rounded-r hover:bg-green-600" onClick={(event) => { event.stopPropagation(); plusFunction() }}>+</button>
+        <button id={props.id + "-"} disabled={props.value >= 99} className="bg-green-500 text-white px-4 py-2 rounded-r hover:bg-green-600" onClick={(event) => { event.stopPropagation(); plusFunction() }}>+</button>
     </>
         ;
 }

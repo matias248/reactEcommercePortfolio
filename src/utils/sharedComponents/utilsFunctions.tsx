@@ -3,9 +3,7 @@ import { AppNames } from '../constants';
 import { StoreDTO } from '../../models/Store';
 import { currencyType, ProductDTO } from '../../models/Product';
 import { CartItemDTO } from '../../models/CartItem';
-
-
-
+import Decimal from 'decimal.js';
 
 export function useClickOutside(functionToDo: () => void) {
     const ref = useRef<HTMLDivElement | null>(null);
@@ -150,17 +148,40 @@ export function getQuantityOfProductInCartShop(cartShopList: CartItemDTO[], idOf
     return indexOfProduct !== -1 ? cartShopList[indexOfProduct].quantity : 0;
 }
 
-export function getTotalPriceCart(cartShopList: CartItemDTO[]): number {
+export function getTotalPriceCart(cartShopList: CartItemDTO[]): string {
     let totalSum = cartShopList.reduce((accumulator, currentValue) => {
-        let currencyIndex = 1;
-        if (currentValue.currency === currencyType.STERLING) {
-            currencyIndex = 1.19;
-        }
-        else if (currentValue.currency === currencyType.DOLLAR) {
-            currencyIndex = 0.92;
+        const currencyIndex = getCurrencyIndexOfACartItem(currentValue);
+        return accumulator.plus(
+            new Decimal(currentValue.price)
+                .times(currencyIndex)
+                .times(currentValue.quantity)
+        );
 
-        }
-        return accumulator + currentValue.price * currencyIndex * currentValue.quantity
-    }, 0);
-    return totalSum
+    }, new Decimal(0));
+
+    return formatPrice(totalSum.toNumber());
+}
+
+export function getCurrencyIndexOfACartItem(cartItem: CartItemDTO) {
+    if (cartItem.currency === currencyType.STERLING) {
+        return new Decimal(1.19);
+    }
+    else if (cartItem.currency === currencyType.DOLLAR) {
+        return new Decimal(0.92);
+    }
+    else {
+        return new Decimal(1);
+    }
+}
+export function formatPrice(number: number):string {
+    return number.toLocaleString('fr-FR', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+    });
+}
+
+export function formatInputNumber(number: number):string {
+    return number.toLocaleString('fr-FR', {
+        maximumFractionDigits: 0,
+    });
 }
