@@ -20,8 +20,7 @@ interface ShopProductListInterface {
 }
 
 export const ShopProductList = (props: ShopProductListInterface): React.JSX.Element => {
-
-
+    
     return (
         <div id="shopProductListContainer" className="max-w-[1200px] mx-auto w-[90%] flex flex-col ">
             <div className="self-end"><NavigationInputs title={""} currentPage={props.currentPage} totalPages={props.totalPages} styleOverride="mb-2"

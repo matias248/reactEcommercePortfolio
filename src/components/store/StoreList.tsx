@@ -38,7 +38,7 @@ export const StoreList = (props: StoreListProps): React.JSX.Element => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-16 gap-8 mx-8">
                 {stores && stores.map((currentValue) => {
-                    return <StoreImageGallery key={currentValue.id} store={currentValue} onClick={() => navigationRouter.goToFappListOfProducts(currentValue.id)} onClickToEdit={() => navigationRouter.goToFappStore(currentValue.id)} />
+                    return <StoreImageGallery key={currentValue.id} store={currentValue} onClick={() => navigationRouter.goToFappListOfProducts(currentValue.id)} onClickToEdit={() => navigationRouter.goToFappStore(currentValue.id)} onClickToProductsListButton={() => navigationRouter.goToFappListOfProducts(currentValue.id)} />
                 })}
             </div>
             <FixedButton functionToDo={() => navigationRouter.goToFappCreationStore()} title={"Create a store"} />
@@ -54,6 +54,7 @@ interface StoreImageGalleryProps {
     store: StoreDTO;
     onClick: (id: number) => void;
     onClickToEdit: (id: number) => void;
+    onClickToProductsListButton: () => void;
 }
 
 const StoreImageGallery = (props: StoreImageGalleryProps): React.JSX.Element => {
@@ -70,11 +71,14 @@ const StoreImageGallery = (props: StoreImageGalleryProps): React.JSX.Element => 
                     </div>
                 }
             </div>
-            <div id={"textStoreGallery" + props.store.id}  className="mt-8 max-w-full h-24 mx-1 text-center">
+            <div id={"textStoreGallery" + props.store.id} className="mt-8 max-w-full h-24 mx-1 text-center ">
                 <p id={"1textStoreGallery" + props.store.id} className="h-1/3 w-full text-xl font-bold text-gray-900 dark:text-white truncate leading-7 ">{props.store.name}</p>
                 <p id={"2textStoreGallery" + props.store.id} className="h-1/3 w-full text-sm text-gray-900 dark:text-white truncate leading-5">{props.store.address.city}</p>
-                <p id={"3textStoreGallery" + props.store.id} className="h-1/3 w-full text-sm text-gray-900 dark:text-white truncate leading-5">{props.store.address.state}</p>
+                <div className=" h-1/3 flex flex-row-reverse items-center overflow-hidden">
+                    <button onClick={(e) => { e.preventDefault(); props.onClickToProductsListButton() }} id={"listOfProductsButton" + props.store.id} className="max-h-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">List of Products</button>
+                </div>
             </div>
+
         </div>
     );
 }

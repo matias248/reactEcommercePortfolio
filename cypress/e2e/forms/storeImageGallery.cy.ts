@@ -63,7 +63,6 @@ describe('Test ImageGallery product ', () => {
   
       cy.get('#storeElementGallery1').find('#1textStoreGallery1').should('have.css', 'overflow', 'hidden')
       cy.get('#storeElementGallery1').find('#2textStoreGallery1').should('have.css', 'overflow', 'hidden')
-      cy.get('#storeElementGallery1').find('#3textStoreGallery1').should('have.css', 'overflow', 'hidden')
 
   
     })
