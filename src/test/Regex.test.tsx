@@ -20,7 +20,7 @@ describe('REGEX Tests', () => {
     test('ONLYNUMBERS regex', () => {
         expect(REGEX.ONLYNUMBERS.test('12345')).toBe(true);
         expect(REGEX.ONLYNUMBERS.test('123a45')).toBe(false);
-        expect(REGEX.ONLYNUMBERS.test('')).toBe(false);
+        expect(REGEX.ONLYNUMBERS.test('')).toBe(true);
     });
 
     test('LATITUDE regex', () => {

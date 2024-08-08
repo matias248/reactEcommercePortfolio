@@ -1,0 +1,50 @@
+---
+name: Run Tests
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+  
+jobs:
+  testBackend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - run: npm i
+        working-directory: ./backend/nodejs
+      - run: npm run test
+        working-directory: ./backend/nodejs
+  testFrontEnd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - run: npm i
+      - run: npm run test
+  testCypressFrontEnd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v3
+        with:
+          project: ./
+          browser: chrome
+          start: npm run start:local
+          wait-on: "http://localhost:3000"
+  
+
+
+
+  
+
