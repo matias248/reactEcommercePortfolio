@@ -47,7 +47,7 @@ export const ProductDetailPage = (props: ProductDetailPageInterface): React.JSX.
     return (
         <div>
             {!isLoading && product && <>
-                <div className="mb-6 text-3xl text-center mb-16 dark:text-white" >{title}</div>
+                <div className="mb-6 text-4xl text-center mb-16 dark:text-white" >{title}</div>
 
                 <div className="max-w-[1000px] mx-auto w-[90%] rounded-lg">
                     <div className="text-3xl text-center mb-1 dark:text-white flex justify-end" >

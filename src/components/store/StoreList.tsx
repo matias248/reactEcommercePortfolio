@@ -34,7 +34,7 @@ export const StoreList = (props: StoreListProps): React.JSX.Element => {
 
     return <>{!isLoading &&
         <div className="">
-            <div className="mx-8 text-5xl text-center mb-8 dark:text-white" >{title}</div>
+            <div className="mx-8 text-4xl text-center mb-8 dark:text-white" >{title}</div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-16 gap-8 mx-8">
                 {stores && stores.map((currentValue) => {

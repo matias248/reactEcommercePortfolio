@@ -1,33 +1,48 @@
 describe("Navigation bar test", () => {
-    it("In Store form to store list", () => {
+    it("In Store view to store list", () => {
         cy.visit('stores/1/');
         cy.get('#NavStoresTitle').click();
         cy.contains('List of stores');
+    })
+    it("In Store form to store view", () => {
+        cy.visit('stores/1/edit');
+        cy.get('#NavStoreName').click();
+        cy.contains('Details of the store');
     })
     it("In Product list to store list", () => {
         cy.visit('stores/1/products');
         cy.get('#NavStoresTitle').click();
         cy.contains('List of stores');
     })
-    it("In Product list to store form", () => {
+    it("In Product list to store view", () => {
         cy.visit('stores/1/products');
         cy.get('#NavStoreName').click();
         cy.contains('Details of the store');
     })
-    it("In Product form to store list", () => {
+    it("In Product view to store list", () => {
         cy.visit('stores/1/products/1');
         cy.get('#NavStoresTitle').click();
         cy.contains('List of stores');
     })
-    it("In Product form to store form", () => {
+    it("In Product view to store form", () => {
         cy.visit('stores/1/products/1');
         cy.get('#NavStoreName').click();
         cy.contains('Details of the store');
     })
-    it("In Product form to product list", () => {
+    it("In Product view to product list", () => {
         cy.visit('stores/1/products/1');
+        cy.get('#NavProductsTitle').click();
+        cy.contains('List of products');
+    })
+    it("In Product form to product view", () => {
+        cy.visit('stores/1/products/1/edit');
         cy.get('#NavProductName').click();
         cy.contains('Details of the product');
+    })
+    it("In Product form to product list", () => {
+        cy.visit('stores/1/products/1/edit');
+        cy.get('#NavProductsTitle').click();
+        cy.contains('List of products');
     })
 })
 
@@ -38,7 +53,6 @@ describe("Navigation Buttons", () => {
         cy.get('#NavigationFormsApp').should('exist');
         cy.get('#NavigationShopApp').should('exist');
         cy.get('#NavigationFinanceApp').should('exist');
-
 
     }),
     it("ToForms", () => {

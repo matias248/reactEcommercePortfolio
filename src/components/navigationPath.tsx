@@ -36,7 +36,7 @@ export const NavigationPath = (props: navigationPath): React.JSX.Element => {
                 props.pathData.productName && <>
                     <div>{">"}</div>
 
-                    <div className="truncate overflow-hidden max-w-[80px] sm:max-w-[200px] text-ellipsis" id="NavProductName">
+                    <div className="truncate overflow-hidden max-w-[80px] sm:max-w-[200px] text-ellipsis hover:opacity-75" id="NavProductName" onClick={() => { if (props.pathData.storeId && props.pathData.productId) navigationRouter.goToFappProduct(props.pathData.productId, props.pathData.storeId) }}>
                         {props.pathData.productName}
                     </div>
                 </>
