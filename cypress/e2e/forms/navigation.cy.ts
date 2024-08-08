@@ -52,7 +52,7 @@ describe("Navigation Buttons", () => {
 
         cy.get('#NavigationFormsApp').should('exist');
         cy.get('#NavigationShopApp').should('exist');
-        cy.get('#NavigationFinanceApp').should('exist');
+        //cy.get('#NavigationFinanceApp').should('exist');
 
     }),
     it("ToForms", () => {
@@ -60,7 +60,7 @@ describe("Navigation Buttons", () => {
 
         cy.get('#NavigationFormsApp').click().should('not.exist');
         cy.get('#NavigationShopApp').should('exist');
-        cy.get('#NavigationFinanceApp').should('exist');
+        //cy.get('#NavigationFinanceApp').should('exist');
 
 
         cy.location().should((location:Location) => {
@@ -71,14 +71,14 @@ describe("Navigation Buttons", () => {
         cy.visit('/');
 
         cy.get('#NavigationShopApp').click().should('not.exist');
-        cy.get('#NavigationFinanceApp').should('exist');
+        //cy.get('#NavigationFinanceApp').should('exist');
         cy.get('#NavigationFormsApp').should('exist');
 
         cy.location().should((location:Location) => {
             expect(location.pathname).to.eq('/shop')
         })
     })
-    it("To Finance", () => {
+    /*it("To Finance", () => {
         cy.visit('/');
 
         cy.get('#NavigationFinanceApp').click().should('not.exist');
@@ -90,7 +90,7 @@ describe("Navigation Buttons", () => {
         cy.location().should((location:Location) => {
             expect(location.pathname).to.eq('/finance')
         })
-    })
+    })*/
 })
 
 

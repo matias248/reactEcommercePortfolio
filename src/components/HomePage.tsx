@@ -8,8 +8,8 @@ export const HomePage = (): React.JSX.Element => {
     const presentationAppForms = "Easily create and manage data with intuitive forms. FormsApp ensures you can build a comprehensive database effortlessly.";
     const AppShopName = "AppShop";
     const presentationAppShop = "Simulate a shop website. Present products with detailed descriptions and Images, allowing visitors to browse as if they were shopping online.";
-    const AppFinanceName = "AppFinance";
-    const presentationAppFinance = "Simulate an app that allows to manage invoices, Past purchases...";
+    /*const AppFinanceName = "AppFinance";
+    const presentationAppFinance = "Simulate an app that allows to manage invoices, Past purchases...";*/
 
     return (
         <div className="flex mx-3 items-center flex-col">
@@ -25,10 +25,10 @@ export const HomePage = (): React.JSX.Element => {
                 <div className="font-bold">{AppShopName + ":"}</div>
                 <div>{presentationAppShop}</div>
             </div>
-            <div className="mb-6 dark:text-white self-start">
+           {/* <div className="mb-6 dark:text-white self-start">
                 <div className="font-bold">{AppFinanceName + ":"}</div>
                 <div>{presentationAppFinance}</div>
-            </div>
+            </div>*/}
         </div>
     );
 }

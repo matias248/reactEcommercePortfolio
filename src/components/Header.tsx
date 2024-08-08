@@ -24,16 +24,14 @@ export const Header = (props: HeaderInterface) => {
                     <div className="flex items-center lg:order-2">
                         {
                             currentRoute !== AppNames.FORMS &&
-                            <button id="NavigationFormsApp" onClick={() => navigationRouter.goToFappListOfStores()} className="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none flex gap-1 "><div className="size-6"><FormIcon /></div><div className="hidden md:inline">Forms</div></button>
+                            <button id="NavigationFormsApp" onClick={() => navigationRouter.goToFappListOfStores()} className="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none flex gap-1 "><div className="size-6"><FormIcon /></div><div className="hidden min-[320px]:inline">Forms</div></button>
                         }
                         {
                             currentRoute !== AppNames.SHOP &&
-                            <button id="NavigationShopApp" onClick={() =>{props.resetPathData(); navigationRouter.goToShapp()}} className="text-white bg-blue-600 hover:bg-blue-700  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none flex gap-1"><div className="size-6"><ShopIcon /></div><div className="hidden md:inline">Shop</div></button>
+                            <button id="NavigationShopApp" onClick={() =>{props.resetPathData(); navigationRouter.goToShapp()}} className="text-white bg-blue-600 hover:bg-blue-700  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none flex gap-1"><div className="size-6"><ShopIcon /></div><div className="hidden min-[320px]:inline">Shop</div></button>
                         }
-                        {
-                            currentRoute !== AppNames.FINANCE &&
-                            <button id="NavigationFinanceApp" onClick={() =>{props.resetPathData(); navigationRouter.goToFiapp()}} className="text-white bg-blue-600 hover:bg-blue-700  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none flex gap-1 items-center"><div className="size-6"><BillIcon /></div><div className="hidden  md:inline">Finance</div></button>
-                        }
+                        {/* id="NavigationFinanceApp" onClick={() =>{props.resetPathData(); navigationRouter.goToFiapp()}} className="text-white bg-blue-600 hover:bg-blue-700  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none flex gap-1 items-center"><div className="size-6"><BillIcon /></div><div className="hidden  md:inline">Finance</div></button>
+                        */}
                     </div>
                 </div>
             </nav>

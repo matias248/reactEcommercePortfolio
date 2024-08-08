@@ -43,10 +43,6 @@ export const AppRoute = [
         element: <ProductForm />, errorElement: <ErrorPage />,
       },
       {
-        path: "finance",
-        element: <h1 className="dark:text-white">Finance App</h1>,
-      },
-      {
         path: "shop",
         element: <ShopTemplate />,
       },
