@@ -22,7 +22,7 @@ describe('Store Crud Test', () => {
 
 
   })
-  it('Read a store', () => {
+  it('Read a store using edit mode', () => {
     cy.visit('stores');
     cy.get('#editButton1').click();
     cy.get('[name="name"]').should('have.value', 'Simple Store');
@@ -36,6 +36,37 @@ describe('Store Crud Test', () => {
 
     cy.get('[name="address.streetName"]').should('have.value', 'Street Name');
 
+  })
+  it('Read a store using display mode', () => {
+    cy.visit('stores');
+    cy.get('#storeElementGallery1').click();
+    cy.get('#displayStoreElement0key').should('contain','Name')
+    cy.get('#displayStoreElement0value').should('contain','Simple Store')
+
+    cy.get('#displayStoreElement1-0key').should('contain','Street number')
+    cy.get('#displayStoreElement1-0value').should('contain','0')
+
+    cy.get('#displayStoreElement1-1key').should('contain','Street name')
+    cy.get('#displayStoreElement1-1value').should('contain','Street Name')
+
+    cy.get('#displayStoreElement1-2key').should('contain','City')
+    cy.get('#displayStoreElement1-2value').should('contain','Simple City D.C')
+
+    cy.get('#displayStoreElement1-3key').should('contain','State')
+    cy.get('#displayStoreElement1-3value').should('contain','Simple Country')
+
+    cy.get('#displayStoreElement1-4key').should('contain','Zip code')
+    cy.get('#displayStoreElement1-4value').should('contain','31000')
+
+    cy.get('#displayStoreElement2-0key').should('contain','Latitude')
+    cy.get('#displayStoreElement2-0value').should('contain','1')
+
+    cy.get('#displayStoreElement2-1key').should('contain','Longitude')
+    cy.get('#displayStoreElement2-1value').should('contain','2')
+
+    cy.get('#displayStoreElement3key').should('contain','Image url')
+    cy.get('#displayStoreElement3value').should('contain','/store1.jpeg')
+    
   })
   it('Update a store', () => {
     cy.visit('stores');

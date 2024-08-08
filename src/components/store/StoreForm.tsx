@@ -10,7 +10,6 @@ import { ContextPathData } from "../BaseTemplate";
 import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
 import { DisplayNotFound } from "../DisplayError";
 import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
-import { arrayCurrencyType } from "../../models/Product";
 
 
 
@@ -30,7 +29,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
   const { storeId } = useParams();
   const [store, setStore] = useState<StoreDTO>();
 
-  const title = storeId !== "new" ? "Edit the store" : "Create a new store";
+  const title = storeId !== undefined ? "Edit the store" : "Create a new store";
   const pathData: ContextPathData = useOutletContext();
   const navigationRouter: NavigationRouterInterface = NavigationRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);

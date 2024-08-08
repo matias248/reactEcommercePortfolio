@@ -6,6 +6,8 @@ import { AppNames } from "../utils/constants";
 export interface NavigationRouterInterface {
     goToFappProduct: (idProduct: number, storeId: number) => void;
     goToFappStore: (storeId: number) => void;
+    goToFappProductEdit: (idProduct: number, storeId: number) => void;
+    goToFappStoreEdit: (storeId: number) => void;
     goToFappListOfStores: () => void;
     goToFappListOfProducts: (storeId: number) => void;
     goToFappCreationProduct: (storeId: number) => void;
@@ -26,6 +28,12 @@ export const NavigationRouter = (): NavigationRouterInterface => {
     };
     const goToFappStore = (storeId: number) => {
         navigate("/" + getUrlStoreList() + "/" + storeId);
+    };
+    const goToFappProductEdit = (idProduct: number, storeId: number) => {
+        navigate("/" + getUrlProductList(storeId + "") + "/" + idProduct + "/edit");
+    };
+    const goToFappStoreEdit = (storeId: number) => {
+        navigate("/" + getUrlStoreList() + "/" + storeId + "/edit");
     };
     const goToFappListOfStores = () => {
         navigate("/" + getUrlStoreList());
@@ -55,6 +63,8 @@ export const NavigationRouter = (): NavigationRouterInterface => {
     return {
         goToFappProduct,
         goToFappStore,
+        goToFappProductEdit,
+        goToFappStoreEdit,
         goToFappListOfStores,
         goToFappListOfProducts,
         goToFappCreationStore,

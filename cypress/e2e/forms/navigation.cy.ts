@@ -12,7 +12,7 @@ describe("Navigation bar test", () => {
     it("In Product list to store form", () => {
         cy.visit('stores/1/products');
         cy.get('#NavStoreName').click();
-        cy.contains('Edit the store');
+        cy.contains('Details of the store');
     })
     it("In Product form to store list", () => {
         cy.visit('stores/1/products/1');
@@ -22,12 +22,12 @@ describe("Navigation bar test", () => {
     it("In Product form to store form", () => {
         cy.visit('stores/1/products/1');
         cy.get('#NavStoreName').click();
-        cy.contains('Edit the store');
+        cy.contains('Details of the store');
     })
     it("In Product form to product list", () => {
         cy.visit('stores/1/products/1');
         cy.get('#NavProductName').click();
-        cy.contains('Edit the product');
+        cy.contains('Details of the product');
     })
 })
 

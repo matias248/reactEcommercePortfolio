@@ -51,7 +51,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         setIsLoading(false)
     }, []);
 
-    const title = productId !== "new" ? "Edit the product" : "Create a new product";
+    const title = productId !== undefined ? "Edit the product" : "Create a new product";
     const {
         register,
         handleSubmit,

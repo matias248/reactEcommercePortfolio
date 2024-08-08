@@ -7,6 +7,8 @@ import { StoreList } from "../components/store/StoreList";
 import { ProductForm } from "../components/product/ProductForm";
 import { HomePage } from "../components/HomePage";
 import { ShopTemplate } from "../components/shop/ShopTemplate";
+import { ProductDetailPage } from "../components/product/ProductDetail";
+import { StoreDetailPage } from "../components/store/StoreDetail";
 
 export const AppRoute = [
   {
@@ -24,7 +26,7 @@ export const AppRoute = [
         element: <StoreList></StoreList>,
       },
       {
-        path: "/stores/:storeId",
+        path: "/stores/:storeId/edit",
         element: <StoreForm />,
         errorElement: <ErrorPage />,
       },
@@ -33,7 +35,11 @@ export const AppRoute = [
         element: <ProductList></ProductList>,
       },
       {
-        path: "/stores/:storeId/products/:productId",
+        path: "/stores/:storeId/products/:productId/edit",
+        element: <ProductForm />, errorElement: <ErrorPage />,
+      },
+      {
+        path: "/stores/:storeId/products/new",
         element: <ProductForm />, errorElement: <ErrorPage />,
       },
       {
@@ -42,9 +48,24 @@ export const AppRoute = [
       },
       {
         path: "shop",
-        element:<ShopTemplate/>,
+        element: <ShopTemplate />,
       },
-
+      {
+        path: "/stores/:storeId/products/:productId",
+        element: <ProductDetailPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/stores/new",
+        element: <StoreForm />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/stores/:storeId",
+        element: <StoreDetailPage />,
+        errorElement: <ErrorPage />,
+      },
+     
 
     ]
   },

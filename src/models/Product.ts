@@ -6,9 +6,10 @@ export interface ProductDTO {
     imageUrl?: string;
     inventoryStatus: string;
     category: string;
-    storeId:number;
+    storeId: number;
     currency: string;
 }
+export const ProductKeysToNotDisplayInDetails = ["id", "storeId"]
 
 export const CategoryType = {
     Accessories: 'Accessories',

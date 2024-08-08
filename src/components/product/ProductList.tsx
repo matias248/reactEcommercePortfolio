@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FixedButton } from "../../utils/sharedComponents/inputsComponentReactForms";
+import { EditButton, FixedButton } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { ProductDTO } from "../../models/Product";
 import { ReactComponent as ImagePlaceholder } from "../../assets/images/iconImagePlaceholder.svg";
 import { useOutletContext, useParams } from "react-router-dom";
@@ -41,7 +41,8 @@ export const ProductList = (props: ProductListProps): React.JSX.Element => {
                 <div className="mb-16 text-5xl text-center dark:text-white" >{title}</div>
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 md:gap-4 gap-6 mx-8">
                     {products && products.map((currentValue) => {
-                        return <ProductImageGallery key={currentValue.id} product={currentValue} onClick={() => { navigationRouter.goToFappProduct(currentValue.id, currentValue.storeId) }} />
+                        return <ProductImageGallery key={currentValue.id} product={currentValue} onClick={() => { navigationRouter.goToFappProduct(currentValue.id, currentValue.storeId); }}
+                            onClickToEdit={() => { navigationRouter.goToFappProductEdit(currentValue.id, currentValue.storeId) }} />
                     })}
                 </div>
                 <FixedButton functionToDo={() => navigationRouter.goToFappCreationProduct((storeId ? +storeId : -1))} title={"Create a product"} />
@@ -59,11 +60,13 @@ export const ProductList = (props: ProductListProps): React.JSX.Element => {
 interface ProductImageGalleryProps {
     product: ProductDTO;
     onClick: (id: number) => void;
+    onClickToEdit: () => void;
 }
-
 export const ProductImageGallery = (props: ProductImageGalleryProps): React.JSX.Element => {
     return (
-        <div id={"productElementGallery" + props.product.id} className="h-56 w-128 md:w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" onClick={() => props.onClick(props.product.id)}>
+        <div id={"productElementGallery" + props.product.id} className="h-56 w-128 md:w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative" onClick={() => props.onClick(props.product.id)}>
+            <EditButton id={props.product.id + ""} styleOverride="absolute top-0 right-0" functionToDo={props.onClickToEdit} title={"Edit"} />
+
             <div id={"imageProductGallery" + props.product.id} className="w-28 mt-5 mx-auto  h-16 ">
                 {props.product.imageUrl &&
                     <img className="h-16 max-w-full rounded-lg object-cover mx-auto text-center dark:text-white" src={props.product.imageUrl} alt="error loading image" />

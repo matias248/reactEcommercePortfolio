@@ -1,4 +1,4 @@
 export interface GeoPoint {
-  readonly latitude: number;
-  readonly longitude: number;
+   latitude: number;
+   longitude: number;
 }

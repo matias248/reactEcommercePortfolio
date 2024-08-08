@@ -185,3 +185,22 @@ export function formatInputNumber(number: number):string {
         maximumFractionDigits: 0,
     });
 }
+
+export function formatString(input: string): string {
+    if (input.length === 0) {
+        return "";
+    }
+
+    let result = input[0].toUpperCase();
+
+    for (let i = 1; i < input.length; i++) {
+        const char = input[i];
+        if (char >= 'A' && char <= 'Z') {
+            result += ' ' + char.toLowerCase();
+        } else {
+            result += char;
+        }
+    }
+
+    return result;
+}

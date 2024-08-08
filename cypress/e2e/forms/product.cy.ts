@@ -1,4 +1,4 @@
-describe('Store Crud Test', () => {
+describe('Product Crud Test', () => {
   it('Create a new product', () => {
     cy.visit('stores/1/products');
     cy.contains('List of products');
@@ -23,10 +23,10 @@ describe('Store Crud Test', () => {
 
 
   })
- it('Read a product', () => {
+ it('Read a product Using edit mode', () => {
     cy.visit('stores/1/products');
 
-    cy.get('#productElementGallery1').should('contain', 'Simple Watch').click();
+    cy.get('#productElementGallery1').should('contain', 'Simple Watch').get('#editButton1').click()
     cy.get('[name="name"]').should('have.value', 'Simple Watch');
     cy.get('textarea[name="description"]').should('have.value', 'Embrace timeless sophistication with the Simple Watch, a fusion of classic design and modern functionality. Crafted from stainless steel and sapphire crystal.');
     cy.get('[name="price"]').should('have.value', '65');
@@ -34,10 +34,38 @@ describe('Store Crud Test', () => {
     cy.get('[name="category"]').should('have.value', 'Accessories');
     cy.get('[name="inventoryStatus"]').should('have.value', 'INSTOCK');
   })
+  it('Read a product Using Display mode', () => {
+    cy.visit('stores/1/products');
+
+    cy.get('#productElementGallery1').click()
+    cy.get('#displayProductElement0key').should('contain','Name')
+    cy.get('#displayProductElement0value').should('contain','Simple Watch')
+
+    cy.get('#displayProductElement1key').should('contain','Description')
+    cy.get('#displayProductElement1value').should('contain','Embrace timeless sophistication with the Simple Watch, a fusion of classic design and modern functionality. Crafted from stainless steel and sapphire crystal.')
+
+    cy.get('#displayProductElement2key').should('contain','Image url')
+    cy.get('#displayProductElement2value').should('contain','watch.jpeg')
+
+    cy.get('#displayProductElement3key').should('contain','Price')
+    cy.get('#displayProductElement3value').should('contain','65')
+
+    cy.get('#displayProductElement4key').should('contain','Category')
+    cy.get('#displayProductElement4value').should('contain','Accessories')
+
+    cy.get('#displayProductElement5key').should('contain','Inventory status')
+    cy.get('#displayProductElement5value').should('contain','INSTOCK')
+
+    cy.get('#displayProductElement6key').should('contain','Currency')
+    cy.get('#displayProductElement6value').should('contain','€')
+
+
+  })
+
 
   it('Update a product', () => {
     cy.visit('stores/1/products');
-    cy.get('#productElementGallery1').click();
+    cy.get('#productElementGallery1').get('#editButton1').click()
     cy.get('[name="imageUrl"]').should('have.value', '/watch.jpeg').clear();
     cy.get('[name="name"]').should('have.value', 'Simple Watch').type('Updated');
     cy.get('textarea[name="description"]').should('have.value', 'Embrace timeless sophistication with the Simple Watch, a fusion of classic design and modern functionality. Crafted from stainless steel and sapphire crystal.').type('Updated');
@@ -50,7 +78,7 @@ describe('Store Crud Test', () => {
 
 
     cy.get('#productElementGallery1').should('exist').should('contain','Simple WatchUpdated')
-      .find('#divNoImageSet').should('exist').click();
+      .find('#divNoImageSet').should('exist').get('#editButton1').click()
 
     cy.get('[name="imageUrl"]').should('have.value', '')
 
@@ -65,7 +93,7 @@ describe('Store Crud Test', () => {
   it('Delete a product',()=>{
     cy.visit('stores/1/products');
 
-    cy.get('#productElementGallery1').click();
+    cy.get('#productElementGallery1').get('#editButton1').click()
 
     cy.get('[name="deleteButton"]').click();
 
@@ -75,11 +103,11 @@ describe('Store Crud Test', () => {
   })
   it('Cancel a product update',()=>{
     cy.visit('stores/1/products');
-    cy.get('#productElementGallery1').click();
+    cy.get('#productElementGallery1').get('#editButton1').click()
 
     cy.get('[name="name"]').should('have.value', 'Simple Watch').type('new name');
     cy.get('[name="cancelButton"]').click();
-    cy.get('#productElementGallery1').click();
+    cy.get('#productElementGallery1').get('#editButton1').click()
     cy.get('[name="name"]').should('have.value','Simple Watch');
 
   })
