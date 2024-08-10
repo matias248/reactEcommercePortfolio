@@ -17,7 +17,7 @@ export const currentStores:StoreDTO[] =[
             longitude:2,
         },
         contactPhone: "+33 123456",
-        imageUrl:"/store1.jpeg"
+        imageUrl:process.env.PUBLIC_URL+"/store1.jpeg"
     },
     {
         id: 2,
@@ -34,7 +34,7 @@ export const currentStores:StoreDTO[] =[
             longitude:2,
         },
         contactPhone: "+33 123456",
-        imageUrl:"/store2.jpeg"
+        imageUrl:process.env.PUBLIC_URL+"/store2.jpeg"
     },
     
 ]

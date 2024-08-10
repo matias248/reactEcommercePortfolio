@@ -1,7 +1,7 @@
 import './App.css';
 
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import { AppRoute } from './routes/AppRoute';
@@ -11,7 +11,7 @@ export const routes =
     ...AppRoute,
   ];
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   routes
 );
 
