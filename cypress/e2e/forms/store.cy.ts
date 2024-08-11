@@ -113,8 +113,10 @@ describe('Store Crud Test', () => {
 
     cy.contains('List of stores');
     cy.get('#storeElementGallery1').should('not.exist')
-
+    cy.get('#NavigationShopApp').click()
+    cy.get('#ShopProductElementGalleryContainer1').should('not.exist')
   })
+
   it('Cancel a store update', () => {
     cy.visit('stores');
     cy.get('#editButton1').click();

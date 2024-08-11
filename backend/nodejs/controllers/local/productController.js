@@ -1,10 +1,7 @@
 import { inventoryStatusType, validatePartialProduct, validateProduct } from '../../models/ProductModel.js';
 import { calculateTotalPages, readJSON, getPaginatedItems, productAccordingToTheFilter } from '../../utils.js';
 import { getNextId } from '../../models/ProductModel.js';
-
-const products = readJSON('./localData/products.json')
-const stores = readJSON('./localData/stores.json')
-
+import { stores, products } from '../../localData/exportsData.js'
 
 export class ProductController {
 

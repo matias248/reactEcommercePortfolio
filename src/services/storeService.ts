@@ -1,6 +1,7 @@
 import { StoreDTO } from '../models/Store';
 import axios, { AxiosResponse } from 'axios';
 import { currentStores } from '../LocalData/Stores';
+import { currentProducts } from '../LocalData/Products';
 import { filterStores, getNextId } from '../utils/sharedComponents/utilsFunctions';
 
 const url = process.env.REACT_APP_URL_API ?? "";
@@ -75,6 +76,11 @@ export const deleteStoreById = async (storeId: number): Promise<StoreDTO> => {
         if (id !== -1) {
             const storeDeleted = currentStores[id];
             currentStores.splice(id, 1)
+            for (let i = currentProducts.length - 1; i >= 0; i--) {
+                if (currentProducts[i].storeId === storeId) {
+                    currentProducts.splice(i, 1);
+                }
+            }
             return Promise.resolve(storeDeleted);
         }
         else {

@@ -1,7 +1,6 @@
 import { validatePartialStore, validateStore } from '../../models/StoreModel.js';
-import { readJSON, filterStores } from '../../utils.js';
-
-const stores = readJSON('./localData/stores.json')
+import { filterStores } from '../../utils.js';
+import { stores, products } from '../../localData/exportsData.js'
 
 export class StoreController {
     getAll = async (req, res) => {
@@ -42,7 +41,12 @@ export class StoreController {
         const { id } = req.params
         const storeIndex = stores.findIndex(store => store.id === +id)
         if (storeIndex === -1) return res.status(404).json({ message: 'store not found' })
-        stores.splice(storeIndex, 1)
+        stores.splice(storeIndex, 1);
+        for (let i = products.length - 1; i >= 0; i--) {
+            if (products[i].storeId === +id) {
+                products.splice(i, 1);
+            }
+        }
         return res.json({ message: 'store deleted' })
     }
 
