@@ -59,7 +59,7 @@ export const ShopSelectorInput = (props: {
                     handlerShopTextFilter={props.handlerShopTextFilter} shopTextFilter={props.shopTextFilter} updadeStoresByFilter={props.updadeStoresByFilter} />
             }
         </AnimatePresence>
-        <div ref={button} id={'ShopSelectorInput'} className="flex h-full border-2 border-gray-200 rounded-lg dark:border-slate-700 ">
+        <div ref={button} id={'ShopSelectorInput'} className="flex h-full border-2 border-gray-400 rounded-lg dark:border-slate-700 ">
             <div className=" w-[144px] ml-2" >
                 <p className="text-sm dark:text-white truncate  max-w-full">My store
                 </p>
