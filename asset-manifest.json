@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/reactEcommercePortfolio/static/css/main.4c528bf7.css",
-    "main.js": "/reactEcommercePortfolio/static/js/main.612f4bb0.js",
+    "main.js": "/reactEcommercePortfolio/static/js/main.28d9eef9.js",
     "static/js/453.ed3810f9.chunk.js": "/reactEcommercePortfolio/static/js/453.ed3810f9.chunk.js",
     "static/media/spinner.svg": "/reactEcommercePortfolio/static/media/spinner.225cd9d7a391ff6caf58fd6bf0e0922c.svg",
     "static/media/iconImagePlaceholder.svg": "/reactEcommercePortfolio/static/media/iconImagePlaceholder.44c19ebbc159a089cf613d20bf3d46d6.svg",
@@ -16,11 +16,11 @@
     "static/media/verifyIcon.svg": "/reactEcommercePortfolio/static/media/verifyIcon.bcfeadc09c60274cc7ea1a1281f6733f.svg",
     "static/media/arrowDownIcon.svg": "/reactEcommercePortfolio/static/media/arrowDownIcon.7c66d6a1cfb4f883d52c8d0066f1223a.svg",
     "main.4c528bf7.css.map": "/reactEcommercePortfolio/static/css/main.4c528bf7.css.map",
-    "main.612f4bb0.js.map": "/reactEcommercePortfolio/static/js/main.612f4bb0.js.map",
+    "main.28d9eef9.js.map": "/reactEcommercePortfolio/static/js/main.28d9eef9.js.map",
     "453.ed3810f9.chunk.js.map": "/reactEcommercePortfolio/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4c528bf7.css",
-    "static/js/main.612f4bb0.js"
+    "static/js/main.28d9eef9.js"
   ]
 }
