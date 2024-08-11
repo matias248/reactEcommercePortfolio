@@ -21,7 +21,7 @@ export const ShopCart = (props: ShopCartInterface) => {
         <motion.div initial={{ x: '+100%' }}
         animate={{ x: 0 }}
         exit={{x:'+100%'}}
-        transition={{ duration: 0.6 }} className="fixed h-screen bg-gray-300 dark:bg-gray-500 top-0 right-0 max-[460px]:w-[60%] w-[40%] md:w-[30%] z-10 rounded-l-lg flex flex-col gap-1 px-2 ">
+        transition={{ duration: 0.6 }} className="fixed h-[100dvh] bg-gray-300 dark:bg-gray-500 top-0 right-0 max-[460px]:w-[60%] w-[40%] md:w-[30%] z-10 rounded-l-lg flex flex-col gap-1 px-2 ">
             <div id="crossShopCart" className="size-[2.5rem] relative -left-1" onClick={() => { props.handlerCartListVisble(false) }}>
                 <CrossIcon className="dark:fill-white" />
             </div>
