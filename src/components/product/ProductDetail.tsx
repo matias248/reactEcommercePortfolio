@@ -63,9 +63,9 @@ export const ProductDetailPage = (props: ProductDetailPageInterface): React.JSX.
 
                         }).map((element,index) => {
                 
-                            return <li id={"displayProductElement"+index} key={index} className="flex justify-between border rounded-lg shadow bg-slate-300 dark:bg-gray-500 dark:border-gray-700 gap-2 margin-top-2">
-                                <div id={"displayProductElement"+index+"key"} className="bg-slate-200 dark:bg-gray-600 rounded-l-lg px-1 w-1/2 overflow-y-auto ">{formatString(element[0])}</div>
-                                <div id={"displayProductElement"+index+"value"} className="bg-slate-200 dark:bg-gray-600 rounded-r-lg px-1 w-1/2 overflow-y-auto text-start" > {element[1]}</div>
+                            return <li id={"displayProductElement"+index} key={index} className="flex justify-between border rounded-lg shadow bg-slate-400 dark:bg-gray-500 dark:border-gray-700 gap-2 margin-top-2">
+                                <div id={"displayProductElement"+index+"key"} className="bg-slate-300 dark:bg-gray-600 rounded-l-lg px-1 w-1/2 overflow-y-auto ">{formatString(element[0])}</div>
+                                <div id={"displayProductElement"+index+"value"} className="bg-slate-300 dark:bg-gray-600 rounded-r-lg px-1 w-1/2 overflow-y-auto text-start" > {element[1]}</div>
                             </li>
                         })
                         }

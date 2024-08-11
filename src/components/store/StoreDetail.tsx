@@ -62,18 +62,18 @@ export const StoreDetailPage = (props: StoreDetailPageInterface): React.JSX.Elem
                         }).map((element,index) => {
                             return <>
                                 {typeof element[1] !== 'object' && <>
-                                    <li key={index} id={"displayStoreElement"+index} className="flex justify-between border rounded-lg shadow bg-slate-300 dark:bg-gray-500 dark:border-gray-700 gap-2 margin-top-2">
-                                        <div id={"displayStoreElement"+index+"key"} className="bg-slate-200 dark:bg-gray-600 rounded-l-lg px-1 w-1/2 overflow-y-auto ">{formatString(element[0])}</div>
-                                        <div id={"displayStoreElement"+index+"value"} className="bg-slate-200 dark:bg-gray-600 rounded-r-lg px-1 w-1/2 overflow-y-auto text-start" > {element[1]}</div>
+                                    <li key={index} id={"displayStoreElement"+index} className="flex justify-between border rounded-lg shadow bg-slate-400 dark:bg-gray-500 dark:border-gray-700 gap-2 margin-top-2">
+                                        <div id={"displayStoreElement"+index+"key"} className="bg-slate-300 dark:bg-gray-600 rounded-l-lg px-1 w-1/2 overflow-y-auto ">{formatString(element[0])}</div>
+                                        <div id={"displayStoreElement"+index+"value"} className="bg-slate-300 dark:bg-gray-600 rounded-r-lg px-1 w-1/2 overflow-y-auto text-start" > {element[1]}</div>
                                     </li>
                                 </>}
                                 {typeof element[1] === 'object' && <>
                                     {
                                         Object.entries(element[1]).map((currentValue,index2) => {
                                             if(typeof currentValue[1] === "number" || typeof currentValue[1] === "string"  )
-                                            return <li key={index+"-"+index2} id={"displayStoreElement"+index+"-"+index2} className="flex justify-between border rounded-lg shadow bg-slate-300 dark:bg-gray-500 dark:border-gray-700 gap-2 margin-top-2">
-                                                <div id={"displayStoreElement"+index+"-"+index2+"key"} className="bg-slate-200 dark:bg-gray-600 rounded-l-lg px-1 w-1/2 overflow-y-auto ">{formatString(currentValue[0])}</div>
-                                                <div id={"displayStoreElement"+index+"-"+index2+"value"} className="bg-slate-200 dark:bg-gray-600 rounded-r-lg px-1 w-1/2 overflow-y-auto text-start" > {currentValue[1]}</div>
+                                            return <li key={index+"-"+index2} id={"displayStoreElement"+index+"-"+index2} className="flex justify-between border rounded-lg shadow bg-slate-400 dark:bg-gray-500 dark:border-gray-700 gap-2 margin-top-2">
+                                                <div id={"displayStoreElement"+index+"-"+index2+"key"} className="bg-slate-300 dark:bg-gray-600 rounded-l-lg px-1 w-1/2 overflow-y-auto ">{formatString(currentValue[0])}</div>
+                                                <div id={"displayStoreElement"+index+"-"+index2+"value"} className="bg-slate-300 dark:bg-gray-600 rounded-r-lg px-1 w-1/2 overflow-y-auto text-start" > {currentValue[1]}</div>
                                             </li>
                                         })
                                     }

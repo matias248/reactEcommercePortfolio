@@ -93,7 +93,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
     {!isLoading && store &&
       <div className="flex items-center flex-col pb-4">
 
-        <div className="mb-6 text-5xl text-center mb-16 dark:text-white" >{title}</div>
+        <div className="mb-6 text-4xl text-center mb-16 dark:text-white" >{title}</div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-3/4 ">
           <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} helpText={descriptionRestrictionMessage} />
