@@ -61,11 +61,7 @@ describe("Navigation Buttons", () => {
         cy.get('#NavigationFormsApp').click().should('not.exist');
         cy.get('#NavigationShopApp').should('exist');
         //cy.get('#NavigationFinanceApp').should('exist');
-
-
-        cy.location().should((location:Location) => {
-            expect(location.pathname).to.eq('/stores')
-        })
+        cy.contains('List of stores')
     })
     it("To Shop", () => {
         cy.visit('/');
@@ -74,9 +70,8 @@ describe("Navigation Buttons", () => {
         //cy.get('#NavigationFinanceApp').should('exist');
         cy.get('#NavigationFormsApp').should('exist');
 
-        cy.location().should((location:Location) => {
-            expect(location.pathname).to.eq('/shop')
-        })
+        cy.contains('Our Categories')
+
     })
     /*it("To Finance", () => {
         cy.visit('/');

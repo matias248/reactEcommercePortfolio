@@ -66,7 +66,7 @@ describe('Product Crud Test', () => {
   it('Update a product', () => {
     cy.visit('stores/1/products');
     cy.get('#productElementGallery1').get('#editButton1').click()
-    cy.get('[name="imageUrl"]').should('have.value', '/watch.jpeg').clear();
+    cy.get('[name="imageUrl"]').should('have.value', '/reactEcommercePortfolio/watch.jpeg').clear();
     cy.get('[name="name"]').should('have.value', 'Simple Watch').type('Updated');
     cy.get('textarea[name="description"]').should('have.value', 'Embrace timeless sophistication with the Simple Watch, a fusion of classic design and modern functionality. Crafted from stainless steel and sapphire crystal.').type('Updated');
 

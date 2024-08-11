@@ -72,7 +72,7 @@ describe('Store Crud Test', () => {
     cy.visit('stores');
     cy.get('#editButton1').click();
 
-    cy.get('[name="imageUrl"]').should('have.value', '/store1.jpeg').clear();
+    cy.get('[name="imageUrl"]').should('have.value', '/reactEcommercePortfolio/store1.jpeg').clear();
 
     cy.get('[name="name"]').should('have.value', 'Simple Store').type('Updated');
     cy.get('[name="address.city"]').should('have.value', 'Simple City D.C').type('Updated');
