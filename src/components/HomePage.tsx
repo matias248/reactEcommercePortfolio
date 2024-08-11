@@ -3,7 +3,7 @@
 export const HomePage = (): React.JSX.Element => {
     const title = "App presentation:"
     const IntroPlatform = 'Welcome to ECportfolio, a platform designed to simulate a simple e-commerce.' 
-    const IntroDiffApp ='ECportfolio integrates three applications:';
+    const IntroDiffApp ='ECportfolio integrates two applications:';
     const AppFormsName = "AppForms";
     const presentationAppForms = "Easily create and manage data with intuitive forms. FormsApp ensures you can build a comprehensive database effortlessly.";
     const AppShopName = "AppShop";
