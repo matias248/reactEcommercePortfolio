@@ -10,7 +10,7 @@ interface navigationPath {
 export const NavigationPath = (props: navigationPath): React.JSX.Element => {
     const navigationRouter: NavigationRouterInterface = NavigationRouter();
     return <>
-        <div className="ml-2 text-xs sm:text-base text-gray-900 dark:text-white flex w-full gap-1    ">
+        <div className="pl-2 text-xs sm:text-base text-gray-900 dark:text-white flex w-full gap-1 max-w-[100vh]">
             {
                 props.pathData.inStores && props.pathData.storeName && <div id="NavStoresTitle" className="overflow-hidden max-w-[60px]  hover:opacity-75" onClick={navigationRouter.goToFappListOfStores}>
                     Stores

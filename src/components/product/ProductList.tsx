@@ -34,12 +34,12 @@ export const ProductList = (props: ProductListProps): React.JSX.Element => {
         })
         setIsLoading(false)
     }, [])
-
+    
     return <>
         {!isLoading && products &&
-            <div className="">
-                <div className="mb-16 text-4xl text-center dark:text-white" >{title}</div>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 md:gap-4 gap-6 mx-8">
+            <div className=" ">
+                <div className="mb-8 text-4xl text-center dark:text-white" >{title}</div>
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 md:gap-4 gap-6 mx-8 pb-4">
                     {products && products.map((currentValue) => {
                         return <ProductImageGallery key={currentValue.id} product={currentValue} onClick={() => { navigationRouter.goToFappProduct(currentValue.id, currentValue.storeId); }}
                             onClickToEdit={() => { navigationRouter.goToFappProductEdit(currentValue.id, currentValue.storeId) }} />
