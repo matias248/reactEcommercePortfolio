@@ -4,8 +4,8 @@ import { SearchBar } from "./SearchBar";
 import { ReactComponent as ShoppingCartIcon } from "../../assets/images/shoppingCartIcon.svg";
 import { ReactComponent as ArrowDown } from "../../assets/images/arrowDownIcon.svg";
 import { ShopSelectorDialog } from "./ShopSelectorDialog";
-import { useSideBarLogic } from "../../utils/sharedComponents/utilsFunctions";
-import { AnimatePresence } from 'framer-motion'
+import { useIsComponentScrolledDown, useSideBarLogic } from "../../utils/sharedComponents/utilsFunctions";
+import { AnimatePresence, motion } from 'framer-motion'
 
 export const ShopHeader = (props: {
     storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined,
@@ -17,8 +17,10 @@ export const ShopHeader = (props: {
     handlerProductTextFilter: (text: string) => void,
     updadeProductsByFilter: () => void,
     handlerCartListVisble: (isVisible: boolean) => void;
+    numberOfElementsInCartShop: number | undefined;
 
 }) => {
+    const { ref, isVisible } = useIsComponentScrolledDown();
 
     return (
         <header className="h-[64px] mb-4 sm:mb-8">
@@ -32,16 +34,46 @@ export const ShopHeader = (props: {
                         <SearchBar handlerValueChange={props.handlerProductTextFilter} textFilter={props.textFilterProduct} functionOnSubmit={props.updadeProductsByFilter} id="filterproducts" />
                     </div>
 
-                    <div className="flex items-center lg:order-2 ">
+                    <div ref={ref} className="flex items-center lg:order-2 ">
                         {
-                            <button id="shoppingCart" onClick={() => props.handlerCartListVisble(true)} className=" bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">
+
+                            <button id="shoppingCart" onClick={() => props.handlerCartListVisble(true)} className="relative bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">
                                 <div className="size-6"><ShoppingCartIcon /></div>
+                                {(props.numberOfElementsInCartShop != 0 && props.numberOfElementsInCartShop != undefined) && <div className={"absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full my-auto text-center flex items-center justify-center overflow-hidden "
+                                    + (props.numberOfElementsInCartShop > 9 ? "size-6 " : "size-5")}>
+                                    <div>{props.numberOfElementsInCartShop > 99 ? "+99" : props.numberOfElementsInCartShop}</div>
+                                </div>}
                             </button>
+
                         }
                     </div>
                 </div>
             </div>
-        </header>
+            <AnimatePresence>
+                {!isVisible &&
+                    <div
+                        className="fixed w-[100%] top-4"
+                    >
+                        <div className=" mx-auto max-w-[1000px]  w-[90%] flex flex-row-reverse px-2 py-1">
+
+                            <motion.button
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5 }}
+                                exit={{ opacity: 0, scale: 0.5 }}
+                                id="shoppingCartFixed" onClick={() => props.handlerCartListVisble(true)} className="relative bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none ">
+                                <div className="size-6 "><ShoppingCartIcon /></div>
+                                {(props.numberOfElementsInCartShop != 0 && props.numberOfElementsInCartShop != undefined) && <div className={"absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full my-auto text-center flex items-center justify-center overflow-hidden "
+                                    + (props.numberOfElementsInCartShop > 9 ? "size-6 " : "size-5")}>
+                                    <div>{props.numberOfElementsInCartShop > 99 ? "+99" : props.numberOfElementsInCartShop}</div>
+                                </div>}
+                            </motion.button>
+                        </div>
+                    </div>
+                }
+            </AnimatePresence>
+
+        </header >
     )
 }
 

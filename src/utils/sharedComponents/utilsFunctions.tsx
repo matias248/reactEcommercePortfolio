@@ -29,6 +29,42 @@ export function useClickOutside(functionToDo: () => void) {
     return { ref };
 }
 
+const isElementScrolledDown = (element: HTMLDivElement) => {
+    const rect = element.getBoundingClientRect();
+
+    return (
+        rect.top >= -rect.height
+    );
+};
+
+export function useIsComponentScrolledDown() {
+    const ref = useRef<HTMLDivElement | null>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const handleVisibility = () => {
+            if (ref.current) {
+                setIsVisible(isElementScrolledDown(ref.current));
+            }
+        };
+        // Initial check
+        handleVisibility();
+        // Optionally, you can add event listeners to track visibility on scroll or resize
+        window.addEventListener('scroll', handleVisibility);
+        window.addEventListener('resize', handleVisibility);
+
+        // Clean up event listeners on component unmount
+        return () => {
+            window.removeEventListener('scroll', handleVisibility);
+            window.removeEventListener('resize', handleVisibility);
+        };
+    }, []);
+
+
+
+    return { ref, isVisible };
+}
+
 export function useSideBarLogic(initialIsVisible: boolean) {
     const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
     const button = useRef<HTMLDivElement | null>(null);
@@ -173,14 +209,14 @@ export function getCurrencyIndexOfACartItem(cartItem: CartItemDTO) {
         return new Decimal(1);
     }
 }
-export function formatPrice(number: number):string {
+export function formatPrice(number: number): string {
     return number.toLocaleString('fr-FR', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2
     });
 }
 
-export function formatInputNumber(number: number):string {
+export function formatInputNumber(number: number): string {
     return number.toLocaleString('fr-FR', {
         maximumFractionDigits: 0,
     });
@@ -203,4 +239,14 @@ export function formatString(input: string): string {
     }
 
     return result;
+}
+
+export function getTotalProductsElements(cartShopList: CartItemDTO[]): number {
+    let totalElements = cartShopList.reduce((accumulator, currentValue) => {
+        return currentValue.quantity + accumulator;
+
+
+    }, 0);
+
+    return totalElements;
 }

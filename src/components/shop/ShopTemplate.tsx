@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ShopCategoryList } from "./ShopCategory";
 import { arrayCategoryType, ProductDTO } from "../../models/Product";
 import { getProductsPublicUrl } from "../../services/productService";
-import { getTrueKeys } from '../../utils/sharedComponents/utilsFunctions'
+import { getTotalProductsElements, getTrueKeys } from '../../utils/sharedComponents/utilsFunctions'
 import { ShopProductList } from "./ShopProductList";
 import { StoreDTO } from "../../models/Store";
 import { getStores, getStoresFilteredByNameCityCodeZip } from "../../services/storeService";
@@ -19,6 +19,8 @@ export const ShopTemplate = (): React.JSX.Element => {
     const [cartShopList, setcartShopList] = useState<CartItemDTO[]>();
     const [cartListVisble, setCartListVisble] = useState<boolean>(false);
     const [orderConfirmModal, setOrderConfirmModal] = useState<boolean>(false);
+
+    const numberOfElementsInCartShop:number = getTotalProductsElements(cartShopList ?? []);
 
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -144,7 +146,7 @@ export const ShopTemplate = (): React.JSX.Element => {
             </AnimatePresence>
 
             <ShopHeader storesList={listOfStores} selectedStore={shopSelected} handlerSelectedInput={handlerStoreSelected} handlerShopTextFilter={handlerShopTextFilter} updadeStoresByFilter={() => getFilteredStores(shopTextFilter)} updadeProductsByFilter={() => getFilteredProducts(productTextFilter)}
-                textFilterShop={shopTextFilter} textFilterProduct={productTextFilter} handlerProductTextFilter={handlerProductTextFilter} handlerCartListVisble={(value: boolean) => setCartListVisble(value)} />
+                textFilterShop={shopTextFilter} textFilterProduct={productTextFilter} handlerProductTextFilter={handlerProductTextFilter} handlerCartListVisble={(value: boolean) => setCartListVisble(value)} numberOfElementsInCartShop={numberOfElementsInCartShop} />
             <div className=" block sm:hidden  ml-[5%] w-[188px] mb-4">
                 <ShopSelectorInput storesList={listOfStores} selectedStore={shopSelected} handlerSelectedInput={handlerStoreSelected} handlerShopTextFilter={handlerShopTextFilter} shopTextFilter={shopTextFilter} updadeStoresByFilter={() => getFilteredStores(shopTextFilter)} />
             </div>
