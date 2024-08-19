@@ -45,7 +45,7 @@ describe('filters on the shop', () => {
         cy.contains('Neo store').click();
         cy.get('[name="confirmDialogShopButton"]').click();
         cy.get('#shopProductListContainer').get('#ShopProductElementGallery1').should('not.exist');
-        cy.get('#shopProductListContainer').contains('No items founded').should('exist');
+        cy.get('#shopProductListContainer').contains('No items found').should('exist');
     })
 
     it('Categories filter is applied method applied', function () {
@@ -56,6 +56,6 @@ describe('filters on the shop', () => {
         cy.get('#ShopCategoryItem1').click();
 
         cy.get('#shopProductList').should('not.exist');
-        cy.get('#shopProductListContainer').contains('No items founded').should('exist');
+        cy.get('#shopProductListContainer').contains('No items found').should('exist');
     })
 })

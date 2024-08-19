@@ -28,7 +28,7 @@ export const ShopProductList = (props: ShopProductListInterface): React.JSX.Elem
             </div>
 
             {!props.isLoading && (props.products === undefined || (props.products && props.products.length === 0)) &&
-                <div className="dark:text-white  rounded-lg  min-h-[300px] dark:bg-gray-600 bg-gray-300 p-2 w-full  flex items-center justify-center">No items founded</div>
+                <div className="dark:text-white  rounded-lg  min-h-[300px] dark:bg-gray-600 bg-gray-300 p-2 w-full  flex items-center justify-center">No items found</div>
             }
             {props.isLoading &&
                 props.isLoading && <div className="flex justify-center"><Spinner /></div>
