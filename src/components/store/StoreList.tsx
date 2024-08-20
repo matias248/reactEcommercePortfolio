@@ -33,10 +33,10 @@ export const StoreList = (props: StoreListProps): React.JSX.Element => {
     }, [])
 
     return <>{!isLoading &&
-        <div className="">
-            <div className="mx-8 text-4xl text-center mb-8 dark:text-white" >{title}</div>
+        <div className="mx-auto max-w-[1600px] mx-auto w-[90%]">
+            <div className="text-4xl text-center mb-8 dark:text-white" >{title}</div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-16 gap-8 mx-8 pb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-y-4 gap-y-6  pb-4 md:justify-items-center">
                 {stores && stores.map((currentValue) => {
                     return <StoreImageGallery key={currentValue.id} store={currentValue} onClick={() => { navigationRouter.goToFappStore(currentValue.id) }} onClickToEdit={() => navigationRouter.goToFappStoreEdit(currentValue.id)} onClickToProductsListButton={() => navigationRouter.goToFappListOfProducts(currentValue.id)} />
                 })}

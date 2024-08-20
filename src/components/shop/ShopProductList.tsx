@@ -35,7 +35,7 @@ export const ShopProductList = (props: ShopProductListInterface): React.JSX.Elem
 
             }
             {!props.isLoading && props.products && props.products.length > 0 &&
-                <div id="shopProductList" className="grid max-[1040px]:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:gap-4 gap-6 rounded-lg  min-h-[300px] dark:bg-gray-600 bg-gray-300 p-2">
+                <div id="shopProductList" className="grid grid-cols-1 min-[1040px]:grid-cols-3 xl:grid-cols-4 md:gap-y-4 gap-y-6 rounded-lg  min-h-[300px] dark:bg-gray-600 bg-gray-300 p-2 md:justify-items-center">
                     {
                         props.products.map((product) => {
                             return <div key={product.id} className="w-full min-[1040px]:w-[258px]" id={"ShopProductElementGalleryContainer" + product.id}>
