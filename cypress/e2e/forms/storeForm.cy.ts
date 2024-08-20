@@ -49,8 +49,6 @@ describe('Store Form Test', () => {
    
         cy.contains('Create a new store');
 
-        cy.get('[name="imageUrl"]').type('123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X');
-
         cy.get('[name="name"]').type('123456789X123456789X123456');       
 
         cy.get('[name="address.city"]').type('123456789X123456789X123456');
@@ -61,7 +59,7 @@ describe('Store Form Test', () => {
 
         cy.get('[name="address.streetNumber"]').type('123456789X123456789X123456');
 
-        cy.get('[name="address.streetName"]').type('123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X123456789X');
+        cy.get('[name="address.streetName"]').type('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu,');
         
         cy.get('[name="location.latitude"]').type('A');
         cy.get('[name="location.longitude"]').type('A');
@@ -75,9 +73,7 @@ describe('Store Form Test', () => {
         cy.get('[name="address.streetNumber"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'Only numbers allowed');
         cy.get('[name="location.latitude"]').should('have.css', 'background-color','rgb(254, 202, 202)');
         cy.get('[name="location.longitude"]').should('have.css', 'background-color','rgb(254, 202, 202)');
-        cy.get('[name="address.streetName"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 250');
-        cy.get('[name="imageUrl"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 250');
-
+        cy.get('[name="address.streetName"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 500');
         
         cy.get('[name="name"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
         cy.get('[name="name"]').type('correct Name').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 25');
@@ -94,12 +90,9 @@ describe('Store Form Test', () => {
         cy.get('[name="address.streetNumber"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'Only numbers allowed');
         cy.get('[name="address.streetNumber"]').type('1').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'Only numbers allowed');
 
-        cy.get('[name="address.streetName"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 250');
-        cy.get('[name="address.streetName"]').type('street Name').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 250');
-
-        cy.get('[name="imageUrl"]').clear().should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 250');
-        cy.get('[name="imageUrl"]').type('/store1.jpeg').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 250');
-
+        cy.get('[name="address.streetName"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 500');
+        cy.get('[name="address.streetName"]').type('street Name').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 500');
+        
         cy.get('[name="location.latitude"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent()
         cy.get('[name="location.latitude"]').type('1').should('have.css', 'background-color','rgb(249, 250, 251)').parent()
 

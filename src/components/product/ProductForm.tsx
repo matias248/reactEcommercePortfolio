@@ -61,9 +61,6 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         values: product
     })
 
-
-
-
     const onSubmit: SubmitHandler<ProductDTO> = (data) => {
         if (productId !== "new" && !isNaN(+(productId ?? NaN))) {
 
@@ -103,12 +100,12 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                 <div className="mb-6 text-4xl text-center mb-16 dark:text-white" >{title}</div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-3/4">
-                    <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} helpText={descriptionRestrictionMessage} />
+                    <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} helpText={descriptionRestrictionMessage} />
                     <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("name", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Name"} errorShouldDisplay={errors.name ? true : false} required={true} helpText={nameRestrictionMessage} />
                     <InputOfStringForm numberOfLines={4} reactFormProps={{ ...register("description", { required: true, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Description"} errorShouldDisplay={errors.description ? true : false} required={true} helpText={descriptionRestrictionMessage} />
                     <div className="flex gap-4 ">
                         <InputOfNumberForm reactFormProps={{ ...register("price", { required: true, pattern: REGEX.NUMBERS_DOTS_COMMAS, setValueAs: (value: string) => replaceTextNumberPerNumber(value) }) }} title={"Price"} errorShouldDisplay={errors.price ? true : false} required={true} helpText={onlyNumbersRestrictionMessage} />
-                        <InputSwitchForm options={arrayCurrencyType} optionSelected={watch("currency")} reactFormProps={{ ...register("currency", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Currency"} styleOverride="text-center h-[2.875rem] " />
+                        <InputSwitchForm options={arrayCurrencyType} optionSelected={watch("currency")} reactFormProps={{ ...register("currency", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Currency"} styleOverride="text-center h-[2.875rem] min-w-[50px]" />
                     </div>
                     <InputSwitchForm options={arrayCategoryType} optionSelected={watch("category")} reactFormProps={{ ...register("category", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Category"} />
                     <InputSwitchForm options={arrayInventoryStatusType} optionSelected={watch("inventoryStatus")} reactFormProps={{ ...register("inventoryStatus", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Inventory status"} />

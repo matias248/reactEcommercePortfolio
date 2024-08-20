@@ -11,7 +11,7 @@ export const REGEX = {
 
 
 export const NAME_RESTRICTION = 25;
-export const DESCRIPTION_RESTRICTION = 250;
+export const DESCRIPTION_RESTRICTION = 500;
 
 export const errorBackground = "#ff7b7b";
 

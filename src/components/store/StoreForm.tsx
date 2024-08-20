@@ -96,7 +96,7 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
         <div className="mb-6 text-4xl text-center mb-16 dark:text-white" >{title}</div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-3/4 ">
-          <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} helpText={descriptionRestrictionMessage} />
+          <InputOfUrlImagesForm reactFormProps={{ ...register("imageUrl", { required: false, setValueAs: (value: string) => value.trim() }) }} title={"URL"} errorShouldDisplay={errors.imageUrl ? true : false} required={false} currentValue={watch("imageUrl")} helpText={descriptionRestrictionMessage} />
           <div className="flex gap-4">
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("name", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Name"} errorShouldDisplay={errors.name ? true : false} required={true} helpText={nameRestrictionMessage} />
             <InputOfStringForm numberOfLines={1} reactFormProps={{ ...register("address.city", { required: true, maxLength: NAME_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"City"} errorShouldDisplay={errors.address?.city ? true : false} required={true} helpText={nameRestrictionMessage} />
