@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AppNames } from '../constants';
 import { StoreDTO } from '../../models/Store';
-import { currencyType, ProductDTO } from '../../models/Product';
+import { arrayCategoryType, arrayCurrencyType, arrayInventoryStatusType, currencyType, ProductDTO } from '../../models/Product';
 import { CartItemDTO } from '../../models/CartItem';
 import Decimal from 'decimal.js';
 
@@ -244,9 +244,23 @@ export function formatString(input: string): string {
 export function getTotalProductsElements(cartShopList: CartItemDTO[]): number {
     let totalElements = cartShopList.reduce((accumulator, currentValue) => {
         return currentValue.quantity + accumulator;
-
-
     }, 0);
 
     return totalElements;
+}
+
+export function productVerificationRestrictFields(productDTO: ProductDTO): boolean {
+    let category = productDTO.category;
+    let inventoryStatus = productDTO.inventoryStatus;
+    let currency = productDTO.currency;
+    if (!arrayCategoryType.includes(category)) {
+        return false;
+    }
+    if (!arrayCurrencyType.includes(currency)) {
+        return false;
+    }
+    if (!arrayInventoryStatusType.includes(inventoryStatus)) {
+        return false;
+    }
+    return true;
 }

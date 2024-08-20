@@ -3,7 +3,7 @@ import { inventoryStatusType, ProductDTO } from '../models/Product';
 import { StoreDTO } from '../models/Store';
 import { currentProducts } from '../LocalData/Products';
 import { currentStores } from '../LocalData/Stores';
-import { calculateTotalPages, getNextId, getPaginatedItems, joinArrayWithComma, productAccordingToTheFilter } from '../utils/sharedComponents/utilsFunctions';
+import { calculateTotalPages, getNextId, getPaginatedItems, joinArrayWithComma, productAccordingToTheFilter, productVerificationRestrictFields } from '../utils/sharedComponents/utilsFunctions';
 
 
 const url = process.env.REACT_APP_URL_API ?? "";
@@ -146,6 +146,10 @@ export const createProductById = async (storeId: number, data: ProductDTO): Prom
         productToset.id = getNextId(currentProducts)
         productToset.storeId = storeId;
         currentProducts.push(data);
+        if(!productVerificationRestrictFields(data)){
+            return Promise.reject("format is not correct");
+        }
+
         return Promise.resolve(data);
     }
 

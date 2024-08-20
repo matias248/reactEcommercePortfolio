@@ -224,6 +224,48 @@ describe('POST /products', () => {
       })
   }
   );
+  test('Test currency bad value Should return 400', async () => {
+    await api.post('/stores/1/products/').send({
+      name: "Black Watch",
+      description: "Product Description",
+      imageUrl: "black-watch.jpg",
+      price: 72,
+      category: "Accessories",
+      inventoryStatus: "INSTOCK",
+      currency: "error",
+
+    }).set(commonHeaders)
+      .expect(400)
+  }
+  );
+  test('Test category bad value Should return 400', async () => {
+    await api.post('/stores/1/products/').send({
+      name: "Black Watch",
+      description: "Product Description",
+      imageUrl: "black-watch.jpg",
+      price: 72,
+      category: "error",
+      inventoryStatus: "INSTOCK",
+      currency: "€",
+
+    }).set(commonHeaders)
+      .expect(400)
+  }
+  );
+  test('Test inventoryStatus bad value Should return 400', async () => {
+    await api.post('/stores/1/products/').send({
+      name: "Black Watch",
+      description: "Product Description",
+      imageUrl: "black-watch.jpg",
+      price: 72,
+      category: "Accessories",
+      inventoryStatus: "error",
+      currency: "€",
+
+    }).set(commonHeaders)
+      .expect(400)
+  }
+  );
 });
 
 
