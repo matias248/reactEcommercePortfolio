@@ -19,7 +19,7 @@ describe('Product Crud Test', () => {
     cy.get('#productElementGallery4').should('exist')
       .should('contain', 'ProductCypress')
       .should('contain', 'Description')
-      .find('#divNoImageSet').should('exist');
+      .find('#divNoImageSet4').should('exist');
 
 
   })
@@ -78,7 +78,7 @@ describe('Product Crud Test', () => {
 
 
     cy.get('#productElementGallery1').should('exist').should('contain','Simple WatchUpdated')
-      .find('#divNoImageSet').should('exist').get('#editButton1').click()
+      .find('#divNoImageSet1').should('exist').get('#editButton1').click()
 
     cy.get('[name="imageUrl"]').should('have.value', '')
 

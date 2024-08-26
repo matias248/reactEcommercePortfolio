@@ -18,7 +18,7 @@ describe('Store Crud Test', () => {
     cy.get('#storeElementGallery3').should('exist')
       .should('contain', 'StoreCypress')
       .should('contain', 'City')
-      .find('#divNoImageSet').should('exist');
+      .find('#divNoImageSet3').should('exist');
 
 
   })
@@ -89,7 +89,7 @@ describe('Store Crud Test', () => {
     cy.get('#storeElementGallery1').should('exist')
       .should('contain', 'Simple StoreUpdated')
       .should('contain', 'Simple City D.CUpdated')
-      .find('#divNoImageSet').should('exist');
+      .find('#divNoImageSet1').should('exist');
 
     cy.get('#editButton1').click();
 

@@ -72,7 +72,7 @@ const ShopCartInputItem = (props: {
                     <img className="h-full max-w-full rounded-lg object-cover mx-auto text-center dark:text-white" src={props.cartItem.imageUrl} alt="error loading image" />
                 }
                 {!props.cartItem.imageUrl &&
-                    <div id="divNoImageSet" className="h-full max-w-full rounded-lg">
+                    <div id={"divNoImageSet" + props.cartItem.id} className="h-full max-w-full rounded-lg">
                         <ImagePlaceholder />
                     </div>
                 }

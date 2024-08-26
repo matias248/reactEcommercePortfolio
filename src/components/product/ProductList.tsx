@@ -72,7 +72,7 @@ export const ProductImageGallery = (props: ProductImageGalleryProps): React.JSX.
                     <img className="h-16 max-w-full rounded-lg object-cover mx-auto text-center dark:text-white" src={props.product.imageUrl} alt="error loading image" />
                 }
                 {!props.product.imageUrl &&
-                    <div id="divNoImageSet" className="h-16 max-w-full rounded-lg">
+                    <div id={"divNoImageSet" + props.product.id}className="h-16 max-w-full rounded-lg">
                         <ImagePlaceholder />
                     </div>
                 }

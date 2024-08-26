@@ -66,7 +66,7 @@ const StoreImageGallery = (props: StoreImageGalleryProps): React.JSX.Element => 
                     <img className="h-16 max-w-full rounded-lg object-cover mx-auto text-center dark:text-white" src={props.store.imageUrl} alt="error loading image" />
                 }
                 {!props.store.imageUrl &&
-                    <div id="divNoImageSet" className=" h-16 max-w-full rounded-lg">
+                    <div id={"divNoImageSet" + props.store.id} className=" h-16 max-w-full rounded-lg">
                         <ImagePlaceholder />
                     </div>
                 }

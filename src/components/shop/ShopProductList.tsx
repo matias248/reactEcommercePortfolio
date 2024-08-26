@@ -20,7 +20,7 @@ interface ShopProductListInterface {
 }
 
 export const ShopProductList = (props: ShopProductListInterface): React.JSX.Element => {
-    
+
     return (
         <div id="shopProductListContainer" className="max-w-[1200px] mx-auto w-[90%] flex flex-col ">
             <div className="self-end"><NavigationInputs title={""} currentPage={props.currentPage} totalPages={props.totalPages} styleOverride="mb-2"
@@ -70,7 +70,7 @@ export const ShopProductImageGallery = (props: ProductImageGalleryProps): React.
                         <img className="h-[7rem] max-w-full rounded-lg object-cover mx-auto text-center dark:text-white" src={props.cartItem.imageUrl} alt="error loading image" />
                     }
                     {!props.cartItem.imageUrl &&
-                        <div id="divNoImageSet" className="h-[7rem] max-w-full rounded-lg">
+                        <div id={"divNoImageSet" + props.cartItem.id} className="h-[7rem] max-w-full rounded-lg">
                             <ImagePlaceholder />
                         </div>
                     }
