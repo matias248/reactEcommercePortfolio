@@ -52,7 +52,7 @@ export const ShopHeader = (props: {
             <AnimatePresence>
                 {!isVisible &&
                     <div
-                        className="fixed w-[100%] top-4"
+                        className="fixed w-[100%] top-4 pointer-events-none"
                     >
                         <div className=" mx-auto max-w-[1000px]  w-[90%] flex flex-row-reverse px-2 py-1">
 
@@ -61,7 +61,7 @@ export const ShopHeader = (props: {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.5 }}
                                 exit={{ opacity: 0, scale: 0.5 }}
-                                id="shoppingCartFixed" onClick={() => props.handlerCartListVisble(true)} className="relative bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none ">
+                                id="shoppingCartFixed" onClick={() => props.handlerCartListVisble(true)} className="relative bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none pointer-events-auto">
                                 <div className="size-6 "><ShoppingCartIcon /></div>
                                 {(props.numberOfElementsInCartShop != 0 && props.numberOfElementsInCartShop != undefined) && <div className={"absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full my-auto text-center flex items-center justify-center overflow-hidden "
                                     + (props.numberOfElementsInCartShop > 9 ? "size-6 " : "size-5")}>

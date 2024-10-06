@@ -68,8 +68,6 @@ const ShopSelectorDialogStoreInput = (props: {
                 <p id={"2textStoreElementDialog" + props.store.id} className="h-5 w-full text-sm text-gray-900 dark:text-white truncate leading-5">{props.store.address.state}</p>
                 <p id={"3textStoreElementDialog" + props.store.id} className="h-5 w-full text-sm text-gray-900 dark:text-white truncate leading-5">{props.store.address.zipCode + " " + props.store.address.city}</p>
                 <p id={"4textStoreElementDialog" + props.store.id} className="h-5 w-full text-sm text-gray-900 dark:text-white truncate leading-5">{props.store.address.streetNumber + " " + props.store.address.streetName}</p>
-
-
             </div>
         </div>
     )

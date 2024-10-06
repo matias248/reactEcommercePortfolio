@@ -14,8 +14,6 @@ export interface NavigationRouterInterface {
     goToFappCreationStore: () => void;
     goToFiapp: () => void;
     goToShapp: () => void;
-
-
     currentRoute: () => AppNames | undefined;
 }
 

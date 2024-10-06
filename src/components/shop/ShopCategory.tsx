@@ -36,13 +36,10 @@ export const ShopCategoryItem = (props: ShopCategoryItemInterface): React.JSX.El
     return <div id={`ShopCategoryItem${props.id}`} onClick={() => { props.onChange() }} className={"dark:text-white rounded-lg px-2 flex  " + (props.filterOn ? "bg-blue-500" : "bg-gray-500")}>
         {
             !props.filterOn && <div className="dark:fill-white size-[20px] self-center "><CrossIcon /> </div>
-
         }
         {
             props.filterOn && <div className="dark:fill-white size-[20px] self-center "><VerifyIcon /> </div>
-
         }
-
         <div>{props.category}</div>
     </div>
 }
