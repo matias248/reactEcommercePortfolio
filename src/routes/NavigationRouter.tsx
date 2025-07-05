@@ -1,4 +1,4 @@
-import { matchPath, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { getUrlProductList, getUrlStoreList } from "./RoutesConfigs";
 import { getCurrentApp } from "../utils/sharedComponents/utilsFunctions";
 import { AppNames } from "../utils/constants";

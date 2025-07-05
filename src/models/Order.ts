@@ -1,4 +1,4 @@
-import { CartItemDTO } from "./CartItem";
+import type { CartItemDTO } from "./CartItem";
 
 export interface Order {
     cartShop: CartItemDTO[];

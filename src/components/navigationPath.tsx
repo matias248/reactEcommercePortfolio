@@ -1,7 +1,5 @@
-import { NavigationRouter, NavigationRouterInterface } from "../routes/NavigationRouter";
-import { PathData } from "./BaseTemplate";
-
-
+import { NavigationRouter, type NavigationRouterInterface } from "../routes/NavigationRouter";
+import type { PathData } from "./BaseTemplate";
 
 interface navigationPath {
     pathData: PathData;

@@ -1,10 +1,10 @@
 import { AppNames } from "../utils/constants"
 import { calculateTotalPages, filterStores, getCurrentApp, getPaginatedItems, joinArrayWithComma } from "../utils/sharedComponents/utilsFunctions"
-import { currentStores } from '../LocalData/Stores';
-
+import { currentStores } from '../localData/Stores';
+import { expect, test ,describe} from 'vitest'
 
 describe('Test getCurrentApp', () => {
-    it('forms ', () => {
+    test('forms ', () => {
         const currentApp: AppNames | undefined = getCurrentApp("/stores");
         const currentApp2: AppNames | undefined = getCurrentApp("/stores/1");
         const currentApp3: AppNames | undefined = getCurrentApp("/stores/1/products");
@@ -27,7 +27,7 @@ describe('Test getCurrentApp', () => {
         expect(currentApp2).toBe(AppNames.FORMS)
 
     })*/
-    it('shop ', () => {
+    test('shop ', () => {
         const currentApp: AppNames | undefined = getCurrentApp("/shop");
         const currentApp2: AppNames | undefined = getCurrentApp("/stores/finance");
 
@@ -38,31 +38,31 @@ describe('Test getCurrentApp', () => {
 })
 
 describe('joinArrayWithComma', () => {
-    it('Test one element', () => {
+    test('Test one element', () => {
         const input = ["a"];
         const result = joinArrayWithComma(input);
         expect(result).toBe("a");
     });
 
-    it(' Test Two elements ', () => {
+    test(' Test Two elements ', () => {
         const input = ["a", "b"];
         const result = joinArrayWithComma(input);
         expect(result).toBe("a,b");
     });
 
-    it('Test n elements', () => {
+    test('Test n elements', () => {
         const input = ["a", "b", "c"];
         const result = joinArrayWithComma(input);
         expect(result).toBe("a,b,c");
     });
 
-    it('Test 0 elements', () => {
+    test('Test 0 elements', () => {
         const input: string[] = [];
         const result = joinArrayWithComma(input);
         expect(result).toBe("");
     });
 
-    it('Should count empty elements', () => {
+    test('Should count empty elements', () => {
         const input = ["a", "", "b"];
         const result = joinArrayWithComma(input);
         expect(result).toBe("a,,b");

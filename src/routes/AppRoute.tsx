@@ -1,14 +1,14 @@
 
 import ErrorPage from "./ErrorPage";
 import { StoreForm } from "../components/store/StoreForm";
-import { ProductList } from "../components/product/ProductList";
 import { BaseTemplate } from "../components/BaseTemplate";
 import { StoreList } from "../components/store/StoreList";
-import { ProductForm } from "../components/product/ProductForm";
 import { HomePage } from "../components/HomePage";
-import { ShopTemplate } from "../components/shop/ShopTemplate";
-import { ProductDetailPage } from "../components/product/ProductDetail";
 import { StoreDetailPage } from "../components/store/StoreDetail";
+import { ProductDetailPage } from "../components/product/ProductDetail";
+import { ProductList } from "../components/product/ProductList";
+import { ProductForm } from "../components/product/ProductForm";
+import { ShopTemplate } from "../components/shop/ShopTemplate";
 
 export const AppRoute = [
   {
@@ -31,6 +31,52 @@ export const AppRoute = [
         errorElement: <ErrorPage />,
       },
       {
+        path: "/stores/new",
+        element: <StoreForm />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/stores/:storeId",
+        element: <StoreDetailPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/stores/:storeId/products/:productId",
+        element: <ProductDetailPage />,
+        errorElement: <ErrorPage />,
+      },
+
+      {
+        path: "/stores/:storeId/products",
+        element: <ProductList/>,
+      },
+      {
+        path: "/stores/:storeId/products/:productId/edit",
+        element: <ProductForm />, errorElement: <ErrorPage />,
+      },
+      {
+        path: "/stores/:storeId/products/new",
+        element: <ProductForm />, errorElement: <ErrorPage />,
+      }, 
+      {
+        path: "shop",
+        element: <ShopTemplate />,
+      }
+    ]
+  },
+];
+/*
+ {
+        path: "shop",
+        element: <ShopTemplate />,
+      },
+      {
+        path: "/stores/:storeId/products/:productId",
+        element: <ProductDetailPage />,
+        errorElement: <ErrorPage />,
+      },
+
+    {
         path: "/stores/:storeId/products",
         element: <ProductList></ProductList>,
       },
@@ -42,27 +88,4 @@ export const AppRoute = [
         path: "/stores/:storeId/products/new",
         element: <ProductForm />, errorElement: <ErrorPage />,
       },
-      {
-        path: "shop",
-        element: <ShopTemplate />,
-      },
-      {
-        path: "/stores/:storeId/products/:productId",
-        element: <ProductDetailPage />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "/stores/new",
-        element: <StoreForm />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "/stores/:storeId",
-        element: <StoreDetailPage />,
-        errorElement: <ErrorPage />,
-      },
-     
-
-    ]
-  },
-];
+*/

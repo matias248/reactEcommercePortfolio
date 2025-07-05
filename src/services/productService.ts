@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { inventoryStatusType, ProductDTO } from '../models/Product';
-import { StoreDTO } from '../models/Store';
-import { currentProducts } from '../LocalData/Products';
-import { currentStores } from '../LocalData/Stores';
+import { inventoryStatusType, type ProductDTO } from '../models/Product';
+import type { StoreDTO } from '../models/Store';
+import { currentProducts } from '../localData/Products';
+import { currentStores } from '../localData/Stores';
 import { calculateTotalPages, getNextId, getPaginatedItems, joinArrayWithComma, productAccordingToTheFilter, productVerificationRestrictFields } from '../utils/sharedComponents/utilsFunctions';
 
 
-const url = process.env.REACT_APP_URL_API ?? "";
+const url = import.meta.env.VITE_APP_URL_API  ?? "";
 
 export const getProductsPublicUrl = async (categories: string[], pageIndex: number, elementsPerPage: number, textFilter: string, storeId?: number): Promise<{ totalPages: number, products: ProductDTO[] }> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         const productsFiltered = currentProducts.filter((product) => {
             return (categories.includes(product.category) || categories.length === 0) && product.inventoryStatus !== inventoryStatusType.OUTOFSTOCK && productAccordingToTheFilter(product, textFilter, storeId)
         });
@@ -28,7 +28,7 @@ export const getProductsPublicUrl = async (categories: string[], pageIndex: numb
 };
 
 export const getProducts = async (storeId: number): Promise<ProductDTO[]> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         return currentProducts;
     }
     try {
@@ -40,7 +40,7 @@ export const getProducts = async (storeId: number): Promise<ProductDTO[]> => {
 };
 
 export const getProductsWithstore = async (storeId: number): Promise<{ store: StoreDTO, products: ProductDTO[] }> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         const store: StoreDTO | undefined = currentStores.find((store) => { return store.id === storeId });
         if (store) {
             const filterProducts = currentProducts.filter((product) => product.storeId === storeId);
@@ -60,7 +60,7 @@ export const getProductsWithstore = async (storeId: number): Promise<{ store: St
 
 
 export const getProductById = async (storeId: number, productId: number): Promise<ProductDTO> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         const filterProducts = currentProducts.filter((product) => { return product.storeId === storeId && product.id === productId })
         if (filterProducts.length > 0)
             return filterProducts[0];
@@ -77,7 +77,7 @@ export const getProductById = async (storeId: number, productId: number): Promis
 };
 
 export const getProductByIdWithstore = async (storeId: number, productId: number): Promise<{ store: StoreDTO, product: ProductDTO }> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         const store: StoreDTO | undefined = currentStores.find((store) => { return store.id === storeId });
         if (store) {
             const filterProducts = currentProducts.filter((product) => { return product.storeId === storeId && product.id === productId })
@@ -100,7 +100,7 @@ export const getProductByIdWithstore = async (storeId: number, productId: number
 };
 
 export const updateProductById = async (storeId: number, productId: number, updateData: ProductDTO): Promise<ProductDTO> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         const id: number = currentProducts.findIndex((product) => { return product.id === productId && product.storeId === storeId });
         if (id !== -1) {
             currentProducts[id] = updateData;
@@ -120,7 +120,7 @@ export const updateProductById = async (storeId: number, productId: number, upda
 };
 
 export const deleteProductById = async (storeId: number, productId: number): Promise<ProductDTO> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         const id: number = currentProducts.findIndex((product) => { return product.id === productId && product.storeId === storeId });
         if (id !== -1) {
             const productDeleted = currentProducts[id];
@@ -141,7 +141,7 @@ export const deleteProductById = async (storeId: number, productId: number): Pro
 };
 
 export const createProductById = async (storeId: number, data: ProductDTO): Promise<ProductDTO> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         let productToset = data;
         productToset.id = getNextId(currentProducts)
         productToset.storeId = storeId;

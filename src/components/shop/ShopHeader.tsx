@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { StoreDTO } from "../../models/Store";
+import type { StoreDTO } from "../../models/Store";
 import { SearchBar } from "./SearchBar";
-import { ReactComponent as ShoppingCartIcon } from "../../assets/images/shoppingCartIcon.svg";
-import { ReactComponent as ArrowDown } from "../../assets/images/arrowDownIcon.svg";
+import ShoppingCartIcon  from "../../assets/images/shoppingCartIcon.svg?react";
+import  ArrowDown  from "../../assets/images/arrowDownIcon.svg?react";
 import { ShopSelectorDialog } from "./ShopSelectorDialog";
 import { useIsComponentScrolledDown, useSideBarLogic } from "../../utils/sharedComponents/utilsFunctions";
 import { AnimatePresence, motion } from 'framer-motion'
@@ -37,7 +36,7 @@ export const ShopHeader = (props: {
                     <div ref={ref} className="flex items-center lg:order-2 ">
                         {
 
-                            <button id="shoppingCart" onClick={() => props.handlerCartListVisble(true)} className="relative bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">
+                            <button id="shoppingCart" onClick={() => props.handlerCartListVisble(true)} className="relative bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-hidden">
                                 <div className="size-6"><ShoppingCartIcon /></div>
                                 {(props.numberOfElementsInCartShop != 0 && props.numberOfElementsInCartShop != undefined) && <div className={"absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full my-auto text-center flex items-center justify-center overflow-hidden "
                                     + (props.numberOfElementsInCartShop > 9 ? "size-6 " : "size-5")}>
@@ -52,7 +51,7 @@ export const ShopHeader = (props: {
             <AnimatePresence>
                 {!isVisible &&
                     <div
-                        className="fixed w-[100%] top-4 pointer-events-none"
+                        className="fixed w-full top-4 pointer-events-none"
                     >
                         <div className=" mx-auto max-w-[1000px]  w-[90%] flex flex-row-reverse px-2 py-1">
 
@@ -61,7 +60,7 @@ export const ShopHeader = (props: {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.5 }}
                                 exit={{ opacity: 0, scale: 0.5 }}
-                                id="shoppingCartFixed" onClick={() => props.handlerCartListVisble(true)} className="relative bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none pointer-events-auto">
+                                id="shoppingCartFixed" onClick={() => props.handlerCartListVisble(true)} className="relative bg-blue-600 hover:bg-blue-700 rounded-full p-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-hidden pointer-events-auto">
                                 <div className="size-6 "><ShoppingCartIcon /></div>
                                 {(props.numberOfElementsInCartShop != 0 && props.numberOfElementsInCartShop != undefined) && <div className={"absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full my-auto text-center flex items-center justify-center overflow-hidden "
                                     + (props.numberOfElementsInCartShop > 9 ? "size-6 " : "size-5")}>

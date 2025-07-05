@@ -1,5 +1,5 @@
-import { Address } from "./Address";
-import { GeoPoint } from "./GeoPoint";
+import type { Address } from "./Address";
+import type { GeoPoint } from "./GeoPoint";
 
 export interface StoreDTO {
     id: number;

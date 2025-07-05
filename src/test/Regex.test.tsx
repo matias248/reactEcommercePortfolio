@@ -1,4 +1,5 @@
 import { REGEX } from '../utils/constants'; 
+import { expect, test ,describe} from 'vitest'
 
 describe('REGEX Tests', () => {
     test('EMAIL regex', () => {

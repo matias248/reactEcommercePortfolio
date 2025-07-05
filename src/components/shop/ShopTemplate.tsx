@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { ShopCategoryList } from "./ShopCategory";
-import { arrayCategoryType, ProductDTO } from "../../models/Product";
+import { arrayCategoryType, type ProductDTO } from "../../models/Product";
 import { getProductsPublicUrl } from "../../services/productService";
 import { getTotalProductsElements, getTrueKeys } from '../../utils/sharedComponents/utilsFunctions'
 import { ShopProductList } from "./ShopProductList";
-import { StoreDTO } from "../../models/Store";
+import type { StoreDTO } from "../../models/Store";
 import { getStores, getStoresFilteredByNameCityCodeZip } from "../../services/storeService";
 import { ShopHeader, ShopSelectorInput } from "./ShopHeader";
 import { ShopCart } from "./ShopCart";
-import { CartItemDTO } from "../../models/CartItem";
+import type { CartItemDTO } from "../../models/CartItem";
 import { OrderConfirmModal } from "./OrderConfirm";
 import { AnimatePresence } from "framer-motion";
-
 
 export const ShopTemplate = (): React.JSX.Element => {
 
@@ -19,9 +18,7 @@ export const ShopTemplate = (): React.JSX.Element => {
     const [cartShopList, setcartShopList] = useState<CartItemDTO[]>();
     const [cartListVisble, setCartListVisble] = useState<boolean>(false);
     const [orderConfirmModal, setOrderConfirmModal] = useState<boolean>(false);
-
     const numberOfElementsInCartShop:number = getTotalProductsElements(cartShopList ?? []);
-
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -102,7 +99,7 @@ export const ShopTemplate = (): React.JSX.Element => {
             setProducts(data.products);
             setTotalPages(data.totalPages);
             setIsLoading(false);
-        }).catch((error) => {
+        }).catch(() => {
             console.error('Error loading products filtered');
         })
         setIsLoading(false)
@@ -111,7 +108,7 @@ export const ShopTemplate = (): React.JSX.Element => {
     useEffect(() => {
         getStores().then((stores) => {
             setListOfStores(stores);
-        }).catch((error) => {
+        }).catch(() => {
             console.error('Error loading stores');
         })
     }, []);
@@ -129,7 +126,7 @@ export const ShopTemplate = (): React.JSX.Element => {
             setProducts(data.products);
             setTotalPages(data.totalPages);
             setIsLoading(false);
-        }).catch((error) => {
+        }).catch(() => {
             console.error('Error loading products filtered');
         })
     }

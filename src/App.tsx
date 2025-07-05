@@ -1,5 +1,3 @@
-import './App.css';
-
 import {
   createHashRouter,
   RouterProvider,
@@ -17,7 +15,7 @@ const router = createHashRouter(
 
 function App() {
   return (
-    <main className="bg-slate-200	dark:bg-gray-900 min-h-screen " >
+    <main className="bg-slate-200	dark:bg-gray-900 min-h-screen" >
       <RouterProvider router={router} />
     </main>
   );

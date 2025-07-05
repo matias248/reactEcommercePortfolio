@@ -2,11 +2,8 @@ import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import { NavigationPath } from "./navigationPath";
 import { Header } from "./Header";
-import { NavigationRouterInterface, NavigationRouter } from "../routes/NavigationRouter";
+import { type NavigationRouterInterface, NavigationRouter } from "../routes/NavigationRouter";
 import { AppNames } from "../utils/constants";
-
-interface BaseTemplateProps {
-}
 
 export interface PathData {
     storeName: string | undefined, productName: string | undefined,
@@ -19,7 +16,7 @@ export interface ContextPathData {
 };
 
 
-export const BaseTemplate = (props: BaseTemplateProps): React.JSX.Element => {
+export const BaseTemplate = (): React.JSX.Element => {
 
     const [pathData, setPathData] = useState<PathData>();
     const navigationRouter: NavigationRouterInterface = NavigationRouter();

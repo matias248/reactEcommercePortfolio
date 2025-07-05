@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { AppNames } from '../constants';
-import { StoreDTO } from '../../models/Store';
-import { arrayCategoryType, arrayCurrencyType, arrayInventoryStatusType, currencyType, ProductDTO } from '../../models/Product';
-import { CartItemDTO } from '../../models/CartItem';
+import type { StoreDTO } from '../../models/Store';
+import { arrayCategoryType, arrayCurrencyType, arrayInventoryStatusType, currencyType, type ProductDTO } from '../../models/Product';
+import type { CartItemDTO } from '../../models/CartItem';
 import Decimal from 'decimal.js';
 
 export function useClickOutside(functionToDo: () => void) {

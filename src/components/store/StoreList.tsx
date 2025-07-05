@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { FixedButton } from "../../utils/sharedComponents/inputsComponentReactForms";
-import { ReactComponent as ImagePlaceholder } from "../../assets/images/iconImagePlaceholder.svg";
+import ImagePlaceholder  from "../../assets/images/iconImagePlaceholder.svg?react";
 import { useOutletContext } from "react-router-dom";
-import { StoreDTO } from "../../models/Store";
+import type { StoreDTO } from "../../models/Store";
 import { EditButton } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { getStores } from "../../services/storeService";
-import { ContextPathData } from "../BaseTemplate";
-import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
-import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
+import type { ContextPathData } from "../BaseTemplate";
+import { NavigationRouter, type NavigationRouterInterface } from "../../routes/NavigationRouter";
+import Spinner  from "../../assets/images/spinner.svg?react";
 
-
-interface StoreListProps {
-}
-
-export const StoreList = (props: StoreListProps): React.JSX.Element => {
+export const StoreList = (): React.JSX.Element => {
     const title = "List of stores";
     const navigationRouter: NavigationRouterInterface = NavigationRouter();
     const pathData: ContextPathData = useOutletContext();
@@ -26,7 +22,7 @@ export const StoreList = (props: StoreListProps): React.JSX.Element => {
             setStores(response);
             pathData.handlerPathData({ inProducts: false, inStores: true, storeName: undefined, productName: undefined, storeId: undefined, productId: undefined })
 
-        }).catch((error) => {
+        }).catch(() => {
             console.error('Error loading products');
         })
         setIsLoading(false)
@@ -59,7 +55,7 @@ interface StoreImageGalleryProps {
 
 const StoreImageGallery = (props: StoreImageGalleryProps): React.JSX.Element => {
     return (
-        <div id={"storeElementGallery" + props.store.id} className="h-56 w-128 md:w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative" onClick={props.onClick}>
+        <div id={"storeElementGallery" + props.store.id} className="h-56 md:w-56 bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-gray-800 dark:border-gray-700 relative" onClick={props.onClick}>
             <EditButton id={props.store.id + ""} styleOverride="absolute top-0 right-0" functionToDo={props.onClickToEdit} title={"Edit"} />
             <div id={"imageStoreGallery" + props.store.id} className="w-28 mt-5 mx-auto  h-16 ">
                 {props.store.imageUrl &&
@@ -75,10 +71,9 @@ const StoreImageGallery = (props: StoreImageGalleryProps): React.JSX.Element => 
                 <p id={"1textStoreGallery" + props.store.id} className="h-1/3 w-full text-xl font-bold text-gray-900 dark:text-white truncate leading-7 ">{props.store.name}</p>
                 <p id={"2textStoreGallery" + props.store.id} className="h-1/3 w-full text-sm text-gray-900 dark:text-white truncate leading-5">{props.store.address.city}</p>
                 <div className=" h-1/3 flex flex-row-reverse items-center overflow-hidden">
-                    <button onClick={(e) => { e.stopPropagation(); props.onClickToProductsListButton() }} id={"listOfProductsButton" + props.store.id} className="max-h-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">List of Products</button>
+                    <button onClick={(e) => { e.stopPropagation(); props.onClickToProductsListButton() }} id={"listOfProductsButton" + props.store.id} className="max-h-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-hidden focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">List of Products</button>
                 </div>
             </div>
-
         </div>
     );
 }

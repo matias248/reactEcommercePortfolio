@@ -30,18 +30,18 @@ describe('Product Form Test', () => {
 
         cy.get('[name="submitButton"]').click();
 
-        cy.get('[name="name"]').should('have.css', 'background-color', 'rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="price"]').should('have.css', 'background-color', 'rgb(254, 202, 202)').parent().should('contain', 'Only numbers allowed');
-        cy.get('textarea[name="description"]').should('have.css', 'background-color', 'rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 500');
+        cy.get('[name="name"]').should('have.css', 'background-color', 'oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="price"]').should('have.css', 'background-color', 'oklch(0.885 0.062 18.334)').parent().should('contain', 'Only numbers allowed');
+        cy.get('textarea[name="description"]').should('have.css', 'background-color', 'oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 500');
 
 
-        cy.get('[name="name"]').clear().should('have.css', 'background-color', 'rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="name"]').type('correct Name').should('have.css', 'background-color', 'rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 25');
+        cy.get('[name="name"]').clear().should('have.css', 'background-color', 'oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="name"]').type('correct Name').should('have.css', 'background-color', 'oklch(0.985 0.002 247.839)').parent().should('not.contain', 'The size should be between 0 and 25');
 
-        cy.get('[name="price"]').clear().should('have.css', 'background-color', 'rgb(254, 202, 202)').parent().should('contain', 'Only numbers allowed');
-        cy.get('[name="price"]').type('1,3').should('have.css', 'background-color', 'rgb(249, 250, 251)').parent().should('not.contain', 'Only numbers allowed');
+        cy.get('[name="price"]').clear().should('have.css', 'background-color', 'oklch(0.885 0.062 18.334)').parent().should('contain', 'Only numbers allowed');
+        cy.get('[name="price"]').type('1,3').should('have.css', 'background-color', 'oklch(0.985 0.002 247.839)').parent().should('not.contain', 'Only numbers allowed');
 
-        cy.get('textarea[name="description"]').clear().should('have.css', 'background-color', 'rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 500');
-        cy.get('textarea[name="description"]').type('correct state').should('have.css', 'background-color', 'rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 500');
+        cy.get('textarea[name="description"]').clear().should('have.css', 'background-color', 'oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 500');
+        cy.get('textarea[name="description"]').type('correct state').should('have.css', 'background-color', 'oklch(0.985 0.002 247.839)').parent().should('not.contain', 'The size should be between 0 and 500');
     })
 })

@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { EditButton, FixedButton } from "../../utils/sharedComponents/inputsComponentReactForms";
-import { ProductDTO } from "../../models/Product";
-import { ReactComponent as ImagePlaceholder } from "../../assets/images/iconImagePlaceholder.svg";
+import type { ProductDTO } from "../../models/Product";
+import  ImagePlaceholder  from "../../assets/images/iconImagePlaceholder.svg?react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { getProductsWithstore } from "../../services/productService";
-import { ContextPathData } from "../BaseTemplate";
-import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
+import type { ContextPathData } from "../BaseTemplate";
+import { NavigationRouter, type NavigationRouterInterface } from "../../routes/NavigationRouter";
 import { DisplayNotFound } from "../DisplayError";
-import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
+import  Spinner  from "../../assets/images/spinner.svg?react";
 
-
-
-interface ProductListProps {
-    products?: ProductDTO[];
-}
-
-export const ProductList = (props: ProductListProps): React.JSX.Element => {
+export const ProductList = (): React.JSX.Element => {
     const title = "List of products";
     const { storeId } = useParams();
     const [products, setProducts] = useState<ProductDTO[]>();
@@ -23,13 +17,12 @@ export const ProductList = (props: ProductListProps): React.JSX.Element => {
     const navigationRouter: NavigationRouterInterface = NavigationRouter();
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-
     useEffect(() => {
         getProductsWithstore(+(storeId ?? 0)).then((data) => {
             setProducts(data.products);
             pathData.handlerPathData({ inProducts: true, inStores: true, storeName: data.store.name, productName: undefined, storeId: data.store.id, productId: undefined })
 
-        }).catch((error) => {
+        }).catch(() => {
             console.error('Error loading products');
         })
         setIsLoading(false)
@@ -64,7 +57,7 @@ interface ProductImageGalleryProps {
 }
 export const ProductImageGallery = (props: ProductImageGalleryProps): React.JSX.Element => {
     return (
-        <div id={"productElementGallery" + props.product.id} className="h-56 w-128 md:w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative" onClick={() => props.onClick(props.product.id)}>
+        <div id={"productElementGallery" + props.product.id} className="h-56 md:w-56 bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-gray-800 dark:border-gray-700 relative" onClick={() => props.onClick(props.product.id)}>
             <EditButton id={props.product.id + ""} styleOverride="absolute top-0 right-0" functionToDo={props.onClickToEdit} title={"Edit"} />
 
             <div id={"imageProductGallery" + props.product.id} className="w-28 mt-5 mx-auto  h-16 ">

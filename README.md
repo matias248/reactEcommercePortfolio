@@ -13,9 +13,9 @@ Front-end:
 **
 npm i => install dependencies
 
-npm run start:local => static front-end data loaded / not persistent data (example:F5 restarts data)
+npm run dev => static front-end data loaded / not persistent data (example:F5 restarts data)
 
-npm run start => comunicate with backend for data (init backend first)
+npm run database => comunicate with backend for data (init backend first)
 
 **Back-end**
 

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { ProductDTO } from "../../models/Product";
-import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
-import { ReactComponent as ImagePlaceholder } from "../../assets/images/iconImagePlaceholder.svg";
+import { type ProductDTO } from "../../models/Product";
+import  Spinner  from "../../assets/images/spinner.svg?react";
+import ImagePlaceholder  from "../../assets/images/iconImagePlaceholder.svg?react";
 import { MinusPlusInput, NavigationInputs } from "../../utils/sharedComponents/inputsComponentReactForms";
-import { ReactComponent as CrossIcon } from "../../assets/images/crossIcon.svg";
+import  CrossIcon  from "../../assets/images/crossIcon.svg?react";
 import { getQuantityOfProductInCartShop, productDTOtoCartItemDTO } from "../../utils/sharedComponents/utilsFunctions";
-import { CartItemDTO } from "../../models/CartItem";
-
-
+import {type CartItemDTO}  from "../../models/CartItem";
 
 interface ShopProductListInterface {
     products: ProductDTO[] | undefined;
@@ -62,20 +60,20 @@ export const ShopProductImageGallery = (props: ProductImageGalleryProps): React.
     }
 
     return (
-        <div id={"ShopProductElementGallery" + props.cartItem.id} className="h-[18.75rem] min-w-64  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" >
+        <div id={"ShopProductElementGallery" + props.cartItem.id} className="h-75 min-w-64  bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-gray-800 dark:border-gray-700" >
 
             {!showDescription && <>
-                <div id={"ShopImageProductGallery" + props.cartItem.id} className="w-56 mt-[0.5rem] mx-auto  h-[7rem] ">
+                <div id={"ShopImageProductGallery" + props.cartItem.id} className="w-56 mt-2 mx-auto  h-28 ">
                     {props.cartItem.imageUrl &&
-                        <img className="h-[7rem] max-w-full rounded-lg object-cover mx-auto text-center dark:text-white" src={props.cartItem.imageUrl} alt="error loading image" />
+                        <img className="h-28 max-w-full rounded-lg object-cover mx-auto text-center dark:text-white" src={props.cartItem.imageUrl} alt="error loading image" />
                     }
                     {!props.cartItem.imageUrl &&
-                        <div id={"divNoImageSet" + props.cartItem.id} className="h-[7rem] max-w-full rounded-lg">
+                        <div id={"divNoImageSet" + props.cartItem.id} className="h-28 max-w-full rounded-lg">
                             <ImagePlaceholder />
                         </div>
                     }
                 </div>
-                <div id={`textShopProductGallery${props.cartItem.id}`} className="mt-[0.5rem] max-w-full h-[6rem] mx-1 text-center overflow-auto">
+                <div id={`textShopProductGallery${props.cartItem.id}`} className="mt-2 max-w-full h-24 mx-1 text-center overflow-auto">
                     <div id={`1textShopProductGallery${props.cartItem.id}`} className="w-full">
                         <div className=" text-2xl font-bold text-gray-900 dark:text-white  leading-8 whitespace-nowrap">{props.cartItem.name}</div>
                     </div>
@@ -85,21 +83,21 @@ export const ShopProductImageGallery = (props: ProductImageGalleryProps): React.
                         </p>
                     </div>
                     <div className="flex flex-row-reverse items-center  max-[1040px]:justify-center" onClick={() => { setshowDescription(!showDescription) }}>
-                        <button id={"learnMore" + props.cartItem.id} className=" text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Learn more</button>
+                        <button id={"learnMore" + props.cartItem.id} className=" text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-hidden focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Learn more</button>
                     </div>
                 </div>
                 <div>
-                    <div className=" h-[4rem] flex justify-center items-center rounded-lg">
+                    <div className=" h-16 flex justify-center items-center rounded-lg">
                         <MinusPlusInput modifyValue={wrapperchangeQuantityInCartShop} value={props.cartItem.quantity} title={""} id={"minusPlusProductItem" + props.cartItem.id} />
                     </div>
                 </div>
 
             </>}
             {showDescription && <>
-                <div id={"descriptionProductCrossIcon" + props.cartItem.id} className="size-[3rem] " onClick={() => { setshowDescription(!showDescription) }}>
+                <div id={"descriptionProductCrossIcon" + props.cartItem.id} className="size-12 " onClick={() => { setshowDescription(!showDescription) }}>
                     <CrossIcon className="dark:fill-white" />
                 </div>
-                <div id={"descriptionProductText" + props.cartItem.id} className="dark:text-white overflow-y-auto  h-[15.25rem] mx-1">{props.cartItem.description} </div>
+                <div id={"descriptionProductText" + props.cartItem.id} className="dark:text-white overflow-y-auto  h-61 mx-1">{props.cartItem.description} </div>
             </>
             }
         </div>

@@ -1,5 +1,4 @@
-import { StoreDTO } from "../models/Store";
-import { currentProducts } from "./Products";
+import { type StoreDTO } from "../models/Store";
 
 export const currentStores:StoreDTO[] =[
     {
@@ -17,7 +16,7 @@ export const currentStores:StoreDTO[] =[
             longitude:2,
         },
         contactPhone: "+33 123456",
-        imageUrl:process.env.PUBLIC_URL+"/store1.jpeg"
+        imageUrl:import.meta.env.VITE_APP_URL_API+"/store1.jpeg"
     },
     {
         id: 2,
@@ -34,7 +33,7 @@ export const currentStores:StoreDTO[] =[
             longitude:2,
         },
         contactPhone: "+33 123456",
-        imageUrl:process.env.PUBLIC_URL+"/store2.jpeg"
+        imageUrl:import.meta.env.VITE_APP_URL_API+"/store2.jpeg"
     },
     
 ]

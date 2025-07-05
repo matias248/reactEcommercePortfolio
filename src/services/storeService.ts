@@ -1,14 +1,14 @@
-import { StoreDTO } from '../models/Store';
-import axios, { AxiosResponse } from 'axios';
-import { currentStores } from '../LocalData/Stores';
-import { currentProducts } from '../LocalData/Products';
+import type { StoreDTO } from '../models/Store';
+import axios, { type AxiosResponse } from 'axios';
+import { currentStores } from '../localData/Stores';
+import { currentProducts } from '../localData/Products';
 import { filterStores, getNextId } from '../utils/sharedComponents/utilsFunctions';
 
-const url = process.env.REACT_APP_URL_API ?? "";
+const url = import.meta.env.VITE_APP_URL_API ?? "";
 
 export const getStores = async (): Promise<StoreDTO[]> => {
-
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
+        
         return currentStores;
     }
     try {
@@ -21,7 +21,7 @@ export const getStores = async (): Promise<StoreDTO[]> => {
 
 export const getStoresFilteredByNameCityCodeZip = async (text: string): Promise<StoreDTO[]> => {
 
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         return filterStores(currentStores, text);
     }
     try {
@@ -33,7 +33,7 @@ export const getStoresFilteredByNameCityCodeZip = async (text: string): Promise<
 };
 
 export const getStoreById = async (storeId: number): Promise<StoreDTO> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         const store: StoreDTO | undefined = currentStores.find((store) => { return store.id === storeId });
         if (store)
             return Promise.resolve(store);
@@ -52,7 +52,7 @@ export const getStoreById = async (storeId: number): Promise<StoreDTO> => {
 
 
 export const updateStoreById = async (storeId: number, updateData: StoreDTO): Promise<StoreDTO> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         const id: number = currentStores.findIndex((store) => { return store.id === storeId });
         if (id !== -1) {
             currentStores[id] = updateData;
@@ -71,7 +71,7 @@ export const updateStoreById = async (storeId: number, updateData: StoreDTO): Pr
 };
 
 export const deleteStoreById = async (storeId: number): Promise<StoreDTO> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         const id: number = currentStores.findIndex((store) => { return store.id === storeId });
         if (id !== -1) {
             const storeDeleted = currentStores[id];
@@ -96,7 +96,7 @@ export const deleteStoreById = async (storeId: number): Promise<StoreDTO> => {
 };
 
 export const createStoreById = async (data: StoreDTO): Promise<StoreDTO> => {
-    if (process.env.REACT_APP_ENV === "test") {
+    if (import.meta.env.VITE_APP_ENV === "test") {
         let storeToSet = data;
         storeToSet.id = getNextId(currentStores)
         currentStores.push(data);

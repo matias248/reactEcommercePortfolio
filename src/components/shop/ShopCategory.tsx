@@ -1,6 +1,6 @@
 import React from "react";
-import { ReactComponent as CrossIcon } from "../../assets/images/crossIcon.svg";
-import { ReactComponent as VerifyIcon } from "../../assets/images/verifyIcon.svg";
+import  CrossIcon  from "../../assets/images/crossIcon.svg?react";
+import  VerifyIcon  from "../../assets/images/verifyIcon.svg?react";
 
 interface ShopCategoryListInterface {
     updateFilterCategoryMap: (key: string, value: boolean) => void;

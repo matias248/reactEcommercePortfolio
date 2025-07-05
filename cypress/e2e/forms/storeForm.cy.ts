@@ -66,38 +66,38 @@ describe('Store Form Test', () => {
     
         cy.get('[name="submitButton"]').click();
 
-        cy.get('[name="name"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="address.city"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="address.state"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="address.zipCode"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="address.streetNumber"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'Only numbers allowed');
-        cy.get('[name="location.latitude"]').should('have.css', 'background-color','rgb(254, 202, 202)');
-        cy.get('[name="location.longitude"]').should('have.css', 'background-color','rgb(254, 202, 202)');
-        cy.get('[name="address.streetName"]').should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 500');
+        cy.get('[name="name"]').should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.city"]').should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.state"]').should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.zipCode"]').should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.streetNumber"]').should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'Only numbers allowed');
+        cy.get('[name="location.latitude"]').should('have.css', 'background-color','oklch(0.885 0.062 18.334)');
+        cy.get('[name="location.longitude"]').should('have.css', 'background-color','oklch(0.885 0.062 18.334)');
+        cy.get('[name="address.streetName"]').should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 500');
         
-        cy.get('[name="name"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="name"]').type('correct Name').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 25');
+        cy.get('[name="name"]').clear().should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="name"]').type('correct Name').should('have.css', 'background-color','oklch(0.985 0.002 247.839)').parent().should('not.contain', 'The size should be between 0 and 25');
 
-        cy.get('[name="address.city"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="address.city"]').type('correct city').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.city"]').clear().should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.city"]').type('correct city').should('have.css', 'background-color','oklch(0.985 0.002 247.839)').parent().should('not.contain', 'The size should be between 0 and 25');
      
-        cy.get('[name="address.state"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="address.state"]').type('correct state').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.state"]').clear().should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.state"]').type('correct state').should('have.css', 'background-color','oklch(0.985 0.002 247.839)').parent().should('not.contain', 'The size should be between 0 and 25');
 
-        cy.get('[name="address.zipCode"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 25');
-        cy.get('[name="address.zipCode"]').type('correct state').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.zipCode"]').clear().should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 25');
+        cy.get('[name="address.zipCode"]').type('correct state').should('have.css', 'background-color','oklch(0.985 0.002 247.839)').parent().should('not.contain', 'The size should be between 0 and 25');
 
-        cy.get('[name="address.streetNumber"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'Only numbers allowed');
-        cy.get('[name="address.streetNumber"]').type('1').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'Only numbers allowed');
+        cy.get('[name="address.streetNumber"]').clear().should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'Only numbers allowed');
+        cy.get('[name="address.streetNumber"]').type('1').should('have.css', 'background-color','oklch(0.985 0.002 247.839)').parent().should('not.contain', 'Only numbers allowed');
 
-        cy.get('[name="address.streetName"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent().should('contain', 'The size should be between 0 and 500');
-        cy.get('[name="address.streetName"]').type('street Name').should('have.css', 'background-color','rgb(249, 250, 251)').parent().should('not.contain', 'The size should be between 0 and 500');
+        cy.get('[name="address.streetName"]').clear().should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent().should('contain', 'The size should be between 0 and 500');
+        cy.get('[name="address.streetName"]').type('street Name').should('have.css', 'background-color','oklch(0.985 0.002 247.839)').parent().should('not.contain', 'The size should be between 0 and 500');
         
-        cy.get('[name="location.latitude"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent()
-        cy.get('[name="location.latitude"]').type('1').should('have.css', 'background-color','rgb(249, 250, 251)').parent()
+        cy.get('[name="location.latitude"]').clear().should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent()
+        cy.get('[name="location.latitude"]').type('1').should('have.css', 'background-color','oklch(0.985 0.002 247.839)').parent()
 
-        cy.get('[name="location.longitude"]').clear().should('have.css', 'background-color','rgb(254, 202, 202)').parent()
-        cy.get('[name="location.longitude"]').type('1').should('have.css', 'background-color','rgb(249, 250, 251)').parent()
+        cy.get('[name="location.longitude"]').clear().should('have.css', 'background-color','oklch(0.885 0.062 18.334)').parent()
+        cy.get('[name="location.longitude"]').type('1').should('have.css', 'background-color','oklch(0.985 0.002 247.839)').parent()
     })
 
 })

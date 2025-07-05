@@ -1,7 +1,7 @@
-import { CartItemDTO } from "../../models/CartItem";
-import { ReactComponent as ImagePlaceholder } from "../../assets/images/iconImagePlaceholder.svg";
+import type { CartItemDTO } from "../../models/CartItem";
+import  ImagePlaceholder  from "../../assets/images/iconImagePlaceholder.svg?react";
 import { MinusPlusInput } from "../../utils/sharedComponents/inputsComponentReactForms";
-import { ReactComponent as CrossIcon } from "../../assets/images/crossIcon.svg";
+import  CrossIcon  from "../../assets/images/crossIcon.svg?react";
 import { getTotalPriceCart } from "../../utils/sharedComponents/utilsFunctions";
 import { motion } from "framer-motion";
 
@@ -13,16 +13,13 @@ interface ShopCartInterface {
 }
 
 export const ShopCart = (props: ShopCartInterface) => {
-
     const totalPriceCart = getTotalPriceCart(props.cart ?? []);
-
-
     return (<>
         <motion.div initial={{ x: '+100%' }}
         animate={{ x: 0 }}
         exit={{x:'+100%'}}
-        transition={{ duration: 0.6 }} className="fixed h-[100dvh] bg-gray-300 dark:bg-gray-500 top-0 right-0 max-[460px]:w-[60%] w-[40%] md:w-[30%] z-10 rounded-l-lg flex flex-col gap-1 px-2 ">
-            <div id="crossShopCart" className="size-[2.5rem] relative -left-1" onClick={() => { props.handlerCartListVisble(false) }}>
+        transition={{ duration: 0.6 }} className="fixed h-dvh bg-gray-300 dark:bg-gray-500 top-0 right-0 max-[460px]:w-[60%] w-[40%] md:w-[30%] z-10 rounded-l-lg flex flex-col gap-1 px-2 ">
+            <div id="crossShopCart" className="size-10 relative -left-1" onClick={() => { props.handlerCartListVisble(false) }}>
                 <CrossIcon className="dark:fill-white" />
             </div>
             <div className="dark:text-white font-bold self-center  text-xl ">Cart shop</div>
@@ -42,10 +39,8 @@ export const ShopCart = (props: ShopCartInterface) => {
 
 
 const ShopCartInputList = (props: { cartItems: CartItemDTO[] | undefined, changeQuantityInCartShop: (shopItem: CartItemDTO, quantity: number) => void }) => {
-
-
     return (
-        <div className="flex flex-col gap-1  overflow-auto h-[100%]  ">
+        <div className="flex flex-col gap-1 overflow-auto h-full  ">
             {props.cartItems && props.cartItems.map((currentValue) => {
                 return <ShopCartInputItem cartItem={currentValue} key={currentValue.id} changeQuantityInCartShop={props.changeQuantityInCartShop} />
             })}
@@ -65,8 +60,8 @@ const ShopCartInputItem = (props: {
     }
 
     return (
-        <div id={"ShopCartItem" + props.cartItem.id} className={"h-[13.75rem] w-full min-w-128 md:min-w-56 bg-white  rounded-lg shadow dark:bg-gray-800  p-1 "}>
-            <div id={"ShopCartItemImage" + props.cartItem.id} className="size-[4.5rem] mt-[0.5rem] mx-auto ">
+        <div id={"ShopCartItem" + props.cartItem.id} className={"h-55 w-full md:min-w-56 bg-white  rounded-lg shadow-xs dark:bg-gray-800  p-1 "}>
+            <div id={"ShopCartItemImage" + props.cartItem.id} className="size-18 mt-2 mx-auto ">
 
                 {props.cartItem.imageUrl &&
                     <img className="h-full max-w-full rounded-lg object-cover mx-auto text-center dark:text-white" src={props.cartItem.imageUrl} alt="error loading image" />
@@ -77,7 +72,7 @@ const ShopCartInputItem = (props: {
                     </div>
                 }
             </div>
-            <div id={`textShopCart${props.cartItem.id}`} className="mt-[0.5rem] max-w-full h-[3.5rem] mx-1 text-center overflow-auto ">
+            <div id={`textShopCart${props.cartItem.id}`} className="mt-2 max-w-full h-14 mx-1 text-center overflow-auto ">
                 <div id={`1textShopCartItem${props.cartItem.id}`} className="w-full ">
                     <div className=" text-xl font-bold text-gray-900 dark:text-white  leading-7 whitespace-nowrap">{props.cartItem.name}</div>
                 </div>
@@ -88,7 +83,7 @@ const ShopCartInputItem = (props: {
                 </div>
             </div>
             <div>
-                <div className=" h-[4rem] flex justify-center items-center rounded-lg">
+                <div className=" h-16 flex justify-center items-center rounded-lg">
                     <MinusPlusInput modifyValue={wrapperchangeQuantityInCartShop} value={props.cartItem.quantity} title={""} id={"minusPlusCartItem" + props.cartItem.id} />
                 </div>
             </div>
@@ -98,6 +93,6 @@ const ShopCartInputItem = (props: {
 
 
 export const ShopButtonConfirm = (props: { functionToDo: () => void, title: string, styleOverride: string }): React.JSX.Element => {
-    return <button name="confirmDialogShopButton" onClick={props.functionToDo} className={" bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 dark:text-white " + (props.styleOverride ?? "")}>{props.title}</button>
+    return <button name="confirmDialogShopButton" onClick={props.functionToDo} className={" bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-hidden focus:ring-blue-300 font-medium rounded-lg text-lg w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 dark:text-white " + (props.styleOverride ?? "")}>{props.title}</button>
 }
 

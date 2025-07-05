@@ -1,40 +1,31 @@
 import { useOutletContext, useParams } from "react-router-dom";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { CancelButton, DeleteButton, InputOfStringForm, InputOfUrlImagesForm, InputSwitchForm, ValidateButton } from "../../utils/sharedComponents/inputsComponentReactForms";
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { CancelButton, DeleteButton, InputOfStringForm, InputOfUrlImagesForm, ValidateButton } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { DESCRIPTION_RESTRICTION, descriptionRestrictionMessage, NAME_RESTRICTION, nameRestrictionMessage, onlyNumbersRestrictionMessage, REGEX } from "../../utils/constants";
-import { StoreDTO } from "../../models/Store";
+import type { StoreDTO } from "../../models/Store";
 import { useEffect, useState } from "react";
 import { createStoreById, deleteStoreById, getStoreById, updateStoreById } from "../../services/storeService";
 import { replaceTextNumberPerNumber } from "../../utils/sharedComponents/utilsFunctions";
-import { ContextPathData } from "../BaseTemplate";
-import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
+import type { ContextPathData } from "../BaseTemplate";
+import { NavigationRouter, type NavigationRouterInterface } from "../../routes/NavigationRouter";
 import { DisplayNotFound } from "../DisplayError";
-import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
-
-
-
-interface StoreFormProps {
-
-}
+import  Spinner  from "../../assets/images/spinner.svg?react";
 
 const setValuesOfTheInputs = (storeId: number, functionToDo: (store: StoreDTO) => void) => {
   getStoreById(storeId).then((response) => {
     functionToDo(response);
-  }).catch((error) => {
+  }).catch(() => {
     console.error('Error loading store');
   })
 }
 
-export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
+export const StoreForm = (): React.JSX.Element => {
   const { storeId } = useParams();
   const [store, setStore] = useState<StoreDTO>();
-
   const title = storeId !== undefined ? "Edit the store" : "Create a new store";
   const pathData: ContextPathData = useOutletContext();
   const navigationRouter: NavigationRouterInterface = NavigationRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-
 
   const {
     register,
@@ -60,34 +51,32 @@ export const StoreForm = (props: StoreFormProps): React.JSX.Element => {
 
   const onSubmit: SubmitHandler<StoreDTO> = (data) => {
     if (storeId !== "new" && !isNaN(+(storeId ?? NaN))) {
-      updateStoreById(+(storeId ?? 0), data).then((data) => {
+      updateStoreById(+(storeId ?? 0), data).then(() => {
 
         navigationRouter.goToFappListOfStores();
 
-      }).catch((error) => {
+      }).catch(() => {
         console.error('Error when update');
       })
     }
     else {
-      createStoreById(data).then((data) => {
+      createStoreById(data).then(() => {
         navigationRouter.goToFappListOfStores();
 
-      }).catch((error) => {
+      }).catch(() => {
         console.error('Error when create');
       })
     }
   }
 
   const deleteStore = () => {
-    deleteStoreById(+(storeId ?? 0)).then((data) => {
+    deleteStoreById(+(storeId ?? 0)).then(() => {
       navigationRouter.goToFappListOfStores();
-    }).catch((error) => {
+    }).catch(() => {
       console.log("Error when delete")
     })
 
   }
-
-
 
   return <>
     {!isLoading && store &&

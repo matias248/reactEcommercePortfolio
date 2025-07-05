@@ -1,41 +1,31 @@
 import { useOutletContext, useParams } from "react-router-dom";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { CancelButton, DeleteButton, InputOfNumberForm, InputOfStringForm, InputOfUrlImagesForm, InputSwitchForm, ValidateButton } from "../../utils/sharedComponents/inputsComponentReactForms";
 import { DESCRIPTION_RESTRICTION, descriptionRestrictionMessage, NAME_RESTRICTION, nameRestrictionMessage, onlyNumbersRestrictionMessage, REGEX } from "../../utils/constants";
 import { useEffect, useState } from "react";
-import { arrayCategoryType, arrayCurrencyType, arrayInventoryStatusType, ProductDTO } from "../../models/Product";
+import { arrayCategoryType, arrayCurrencyType, arrayInventoryStatusType, type ProductDTO } from "../../models/Product";
 import { createProductById, deleteProductById, getProductByIdWithstore, updateProductById } from "../../services/productService";
 import { replaceTextNumberPerNumber } from "../../utils/sharedComponents/utilsFunctions";
-import { ContextPathData } from "../BaseTemplate";
-import { StoreDTO } from "../../models/Store";
-import { NavigationRouter, NavigationRouterInterface } from "../../routes/NavigationRouter";
+import type { ContextPathData } from "../BaseTemplate";
+import type { StoreDTO } from "../../models/Store";
+import { NavigationRouter, type NavigationRouterInterface } from "../../routes/NavigationRouter";
 import { DisplayNotFound } from "../DisplayError";
-import { ReactComponent as Spinner } from "../../assets/images/spinner.svg";
-
-
-interface ProductFormProps {
-
-}
-
-
+import  Spinner  from "../../assets/images/spinner.svg?react";
 
 const setValuesOfTheInputs = (storeId: number, productId: number, functionToDo: (data: { store: StoreDTO, product: ProductDTO }) => void) => {
-
-    getProductByIdWithstore(storeId, productId).then((data) => {
+    getProductByIdWithstore(storeId, productId).then((data: { store: StoreDTO; product: ProductDTO; }) => {
         functionToDo(data);
-    }).catch((error) => {
+    }).catch(() => {
         console.error('Error loading products');
     })
-
 }
 
-export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
+export const ProductForm = (): React.JSX.Element => {
     const { storeId, productId } = useParams();
     const [product, setProduct] = useState<ProductDTO>();
     const pathData: ContextPathData = useOutletContext();
     const navigationRouter: NavigationRouterInterface = NavigationRouter();
     const [isLoading, setIsLoading] = useState<boolean>(true);
-
 
     useEffect(() => {
         if (productId !== "new" && !isNaN(+(productId ?? NaN))) {
@@ -63,21 +53,18 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
 
     const onSubmit: SubmitHandler<ProductDTO> = (data) => {
         if (productId !== "new" && !isNaN(+(productId ?? NaN))) {
-
-            updateProductById(+(storeId ?? 0), +(productId ?? 0), data).then((data) => {
-
+            updateProductById(+(storeId ?? 0), +(productId ?? 0), data).then(() => {
                 navigationRouter.goToFappListOfProducts(storeId ? +storeId : -1);
-
-            }).catch((error) => {
+            }).catch(() => {
                 console.error('Error when update');
             })
         }
         else {
-            createProductById(+(storeId ?? 0), data).then((data) => {
+            createProductById(+(storeId ?? 0), data).then(() => {
 
                 navigationRouter.goToFappListOfProducts(storeId ? +storeId : -1);
 
-            }).catch((error) => {
+            }).catch(() => {
                 console.error('Error when create');
             })
         }
@@ -85,9 +72,9 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
     }
 
     const deleteProduct = () => {
-        deleteProductById(+(storeId ?? 0), +(productId ?? 0)).then((data) => {
+        deleteProductById(+(storeId ?? 0), +(productId ?? 0)).then(() => {
             navigationRouter.goToFappListOfProducts(storeId ? +storeId : -1);
-        }).catch((error) => {
+        }).catch(() => {
             console.log("Error when delete")
         })
 
@@ -105,7 +92,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                     <InputOfStringForm numberOfLines={4} reactFormProps={{ ...register("description", { required: true, maxLength: DESCRIPTION_RESTRICTION, setValueAs: (value: string) => value.trim() }) }} title={"Description"} errorShouldDisplay={errors.description ? true : false} required={true} helpText={descriptionRestrictionMessage} />
                     <div className="flex gap-4 ">
                         <InputOfNumberForm reactFormProps={{ ...register("price", { required: true, pattern: REGEX.NUMBERS_DOTS_COMMAS, setValueAs: (value: string) => replaceTextNumberPerNumber(value) }) }} title={"Price"} errorShouldDisplay={errors.price ? true : false} required={true} helpText={onlyNumbersRestrictionMessage} />
-                        <InputSwitchForm options={arrayCurrencyType} optionSelected={watch("currency")} reactFormProps={{ ...register("currency", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Currency"} styleOverride="text-center h-[2.875rem] min-w-[50px]" />
+                        <InputSwitchForm options={arrayCurrencyType} optionSelected={watch("currency")} reactFormProps={{ ...register("currency", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Currency"} styleOverride="text-center h-11.5 min-w-[50px]" />
                     </div>
                     <InputSwitchForm options={arrayCategoryType} optionSelected={watch("category")} reactFormProps={{ ...register("category", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Category"} />
                     <InputSwitchForm options={arrayInventoryStatusType} optionSelected={watch("inventoryStatus")} reactFormProps={{ ...register("inventoryStatus", { required: true, setValueAs: (value: string) => value.trim() }) }} title={"Inventory status"} />
@@ -113,7 +100,7 @@ export const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                         <DeleteButton functionToDo={() => deleteProduct()} title={"Delete Product"}></DeleteButton>
                     </div>}
                     <div className="grid md:grid-cols-2 md:gap-28 gap-4 mt-4 mx-auto md:w-80 min-h-14 ">
-                        <ValidateButton functionToDo={() => { console.log(handleSubmit) }} title={"Submit"} />
+                        <ValidateButton functionToDo={() => {  }} title={"Submit"} />
                         <CancelButton functionToDo={() => navigationRouter.goToFappListOfProducts(storeId ? +storeId : -1)} title={"Cancel"} />
                     </div>
                 </form>
