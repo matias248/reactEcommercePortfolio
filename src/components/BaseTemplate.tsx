@@ -3,7 +3,7 @@ import { useState } from "react";
 import { NavigationPath } from "./navigationPath";
 import { Header } from "./Header";
 import { type NavigationRouterInterface, NavigationRouter } from "../routes/NavigationRouter";
-import { AppNames } from "../utils/constants";
+import { AppNames,type AppNamesType } from "../utils/constants";
 
 export interface PathData {
     storeName: string | undefined, productName: string | undefined,
@@ -20,7 +20,7 @@ export const BaseTemplate = (): React.JSX.Element => {
 
     const [pathData, setPathData] = useState<PathData>();
     const navigationRouter: NavigationRouterInterface = NavigationRouter();
-    const currentRoute: AppNames | undefined = navigationRouter.currentRoute();
+    const currentRoute: AppNamesType | undefined = navigationRouter.currentRoute();
 
     const handlerPathData = (pathData: PathData) => {
         setPathData(pathData)

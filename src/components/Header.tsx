@@ -2,7 +2,7 @@ import  EcIcon  from "../assets/images/ecPortofolio.svg?react";
 import  ShopIcon  from "../assets/images/shopIcon.svg?react";
 import  FormIcon  from "../assets/images/formIcon.svg?react";
 import { NavigationRouter, type NavigationRouterInterface } from "../routes/NavigationRouter";
-import { AppNames } from "../utils/constants";
+import { AppNames, type AppNamesType } from "../utils/constants";
 
 interface HeaderInterface {
     resetPathData: () => void;
@@ -10,7 +10,7 @@ interface HeaderInterface {
 
 export const Header = (props: HeaderInterface) => {
     const navigationRouter: NavigationRouterInterface = NavigationRouter();
-    const currentRoute: AppNames | undefined = navigationRouter.currentRoute();
+    const currentRoute: AppNamesType | undefined = navigationRouter.currentRoute();
     
     return (
         <header className="h-[64px] mb-8">

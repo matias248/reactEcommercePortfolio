@@ -19,11 +19,13 @@ export const titleStyle = {
     fontSize: "2.5rem", marginBottom: "100px"
 }
 
-export enum AppNames {
-    FORMS = 'Forms',
-    SHOP = 'Shop',
-    FINANCE = 'Finance',
-};
+
+export const AppNames = {
+   FORMS: 'Forms',
+   SHOP: 'Shop',
+   FINANCE: 'Finance',
+}
+export type AppNamesType =   typeof  AppNames[keyof typeof AppNames];
 
 export const nameRestrictionMessage = "The size should be between 0 and " + NAME_RESTRICTION
 

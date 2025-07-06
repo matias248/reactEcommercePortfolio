@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AppNames } from '../constants';
+import { AppNames, type AppNamesType } from '../constants';
 import type { StoreDTO } from '../../models/Store';
 import { arrayCategoryType, arrayCurrencyType, arrayInventoryStatusType, currencyType, type ProductDTO } from '../../models/Product';
 import type { CartItemDTO } from '../../models/CartItem';
@@ -115,7 +115,7 @@ export function getNextId(array: { id: number }[]) {
 }
 
 
-export const getCurrentApp = (pathName: string): AppNames | undefined => {
+export const getCurrentApp = (pathName: string): AppNamesType | undefined => {
     if (pathName.startsWith("/stores")) {
         return AppNames.FORMS
     }

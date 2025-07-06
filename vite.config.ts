@@ -5,7 +5,8 @@ import svgr from "vite-plugin-svgr";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [tailwindcss(),svgr()],
+  plugins: [tailwindcss(), svgr()],
+  base: "/reactEcommercePortfolio/",
   test: {
     exclude: [
       '**/node_modules/**',

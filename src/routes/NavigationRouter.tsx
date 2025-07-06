@@ -1,7 +1,7 @@
-import {  useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getUrlProductList, getUrlStoreList } from "./RoutesConfigs";
 import { getCurrentApp } from "../utils/sharedComponents/utilsFunctions";
-import { AppNames } from "../utils/constants";
+import { type AppNamesType } from "../utils/constants";
 
 export interface NavigationRouterInterface {
     goToFappProduct: (idProduct: number, storeId: number) => void;
@@ -14,7 +14,7 @@ export interface NavigationRouterInterface {
     goToFappCreationStore: () => void;
     goToFiapp: () => void;
     goToShapp: () => void;
-    currentRoute: () => AppNames | undefined;
+    currentRoute: () => AppNamesType | undefined;
 }
 
 export const NavigationRouter = (): NavigationRouterInterface => {

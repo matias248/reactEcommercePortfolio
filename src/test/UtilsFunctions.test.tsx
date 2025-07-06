@@ -1,15 +1,15 @@
-import { AppNames } from "../utils/constants"
+import { AppNames, type AppNamesType } from "../utils/constants"
 import { calculateTotalPages, filterStores, getCurrentApp, getPaginatedItems, joinArrayWithComma } from "../utils/sharedComponents/utilsFunctions"
 import { currentStores } from '../localData/Stores';
 import { expect, test ,describe} from 'vitest'
 
 describe('Test getCurrentApp', () => {
     test('forms ', () => {
-        const currentApp: AppNames | undefined = getCurrentApp("/stores");
-        const currentApp2: AppNames | undefined = getCurrentApp("/stores/1");
-        const currentApp3: AppNames | undefined = getCurrentApp("/stores/1/products");
-        const currentApp4: AppNames | undefined = getCurrentApp("/stores/1/products/1");
-        //const currentApp5: AppNames | undefined = getCurrentApp("/finance/stores/1/products/1");
+        const currentApp: AppNamesType | undefined = getCurrentApp("/stores");
+        const currentApp2: AppNamesType | undefined = getCurrentApp("/stores/1");
+        const currentApp3: AppNamesType | undefined = getCurrentApp("/stores/1/products");
+        const currentApp4: AppNamesType | undefined = getCurrentApp("/stores/1/products/1");
+        //const currentApp5: AppNamesType | undefined = getCurrentApp("/finance/stores/1/products/1");
 
 
         expect(currentApp).toBe(AppNames.FORMS)
@@ -20,16 +20,16 @@ describe('Test getCurrentApp', () => {
 
     })
    /* it('finance ', () => {
-        const currentApp: AppNames | undefined = getCurrentApp("/finance");
-        const currentApp2: AppNames | undefined = getCurrentApp("/stores/finance");
+        const currentApp: AppNamesType | undefined = getCurrentApp("/finance");
+        const currentApp2: AppNamesType | undefined = getCurrentApp("/stores/finance");
 
         expect(currentApp).toBe(AppNames.FINANCE)
         expect(currentApp2).toBe(AppNames.FORMS)
 
     })*/
     test('shop ', () => {
-        const currentApp: AppNames | undefined = getCurrentApp("/shop");
-        const currentApp2: AppNames | undefined = getCurrentApp("/stores/finance");
+        const currentApp: AppNamesType | undefined = getCurrentApp("/shop");
+        const currentApp2: AppNamesType | undefined = getCurrentApp("/stores/finance");
 
         expect(currentApp).toBe(AppNames.SHOP )
         expect(currentApp2).toBe(AppNames.FORMS)
