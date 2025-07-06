@@ -65,27 +65,3 @@ export const AppRoute = [
     ]
   },
 ];
-/*
- {
-        path: "shop",
-        element: <ShopTemplate />,
-      },
-      {
-        path: "/stores/:storeId/products/:productId",
-        element: <ProductDetailPage />,
-        errorElement: <ErrorPage />,
-      },
-
-    {
-        path: "/stores/:storeId/products",
-        element: <ProductList></ProductList>,
-      },
-      {
-        path: "/stores/:storeId/products/:productId/edit",
-        element: <ProductForm />, errorElement: <ErrorPage />,
-      },
-      {
-        path: "/stores/:storeId/products/new",
-        element: <ProductForm />, errorElement: <ErrorPage />,
-      },
-*/
