@@ -7,6 +7,7 @@ import { DisplayNotFound } from "../DisplayError";
 import Spinner from "../../assets/images/spinner.svg?react";
 import { getStoreById } from "../../services/storeService";
 import { formatString } from "../../utils/sharedComponents/utilsFunctions";
+import React from "react";
 
 const setValuesOfTheInputs = (storeId: number, functionToDo: (store: StoreDTO) => void) => {
     getStoreById(storeId).then((response) => {
@@ -52,7 +53,7 @@ export const StoreDetailPage = (): React.JSX.Element => {
                             return StoresKeysToNotDisplayInDetails.every((productKey: string) => { return productKey !== element[0] })
 
                         }).map((element,index) => {
-                            return <>
+                            return <React.Fragment key={index+"_"+index}>
                                 {typeof element[1] !== 'object' && <>
                                     <li key={index} id={"displayStoreElement"+index} className="flex justify-between border-gray-200 border rounded-lg shadow-xs bg-slate-400 dark:bg-gray-500 dark:border-gray-700 gap-2 margin-top-2">
                                         <div id={"displayStoreElement"+index+"key"} className="bg-slate-300 dark:bg-gray-600 rounded-l-lg px-1 w-1/2 overflow-y-auto ">{formatString(element[0])}</div>
@@ -71,7 +72,7 @@ export const StoreDetailPage = (): React.JSX.Element => {
                                     }
 
                                 </>}
-                            </>
+                            </React.Fragment>
                         })
                         }
                     </ul>
