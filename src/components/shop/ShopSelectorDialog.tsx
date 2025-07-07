@@ -1,16 +1,16 @@
-import { forwardRef, useState } from "react";
+import { useState } from "react";
 import type { StoreDTO } from "../../models/Store";
 import { SearchBar } from "./SearchBar";
 import LocationIcon  from "../../assets/images/locationIcon.svg?react";
 import { motion } from "framer-motion"
 
 interface shopSelectorDialog {
-    storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined, handlerSelectedInput: (store: StoreDTO) => void, handlerShopTextFilter: (text: string) => void, shopTextFilter: string, updadeStoresByFilter: () => void,
+    storesList: StoreDTO[] | undefined, selectedStore: StoreDTO | undefined, handlerSelectedInput: (store: StoreDTO) => void, handlerShopTextFilter: (text: string) => void, shopTextFilter: string, updadeStoresByFilter: () => void,ref: React.RefObject<HTMLDivElement | null>
 }
 
 export type Ref = HTMLDivElement;
 
-export const ShopSelectorDialog = forwardRef<Ref, shopSelectorDialog>((props: shopSelectorDialog, ref) => {
+export const ShopSelectorDialog = ((props: shopSelectorDialog) => {
     const [shopSelectedTemporal, setShopSelectedTemporal] = useState<StoreDTO>();
 
     const handlerStoreSelected = (store: StoreDTO) => {
@@ -20,7 +20,7 @@ export const ShopSelectorDialog = forwardRef<Ref, shopSelectorDialog>((props: sh
     return (<motion.div initial={{ x: '-100%' }}
         animate={{ x: 0 }}
         exit={{x:'-100%'}}
-        transition={{ duration: 0.6 }} ref={ref} className="fixed h-dvh bg-gray-300 dark:bg-gray-500 top-0 left-0 max-[460px]:w-[50%] w-[40%] md:w-[30%] z-10 rounded-r-lg flex flex-col gap-1 px-1" >
+        transition={{ duration: 0.6 }} ref={props.ref} className="fixed h-dvh bg-gray-300 dark:bg-gray-500 top-0 left-0 max-[460px]:w-[50%] w-[40%] md:w-[30%] z-10 rounded-r-lg flex flex-col gap-1 px-1" >
         <div className="dark:text-white font-bold self-center ">Select your store</div>
 
         <div className="dark:text-slate-100 text-sm mb-1">Enter your zip code or city to see the nearest stores. This will allow you to filter products by store.</div>
