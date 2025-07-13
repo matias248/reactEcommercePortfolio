@@ -127,10 +127,13 @@ describe('Test Displays if store doesn t exist ', () => {
 })
 
 describe('Test Displays if product doesn t exist ', () => {
-  it('Test Display in a product', () => {
+  it('Test Display if product not exist', () => {
     cy.visit('stores/1/products/900');
     cy.get('#itemNotFound').should('exist');
-    cy.visit('stores/900/products/900');
+  })
+   it('Test Display if store not exist', () => {
+    cy.visit('stores/99/products/1');
     cy.get('#itemNotFound').should('exist');
+   
   })
 })

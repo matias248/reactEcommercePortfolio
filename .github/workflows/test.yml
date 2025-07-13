@@ -33,14 +33,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Cypress run
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v6
         with:
-          project: ./
-          browser: chrome
+          build: npm run build
           start: npm run dev
-          wait-on: "http://localhost:5173"
+          browser: chrome
   
 
 
